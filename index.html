@@ -3,15 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio & Blog</title>
+    <title>Digital Portfolio | Trương Quốc Kiệt</title>
+    <!-- Thêm font chữ Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Thêm thư viện Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
-        h1 { color: #333; }
-        p { color: #666; font-size: 18px; }
+        /* ================= BIẾN MÀU SẮC & CƠ BẢN ================= */
+        :root {
+            --primary-color: #2563eb; /* Màu xanh công nghệ */
+            --secondary-color: #1e40af;
+            --bg-color: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* ================= THANH ĐIỀU HƯỚNG (NAVBAR) ================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* ================= BỐ CỤC CHUNG CÁC PHẦN ================= */
+        section {
+            padding: 100px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ================= PHẦN 1: GIỚI THIỆU ================= */
+        #gioi-thieu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero-text h3 {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #475569;
+        }
+
+        .hero-img {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-img img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ================= PHẦN 2: DỰ ÁN ================= */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .btn-view {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-view:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* ================= PHẦN 3: TỔNG KẾT ================= */
+        .summary-container {
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .summary-item {
+            margin-bottom: 30px;
+        }
+
+        .summary-item h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background-color: var(--text-main);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 768px) {
+            #gioi-thieu {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 120px;
+            }
+            .nav-links {
+                display: none; /* Rút gọn trên mobile, có thể thêm menu burger sau */
+            }
+            .hero-img img {
+                width: 250px;
+                height: 250px;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Xin chào, mình là Kiệt!</h1>
-    <p>Chào mừng bạn đến với trang Portfolio và Blog cá nhân của mình.</p>
+
+    <!-- THANH ĐIỀU HƯỚNG -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Kiet's Portfolio</a>
+            <ul class="nav-links">
+                <li><a href="#gioi-thieu">Giới thiệu</a></li>
+                <li><a href="#du-an">Dự án & Bài tập</a></li>
+                <li><a href="#tong-ket">Tổng kết</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- TRANG GIỚI THIỆU -->
+    <section id="gioi-thieu">
+        <div class="hero-text">
+            <h3>Xin chào, mình là</h3>
+            <h1>Trương Quốc <span>Kiệt</span></h1>
+            <p><strong>Ngành học:</strong> Sinh viên năm nhất - Hệ thống thông tin (CN2) tại Đại học Công nghệ (UET) - ĐHQGHN.</p>
+            <p><strong>Sở thích:</strong> Đam mê lập trình Java, thể thao (đặc biệt là Bóng rổ - vị trí SF) và tối ưu hóa hệ thống dữ liệu.</p>
+            <p><strong>Mục tiêu:</strong> Website này được xây dựng nhằm mục đích tổng hợp, lưu trữ và thể hiện các kỹ năng số đã học được từ môn <i>"Nhập môn Công nghệ số và Ứng dụng Trí tuệ nhân tạo"</i>, làm nền tảng cho con đường trở thành Data Engineer trong tương lai.</p>
+        </div>
+        <div class="hero-img">
+            <!-- Bạn có thể thay link ảnh đại diện của mình vào đây -->
+            <img src="https://avatars.githubusercontent.com/u/160161426?v=4" alt="Ảnh đại diện của Kiệt">
+        </div>
+    </section>
+
+    <!-- TRANG DỰ ÁN -->
+    <section id="du-an">
+        <h2 class="section-title">Các Dự Án Đã Hoàn Thành</h2>
+        <div class="project-grid">
+            
+            <!-- Bài 1 -->
+            <div class="project-card">
+                <i class="fa-solid fa-folder-tree card-icon"></i>
+                <h3>Bài 1: Quản lý tệp & thư mục</h3>
+                <p><strong>Mục tiêu:</strong> Thiết lập cấu trúc thư mục tối ưu và quy tắc đặt tên tệp tin khoa học.</p>
+                <p><i>Phần chi tiết về cấu trúc và ảnh minh họa sẽ được cập nhật tại đây.</i></p>
+                <a href="#" class="btn-view">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Bài 2 -->
+            <div class="project-card">
+                <i class="fa-solid fa-magnifying-glass-chart card-icon"></i>
+                <h3>Bài 2: Tìm kiếm & Đánh giá</h3>
+                <p><strong>Mục tiêu:</strong> Sử dụng các toán tử nâng cao để tìm kiếm tài liệu học thuật và lập bảng đánh giá nguồn tin.</p>
+                <p><i>Phần chi tiết đánh giá sẽ được cập nhật tại đây.</i></p>
+                <a href="#" class="btn-view">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Bài 3 -->
+            <div class="project-card">
+                <i class="fa-solid fa-terminal card-icon"></i>
+                <h3>Bài 3: Viết Prompt hiệu quả</h3>
+                <p><strong>Mục tiêu:</strong> Áp dụng kỹ thuật Prompt Engineering để so sánh kết quả đầu ra từ AI trước và sau khi tối ưu.</p>
+                <p><i>Bảng so sánh chi tiết sẽ được cập nhật tại đây.</i></p>
+                <a href="#" class="btn-view">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Bài 4 -->
+            <div class="project-card">
+                <i class="fa-solid fa-people-group card-icon"></i>
+                <h3>Bài 4: Hợp tác trực tuyến</h3>
+                <p><strong>Mục tiêu:</strong> Quản lý dự án nhóm, lập kế hoạch phân công và phối hợp làm việc trên môi trường số.</p>
+                <p><i>Hình ảnh minh chứng quá trình làm việc nhóm sẽ cập nhật tại đây.</i></p>
+                <a href="#" class="btn-view">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Bài 5 -->
+            <div class="project-card">
+                <i class="fa-solid fa-wand-magic-sparkles card-icon"></i>
+                <h3>Bài 5: Sáng tạo nội dung với AI</h3>
+                <p><strong>Mục tiêu:</strong> Tận dụng AI để hỗ trợ quy trình sáng tạo, sản xuất ra các sản phẩm nội dung số hoàn thiện.</p>
+                <p><i>Sản phẩm (hình ảnh/video) sẽ được đính kèm tại đây.</i></p>
+                <a href="#" class="btn-view">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Bài 6 -->
+            <div class="project-card">
+                <i class="fa-solid fa-scale-balanced card-icon"></i>
+                <h3>Bài 6: AI có trách nhiệm</h3>
+                <p><strong>Mục tiêu:</strong> Xây dựng bộ nguyên tắc cá nhân về đạo đức và tính liêm chính trong học thuật khi sử dụng AI.</p>
+                <p><i>Bộ nguyên tắc sẽ được trình bày chi tiết tại đây.</i></p>
+                <a href="#" class="btn-view">Xem chi tiết <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TRANG TỔNG KẾT -->
+    <section id="tong-ket">
+        <h2 class="section-title">Tổng Kết Trải Nghiệm</h2>
+        <div class="summary-container">
+            <div class="summary-item">
+                <h3><i class="fa-solid fa-lightbulb"></i> Trải nghiệm & Cảm nhận</h3>
+                <p>Quá trình xây dựng Portfolio không chỉ là một bài tập lớn mà còn là hành trình giúp mình nhìn nhận lại toàn bộ kiến thức đã tích lũy. Việc tự tay thiết lập một không gian lưu trữ cá nhân chuyên nghiệp mang lại trải nghiệm rất mới mẻ và thú vị.</p>
+            </div>
+            
+            <div class="summary-item">
+                <h3><i class="fa-solid fa-brain"></i> Kiến thức & Kỹ năng quan trọng</h3>
+                <p>Thông qua dự án, mình đã nắm vững cách quản lý dữ liệu cá nhân, thành thạo kỹ năng tìm kiếm học thuật chuyên sâu, và đặc biệt là cách sử dụng AI như một trợ lý đắc lực nhưng vẫn đảm bảo tính minh bạch và liêm chính.</p>
+            </div>
+
+            <div class="summary-item">
+                <h3><i class="fa-solid fa-mountain"></i> Điểm tâm đắc & Thách thức</h3>
+                <p><strong>Điểm tâm đắc:</strong> Hoàn thiện được một bộ hồ sơ số trực quan, gọn gàng, thể hiện rõ màu sắc cá nhân.<br>
+                <strong>Thách thức:</strong> Việc hệ thống hóa lại các bài tập lẻ tẻ thành một luồng nội dung logic và lựa chọn định dạng trình bày (ảnh, PDF) sao cho người xem dễ dàng tiếp cận nhất.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Bản quyền thuộc về Trương Quốc Kiệt. Hoàn thành cho môn Nhập môn Công nghệ số.</p>
+    </footer>
+
+    <!-- Script tạo hiệu ứng cuộn mượt (Smooth Scrolling) -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
