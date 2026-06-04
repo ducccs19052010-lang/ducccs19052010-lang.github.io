@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio Kỹ thuật số - [Tên của bạn]</title>
+  <title>Portfolio Kỹ thuật số - Trương Quốc Kiệt</title>
 
   <style>
     :root {
-      --green-dark: #174c37;
-      --green: #1f6f4a;
-      --green-light: #e8f5ee;
-      --cream: #f8f6f1;
-      --text: #2f2f2f;
-      --muted: #666;
+      --blue-dark: #0b3d5c;
+      --blue: #0077b6;
+      --blue-light: #e6f6ff;
+      --blue-soft: #caf0f8;
+      --background: #f4fbff;
+      --text: #24323d;
+      --muted: #607080;
       --white: #ffffff;
-      --border: #ddd8cf;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --border: #d5e6ef;
+      --shadow: 0 10px 30px rgba(0, 64, 128, 0.12);
       --radius: 18px;
     }
 
@@ -31,7 +32,7 @@
 
     body {
       font-family: Arial, sans-serif;
-      background: var(--cream);
+      background: var(--background);
       color: var(--text);
       line-height: 1.7;
     }
@@ -41,16 +42,11 @@
       text-decoration: none;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
     /* ===== HEADER ===== */
     header {
       min-height: 100vh;
       background:
-        linear-gradient(rgba(23, 76, 55, 0.88), rgba(23, 76, 55, 0.88)),
+        linear-gradient(rgba(6, 52, 82, 0.88), rgba(0, 119, 182, 0.82)),
         url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80");
       background-size: cover;
       background-position: center;
@@ -68,7 +64,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(23, 76, 55, 0.92);
+      background: rgba(6, 52, 82, 0.94);
       backdrop-filter: blur(10px);
     }
 
@@ -79,7 +75,7 @@
     }
 
     .logo span {
-      color: #b7e4c7;
+      color: #90e0ef;
     }
 
     .nav-links {
@@ -90,12 +86,12 @@
 
     .nav-links a {
       font-weight: 600;
-      opacity: 0.9;
+      opacity: 0.95;
       transition: 0.3s;
     }
 
     .nav-links a:hover {
-      color: #b7e4c7;
+      color: #90e0ef;
     }
 
     .hero {
@@ -111,8 +107,8 @@
 
     .tag {
       display: inline-block;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.35);
       padding: 8px 16px;
       border-radius: 999px;
       margin-bottom: 22px;
@@ -148,7 +144,7 @@
 
     .btn-primary {
       background: var(--white);
-      color: var(--green-dark);
+      color: var(--blue-dark);
     }
 
     .btn-primary:hover {
@@ -163,10 +159,10 @@
 
     .btn-outline:hover {
       background: var(--white);
-      color: var(--green-dark);
+      color: var(--blue-dark);
     }
 
-    /* ===== GENERAL SECTION ===== */
+    /* ===== SECTION ===== */
     section {
       padding: 90px 8%;
     }
@@ -177,7 +173,7 @@
     }
 
     .section-title span {
-      color: var(--green);
+      color: var(--blue);
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -186,7 +182,7 @@
 
     .section-title h2 {
       font-size: clamp(32px, 5vw, 48px);
-      color: var(--green-dark);
+      color: var(--blue-dark);
       margin: 10px 0 14px;
       line-height: 1.2;
     }
@@ -196,7 +192,7 @@
       font-size: 18px;
     }
 
-    /* ===== INTRO ===== */
+    /* ===== ABOUT ===== */
     .intro-grid {
       display: grid;
       grid-template-columns: 1fr 1.4fr;
@@ -216,18 +212,18 @@
       width: 150px;
       height: 150px;
       border-radius: 50%;
-      background: var(--green-light);
+      background: var(--blue-light);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 58px;
       margin-bottom: 24px;
-      border: 6px solid var(--cream);
+      border: 6px solid var(--background);
     }
 
     .profile-card h3 {
       font-size: 28px;
-      color: var(--green-dark);
+      color: var(--blue-dark);
       margin-bottom: 8px;
     }
 
@@ -247,7 +243,7 @@
     }
 
     .goal-card {
-      background: var(--green-dark);
+      background: linear-gradient(135deg, var(--blue-dark), var(--blue));
       color: var(--white);
       padding: 38px;
       border-radius: var(--radius);
@@ -272,8 +268,8 @@
     }
 
     .skill {
-      background: rgba(255, 255, 255, 0.14);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
       padding: 8px 14px;
       border-radius: 999px;
       font-weight: 600;
@@ -291,11 +287,11 @@
     }
 
     .project-card {
-      background: var(--cream);
+      background: var(--background);
       border-radius: var(--radius);
       overflow: hidden;
       border: 1px solid var(--border);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 8px 20px rgba(0, 64, 128, 0.06);
       transition: 0.3s;
     }
 
@@ -306,7 +302,7 @@
 
     .project-top {
       height: 120px;
-      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
       color: var(--white);
       display: flex;
       align-items: center;
@@ -320,7 +316,7 @@
     }
 
     .project-body h3 {
-      color: var(--green-dark);
+      color: var(--blue-dark);
       font-size: 21px;
       margin-bottom: 12px;
       line-height: 1.35;
@@ -339,9 +335,9 @@
 
     .project-link {
       display: inline-block;
-      color: var(--green);
+      color: var(--blue);
       font-weight: 800;
-      border-bottom: 2px solid var(--green);
+      border-bottom: 2px solid var(--blue);
     }
 
     /* ===== PROCESS ===== */
@@ -373,7 +369,7 @@
       width: 52px;
       height: 52px;
       border-radius: 14px;
-      background: var(--green);
+      background: var(--blue);
       color: var(--white);
       display: flex;
       align-items: center;
@@ -392,14 +388,14 @@
     }
 
     .timeline-content h3 {
-      color: var(--green-dark);
+      color: var(--blue-dark);
       margin-bottom: 10px;
       font-size: 24px;
     }
 
     /* ===== SUMMARY ===== */
     .summary {
-      background: var(--green-light);
+      background: var(--blue-light);
     }
 
     .summary-grid {
@@ -412,19 +408,19 @@
       background: var(--white);
       padding: 28px;
       border-radius: var(--radius);
-      border-left: 7px solid var(--green);
+      border-left: 7px solid var(--blue);
       box-shadow: var(--shadow);
     }
 
     .summary-card h3 {
-      color: var(--green-dark);
+      color: var(--blue-dark);
       margin-bottom: 12px;
       font-size: 24px;
     }
 
     /* ===== CONTACT ===== */
     .contact-box {
-      background: var(--green-dark);
+      background: linear-gradient(135deg, var(--blue-dark), var(--blue));
       color: var(--white);
       padding: 48px;
       border-radius: var(--radius);
@@ -451,7 +447,7 @@
 
     /* ===== FOOTER ===== */
     footer {
-      background: #103525;
+      background: #062f4f;
       color: var(--white);
       text-align: center;
       padding: 28px 8%;
@@ -537,7 +533,7 @@
     <div class="hero">
       <div class="hero-content">
         <span class="tag">Portfolio Kỹ thuật số</span>
-        <h1>Xin chào, tôi là [Tên của bạn]</h1>
+        <h1>Xin chào, tôi là Quốc Kiệt</h1>
         <p>
           Đây là Portfolio cá nhân tổng hợp các sản phẩm học tập, kỹ năng số,
           khả năng sử dụng công cụ trực tuyến và ứng dụng trí tuệ nhân tạo một cách có trách nhiệm.
@@ -552,55 +548,123 @@
   </header>
 
   <!-- ===== ABOUT ===== -->
-  <section id="about">
-    <div class="section-title">
-      <span>Trang giới thiệu</span>
-      <h2>Thông tin cá nhân và mục tiêu Portfolio</h2>
-      <p>
-        Phần này giới thiệu ngắn gọn về bản thân, ngành học, sở thích,
-        mục tiêu học tập và định hướng phát triển cá nhân.
-      </p>
-    </div>
+  <section id="projects" class="projects">
+  <div class="section-title">
+    <span>Trang dự án</span>
+    <h2>Các bài tập thành phần</h2>
+    <p>
+      Tập hợp và trình bày các bài tập đã hoàn thành. Mỗi bài tập gồm mục tiêu,
+      tóm tắt quá trình thực hiện và sản phẩm cuối cùng như file PDF, hình ảnh
+      hoặc đường liên kết minh họa.
+    </p>
+  </div>
 
-    <div class="intro-grid">
-      <div class="profile-card">
-        <div class="avatar">👤</div>
-        <h3>[Tên của bạn]</h3>
-        <p><strong>Ngành/Lớp:</strong> [Nhập ngành hoặc lớp]</p>
-        <p><strong>Sở thích:</strong> Công nghệ, thiết kế, học tập, sáng tạo nội dung.</p>
+  <div class="project-grid">
 
-        <ul class="info-list">
-          <li><strong>Email:</strong> example@gmail.com</li>
-          <li><strong>Kỹ năng:</strong> Tìm kiếm thông tin, viết prompt, làm việc nhóm</li>
-          <li><strong>Định hướng:</strong> Phát triển kỹ năng số và tư duy sáng tạo</li>
+    <div class="project-card">
+      <div class="project-top">01</div>
+      <div class="project-body">
+        <h3>Bài tập 1 - Bài 1: Máy tính và các thiết bị ngoại vi</h3>
+        <p>
+          Trình bày kiến thức về máy tính, các thành phần cơ bản và vai trò của
+          các thiết bị ngoại vi trong quá trình sử dụng máy tính.
+        </p>
+        <ul>
+          <li>Mục tiêu: Nhận biết các bộ phận của máy tính</li>
+          <li>Quá trình: Tìm hiểu, phân loại và mô tả chức năng</li>
+          <li>Sản phẩm: Hình ảnh, file bài làm hoặc đường link minh họa</li>
         </ul>
-      </div>
-
-      <div class="goal-card">
-        <h3>Mục tiêu của Portfolio</h3>
-        <p>
-          Portfolio này được xây dựng nhằm lưu trữ và trình bày các sản phẩm học tập
-          đã hoàn thành trong môn học. Đây cũng là nơi thể hiện quá trình rèn luyện
-          kỹ năng số, tư duy phản biện và khả năng ứng dụng AI trong học tập.
-        </p>
-
-        <p>
-          Thông qua Portfolio, tôi mong muốn thể hiện sự tiến bộ của bản thân,
-          khả năng tổ chức thông tin khoa học và cách sử dụng công nghệ một cách hiệu quả,
-          có trách nhiệm.
-        </p>
-
-        <div class="skills">
-          <span class="skill">Quản lý tệp</span>
-          <span class="skill">Tìm kiếm học thuật</span>
-          <span class="skill">Prompt Engineering</span>
-          <span class="skill">Hợp tác trực tuyến</span>
-          <span class="skill">AI tạo sinh</span>
-          <span class="skill">Đạo đức AI</span>
-        </div>
+        <a href="#" class="project-link">Xem chi tiết</a>
       </div>
     </div>
-  </section>
+
+    <div class="project-card">
+      <div class="project-top">02</div>
+      <div class="project-body">
+        <h3>Bài tập 2 - Bài 2: Khai thác dữ liệu và thông tin</h3>
+        <p>
+          Thể hiện khả năng tìm kiếm, khai thác, chọn lọc và đánh giá thông tin
+          từ nhiều nguồn khác nhau phục vụ cho học tập.
+        </p>
+        <ul>
+          <li>Mục tiêu: Biết cách khai thác dữ liệu hiệu quả</li>
+          <li>Quá trình: Tìm kiếm, so sánh và đánh giá nguồn thông tin</li>
+          <li>Sản phẩm: Bảng đánh giá nguồn hoặc file kết quả tìm kiếm</li>
+        </ul>
+        <a href="#" class="project-link">Xem chi tiết</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">03</div>
+      <div class="project-body">
+        <h3>Bài tập 2 - Bài 3: Tổng quan về trí tuệ nhân tạo</h3>
+        <p>
+          Trình bày những hiểu biết cơ bản về trí tuệ nhân tạo, ứng dụng của AI
+          trong đời sống, học tập và một số lợi ích cũng như thách thức khi sử dụng AI.
+        </p>
+        <ul>
+          <li>Mục tiêu: Hiểu khái niệm và vai trò của AI</li>
+          <li>Quá trình: Tìm hiểu tài liệu, tổng hợp và trình bày nội dung</li>
+          <li>Sản phẩm: Bài viết, slide, hình ảnh hoặc file PDF</li>
+        </ul>
+        <a href="#" class="project-link">Xem chi tiết</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">04</div>
+      <div class="project-body">
+        <h3>Bài tập 3 - Bài 4: Giao tiếp và hợp tác trong môi trường số</h3>
+        <p>
+          Minh chứng việc sử dụng công cụ trực tuyến để giao tiếp, phân công
+          nhiệm vụ, phối hợp nhóm và theo dõi tiến độ công việc.
+        </p>
+        <ul>
+          <li>Mục tiêu: Rèn luyện kỹ năng hợp tác trực tuyến</li>
+          <li>Quá trình: Sử dụng công cụ quản lý nhóm và trao đổi online</li>
+          <li>Sản phẩm: Ảnh chụp màn hình, bảng phân công hoặc link nhóm</li>
+        </ul>
+        <a href="#" class="project-link">Xem chi tiết</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">05</div>
+      <div class="project-body">
+        <h3>Bài tập 2 - Bài 5: Sáng tạo nội dung số</h3>
+        <p>
+          Trưng bày sản phẩm nội dung số được tạo ra trong quá trình học tập,
+          có thể là hình ảnh, video, bài viết, poster hoặc sản phẩm truyền thông số.
+        </p>
+        <ul>
+          <li>Mục tiêu: Biết cách tạo sản phẩm nội dung số</li>
+          <li>Quá trình: Lên ý tưởng, thiết kế và hoàn thiện sản phẩm</li>
+          <li>Sản phẩm: Hình ảnh, video, bài viết hoặc đường link minh họa</li>
+        </ul>
+        <a href="#" class="project-link">Xem chi tiết</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">06</div>
+      <div class="project-body">
+        <h3>Bài tập 4 - Bài 6: An toàn và liêm chính học thuật trong môi trường số</h3>
+        <p>
+          Trình bày nhận thức về an toàn thông tin, bảo vệ dữ liệu cá nhân,
+          liêm chính học thuật và cách sử dụng tài nguyên số một cách có trách nhiệm.
+        </p>
+        <ul>
+          <li>Mục tiêu: Hiểu nguyên tắc an toàn và liêm chính học thuật</li>
+          <li>Quá trình: Phân tích tình huống, rút ra nguyên tắc sử dụng</li>
+          <li>Sản phẩm: Bộ nguyên tắc, bài phân tích hoặc file báo cáo</li>
+        </ul>
+        <a href="#" class="project-link">Xem chi tiết</a>
+      </div>
+    </div>
+
+  </div>
+</section>
 
   <!-- ===== PROJECTS ===== -->
   <section id="projects" class="projects">
