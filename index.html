@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
@@ -6,6 +7,8 @@
   <title>Portfolio Kỹ thuật số - Trương Quốc Kiệt</title>
 
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap");
+
     :root {
       --blue-dark: #0b3d5c;
       --blue: #0077b6;
@@ -18,6 +21,8 @@
       --border: #d5e6ef;
       --shadow: 0 10px 30px rgba(0, 64, 128, 0.12);
       --radius: 18px;
+      --font-main: "Be Vietnam Pro", "Segoe UI", Tahoma, Arial, sans-serif;
+      --font-heading: "Be Vietnam Pro", "Segoe UI", Tahoma, Arial, sans-serif;
     }
 
     * {
@@ -31,10 +36,29 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: var(--font-main);
       background: var(--background);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.75;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    .logo, .btn, .tag, .skill, .project-link, .back-btn {
+      font-family: var(--font-heading);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 800;
+      letter-spacing: -0.035em;
+    }
+
+    p, li {
+      font-size: 16px;
     }
 
     a {
@@ -42,7 +66,6 @@
       text-decoration: none;
     }
 
-    /* ===== HEADER ===== */
     header {
       min-height: 100vh;
       background:
@@ -88,6 +111,7 @@
       font-weight: 600;
       opacity: 0.95;
       transition: 0.3s;
+      cursor: pointer;
     }
 
     .nav-links a:hover {
@@ -123,6 +147,7 @@
 
     .hero p {
       font-size: 20px;
+      font-weight: 400;
       max-width: 680px;
       margin-bottom: 34px;
       opacity: 0.95;
@@ -140,6 +165,10 @@
       font-weight: 700;
       transition: 0.3s;
       display: inline-block;
+      cursor: pointer;
+      border: none;
+      font-size: 16px;
+      font-family: var(--font-main);
     }
 
     .btn-primary {
@@ -155,6 +184,7 @@
     .btn-outline {
       border: 2px solid var(--white);
       color: var(--white);
+      background: transparent;
     }
 
     .btn-outline:hover {
@@ -162,7 +192,6 @@
       color: var(--blue-dark);
     }
 
-    /* ===== SECTION ===== */
     section {
       padding: 90px 8%;
     }
@@ -192,7 +221,6 @@
       font-size: 18px;
     }
 
-    /* ===== ABOUT ===== */
     .intro-grid {
       display: grid;
       grid-template-columns: 1fr 1.4fr;
@@ -209,23 +237,21 @@
     }
 
     .avatar {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background: var(--blue-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 58px;
-      margin-bottom: 24px;
-      border: 6px solid var(--background);
-    }
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 24px;
+  border: 6px solid var(--background);
+  background: var(--blue-light);
+}
 
-    .profile-card h3 {
-      font-size: 28px;
-      color: var(--blue-dark);
-      margin-bottom: 8px;
-    }
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
     .profile-card p {
       color: var(--muted);
@@ -275,7 +301,6 @@
       font-weight: 600;
     }
 
-    /* ===== PROJECTS ===== */
     .projects {
       background: var(--white);
     }
@@ -338,9 +363,15 @@
       color: var(--blue);
       font-weight: 800;
       border-bottom: 2px solid var(--blue);
+      background: transparent;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0;
     }
 
-    /* ===== PROCESS ===== */
     .timeline {
       position: relative;
       max-width: 1000px;
@@ -393,15 +424,15 @@
       font-size: 24px;
     }
 
-    /* ===== SUMMARY ===== */
     .summary {
       background: var(--blue-light);
     }
 
     .summary-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
+      align-items: stretch;
     }
 
     .summary-card {
@@ -410,15 +441,47 @@
       border-radius: var(--radius);
       border-left: 7px solid var(--blue);
       box-shadow: var(--shadow);
+      line-height: 1.75;
     }
 
     .summary-card h3 {
       color: var(--blue-dark);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       font-size: 24px;
     }
 
-    /* ===== CONTACT ===== */
+    .summary-card p {
+      margin-bottom: 12px;
+      color: var(--text);
+      text-align: justify;
+    }
+
+    .summary-wide {
+      grid-column: 1 / -1;
+    }
+
+    .summary-final {
+      background: var(--white);
+      margin-top: 28px;
+      padding: 34px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      line-height: 1.8;
+    }
+
+    .summary-final h2 {
+      color: var(--blue-dark);
+      margin-bottom: 18px;
+      font-size: 28px;
+    }
+
+    .summary-final p {
+      margin-bottom: 14px;
+      color: var(--text);
+      text-align: justify;
+    }
+
     .contact-box {
       background: linear-gradient(135deg, var(--blue-dark), var(--blue));
       color: var(--white);
@@ -445,7 +508,6 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    /* ===== FOOTER ===== */
     footer {
       background: #062f4f;
       color: var(--white);
@@ -457,11 +519,159 @@
       opacity: 0.85;
     }
 
-    /* ===== RESPONSIVE ===== */
+    /* ===== PHẦN CHI TIẾT BÀI TẬP ===== */
+    .detail-page {
+      display: none;
+      padding: 90px 8%;
+      background: var(--background);
+      min-height: 100vh;
+    }
+
+    .detail-page.active {
+      display: block;
+    }
+
+    .detail-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 28px;
+      background: var(--blue);
+      color: var(--white);
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .back-btn:hover {
+      background: var(--blue-dark);
+    }
+
+    .detail-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      padding: 34px;
+      margin-bottom: 28px;
+    }
+
+    .detail-card h1 {
+      color: var(--blue-dark);
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .detail-card h2 {
+      color: var(--blue-dark);
+      margin: 24px 0 12px;
+      font-size: 28px;
+    }
+
+    .detail-card h3 {
+      color: var(--blue);
+      margin: 20px 0 10px;
+      font-size: 22px;
+    }
+
+    .detail-card p {
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .detail-card ul,
+    .detail-card ol {
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .detail-card li {
+      margin-bottom: 10px;
+    }
+
+    .highlight-box {
+      background: var(--blue-light);
+      border-left: 6px solid var(--blue);
+      padding: 18px;
+      border-radius: 12px;
+      margin: 18px 0;
+    }
+
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .step-box {
+      background: var(--background);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 14px;
+    }
+
+    .step-box strong {
+      color: var(--blue-dark);
+    }
+
+    .pdf-frame {
+      width: 100%;
+      height: 720px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-top: 18px;
+      background: var(--white);
+    }
+
+    .rubric-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+      background: var(--white);
+      font-size: 15px;
+    }
+
+    .rubric-table th,
+    .rubric-table td {
+      border: 1px solid #999;
+      padding: 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .rubric-table th {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+    }
+
+    .main-content.hidden {
+      display: none;
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
     @media (max-width: 1000px) {
       .project-grid,
-      .summary-grid {
+      .step-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-wide {
+        grid-column: auto;
       }
 
       .intro-grid,
@@ -489,11 +699,13 @@
       }
 
       .project-grid,
-      .summary-grid {
+      .summary-grid,
+      .step-grid {
         grid-template-columns: 1fr;
       }
 
-      section {
+      section,
+      .detail-page {
         padding: 70px 6%;
       }
 
@@ -510,52 +722,118 @@
         height: 42px;
         font-size: 18px;
       }
+
+      .detail-card {
+        padding: 24px;
+      }
+
+      .pdf-frame {
+        height: 520px;
+      }
+
+      .rubric-table {
+        font-size: 13px;
+      }
     }
   </style>
+
 </head>
 
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header id="home">
-    <nav>
-      <div class="logo">My<span>Portfolio</span></div>
+  <!-- TOÀN BỘ GIAO DIỆN CHÍNH -->
 
-      <ul class="nav-links">
-        <li><a href="#about">Giới thiệu</a></li>
-        <li><a href="#projects">Dự án</a></li>
-        <li><a href="#process">Quy trình</a></li>
-        <li><a href="#summary">Tổng kết</a></li>
-        <li><a href="#contact">Liên hệ</a></li>
-      </ul>
-    </nav>
+  <div id="mainContent" class="main-content">
 
-    <div class="hero">
-      <div class="hero-content">
-        <span class="tag">Portfolio Kỹ thuật số</span>
-        <h1>Xin chào, tôi là Quốc Kiệt</h1>
-        <p>
-          Đây là Portfolio cá nhân tổng hợp các sản phẩm học tập, kỹ năng số,
-          khả năng sử dụng công cụ trực tuyến và ứng dụng trí tuệ nhân tạo một cách có trách nhiệm.
-        </p>
+<!-- HEADER -->
+<header id="home">
+  <nav>
+    <div class="logo">My<span>Portfolio</span></div>
 
-        <div class="btn-group">
-          <a href="#projects" class="btn btn-primary">Xem dự án</a>
-          <a href="#about" class="btn btn-outline">Tìm hiểu thêm</a>
-        </div>
+    <ul class="nav-links">
+      <li><a href="#about">Giới thiệu</a></li>
+      <li><a href="#projects">Dự án</a></li>
+      <li><a href="#process">Quy trình</a></li>
+      <li><a href="#summary">Tổng kết</a></li>
+      <li><a href="#contact">Liên hệ</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-content">
+      <span class="tag">Portfolio Kỹ thuật số</span>
+      <h1>Xin chào, tôi là Trương Quốc Kiệt</h1>
+      <p>
+        Đây là Portfolio cá nhân tổng hợp các sản phẩm học tập, kỹ năng số,
+        khả năng sử dụng công cụ trực tuyến và ứng dụng trí tuệ nhân tạo một cách có trách nhiệm.
+      </p>
+
+      <div class="btn-group">
+        <a href="#projects" class="btn btn-primary">Xem dự án</a>
+        <a href="#about" class="btn btn-outline">Tìm hiểu thêm</a>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- ===== ABOUT ===== -->
-  <section id="projects" class="projects">
+<!-- GIỚI THIỆU -->
+<section id="about">
+  <div class="section-title">
+    <span>Giới thiệu</span>
+    <h2>Thông tin cá nhân và mục tiêu học tập</h2>
+    <p>
+      Portfolio này thể hiện quá trình học tập, rèn luyện kỹ năng số và khả năng trình bày sản phẩm học tập.
+    </p>
+  </div>
+
+  <div class="intro-grid">
+    <div class="profile-card">
+      <div class="avatar">
+        <img src="profile.jpg" alt="Ảnh đại diện của Trương Quốc Kiệt">
+      </div>
+
+      <h3>Trương Quốc Kiệt</h3>
+      <p>Học sinh/Sinh viên đang xây dựng Portfolio kỹ thuật số.</p>
+
+      <ul class="info-list">
+        <li><strong>Họ tên:</strong> Trương Quốc Kiệt</li>
+        <li><strong>Lớp:</strong> VNU1001_E252014</li>
+        <li><strong>Môn học:</strong> Nhập môn công nghệ số và trí tuệ nhân tạo</li>
+        <li><strong>Chủ đề:</strong> Portfolio cá nhân</li>
+      </ul>
+    </div>
+
+    <div class="goal-card">
+      <h3>Mục tiêu Portfolio</h3>
+      <p>
+        Mục tiêu của Portfolio là tổng hợp các bài tập đã hoàn thành, trình bày rõ ràng
+        quá trình thực hiện, sản phẩm cuối cùng và những kỹ năng đã học được.
+      </p>
+      <p>
+        Thông qua Portfolio này, tôi có thể tự đánh giá quá trình học tập, cải thiện khả năng sử dụng
+        công cụ số và phát triển tư duy trình bày sản phẩm cá nhân.
+      </p>
+
+      <div class="skills">
+        <span class="skill">Quản lý tệp</span>
+        <span class="skill">Tìm kiếm thông tin</span>
+        <span class="skill">AI</span>
+        <span class="skill">Hợp tác trực tuyến</span>
+        <span class="skill">Nội dung số</span>
+        <span class="skill">An toàn số</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DỰ ÁN -->
+<section id="projects" class="projects">
   <div class="section-title">
     <span>Trang dự án</span>
     <h2>Các bài tập thành phần</h2>
     <p>
       Tập hợp và trình bày các bài tập đã hoàn thành. Mỗi bài tập gồm mục tiêu,
-      tóm tắt quá trình thực hiện và sản phẩm cuối cùng như file PDF, hình ảnh
-      hoặc đường liên kết minh họa.
+      tóm tắt quá trình thực hiện và sản phẩm cuối cùng như file PDF, hình ảnh hoặc đường liên kết minh họa.
     </p>
   </div>
 
@@ -566,15 +844,14 @@
       <div class="project-body">
         <h3>Bài tập 1 - Bài 1: Máy tính và các thiết bị ngoại vi</h3>
         <p>
-          Trình bày kiến thức về máy tính, các thành phần cơ bản và vai trò của
-          các thiết bị ngoại vi trong quá trình sử dụng máy tính.
+          Trình bày kỹ năng thao tác với tệp tin và thư mục trên hệ điều hành Windows.
         </p>
         <ul>
-          <li>Mục tiêu: Nhận biết các bộ phận của máy tính</li>
-          <li>Quá trình: Tìm hiểu, phân loại và mô tả chức năng</li>
-          <li>Sản phẩm: Hình ảnh, file bài làm hoặc đường link minh họa</li>
+          <li>Mục tiêu: Tạo, đổi tên, sao chép, di chuyển và xóa tệp/thư mục</li>
+          <li>Quá trình: Thực hành theo từng bước trên File Explorer</li>
+          <li>Sản phẩm: File PDF minh chứng quá trình thực hiện</li>
         </ul>
-        <a href="#" class="project-link">Xem chi tiết</a>
+        <button class="project-link" onclick="showDetail('bai1')">Xem chi tiết</button>
       </div>
     </div>
 
@@ -583,15 +860,14 @@
       <div class="project-body">
         <h3>Bài tập 2 - Bài 2: Khai thác dữ liệu và thông tin</h3>
         <p>
-          Thể hiện khả năng tìm kiếm, khai thác, chọn lọc và đánh giá thông tin
-          từ nhiều nguồn khác nhau phục vụ cho học tập.
+          Thể hiện khả năng tìm kiếm, khai thác, chọn lọc và đánh giá thông tin từ nhiều nguồn khác nhau.
         </p>
         <ul>
           <li>Mục tiêu: Biết cách khai thác dữ liệu hiệu quả</li>
-          <li>Quá trình: Tìm kiếm, so sánh và đánh giá nguồn thông tin</li>
-          <li>Sản phẩm: Bảng đánh giá nguồn hoặc file kết quả tìm kiếm</li>
+          <li>Quá trình: Tìm kiếm, so sánh và đánh giá nguồn</li>
+          <li>Sản phẩm: Bảng đánh giá nguồn hoặc file kết quả</li>
         </ul>
-        <a href="#" class="project-link">Xem chi tiết</a>
+        <button class="project-link" onclick="showDetail('bai2')">Xem chi tiết</button>
       </div>
     </div>
 
@@ -600,15 +876,14 @@
       <div class="project-body">
         <h3>Bài tập 2 - Bài 3: Tổng quan về trí tuệ nhân tạo</h3>
         <p>
-          Trình bày những hiểu biết cơ bản về trí tuệ nhân tạo, ứng dụng của AI
-          trong đời sống, học tập và một số lợi ích cũng như thách thức khi sử dụng AI.
+          Trình bày hiểu biết cơ bản về trí tuệ nhân tạo, ứng dụng của AI trong đời sống và học tập.
         </p>
         <ul>
           <li>Mục tiêu: Hiểu khái niệm và vai trò của AI</li>
-          <li>Quá trình: Tìm hiểu tài liệu, tổng hợp và trình bày nội dung</li>
-          <li>Sản phẩm: Bài viết, slide, hình ảnh hoặc file PDF</li>
+          <li>Quá trình: Tìm hiểu, tổng hợp và trình bày</li>
+          <li>Sản phẩm: Bài viết, slide, hình ảnh hoặc PDF</li>
         </ul>
-        <a href="#" class="project-link">Xem chi tiết</a>
+        <button class="project-link" onclick="showDetail('bai3')">Xem chi tiết</button>
       </div>
     </div>
 
@@ -617,15 +892,14 @@
       <div class="project-body">
         <h3>Bài tập 3 - Bài 4: Giao tiếp và hợp tác trong môi trường số</h3>
         <p>
-          Minh chứng việc sử dụng công cụ trực tuyến để giao tiếp, phân công
-          nhiệm vụ, phối hợp nhóm và theo dõi tiến độ công việc.
+          Minh chứng việc sử dụng công cụ trực tuyến để giao tiếp, phân công nhiệm vụ và phối hợp nhóm.
         </p>
         <ul>
           <li>Mục tiêu: Rèn luyện kỹ năng hợp tác trực tuyến</li>
-          <li>Quá trình: Sử dụng công cụ quản lý nhóm và trao đổi online</li>
-          <li>Sản phẩm: Ảnh chụp màn hình, bảng phân công hoặc link nhóm</li>
+          <li>Quá trình: Sử dụng công cụ quản lý nhóm</li>
+          <li>Sản phẩm: Ảnh chụp màn hình hoặc link nhóm</li>
         </ul>
-        <a href="#" class="project-link">Xem chi tiết</a>
+        <button class="project-link" onclick="showDetail('bai4')">Xem chi tiết</button>
       </div>
     </div>
 
@@ -634,15 +908,14 @@
       <div class="project-body">
         <h3>Bài tập 2 - Bài 5: Sáng tạo nội dung số</h3>
         <p>
-          Trưng bày sản phẩm nội dung số được tạo ra trong quá trình học tập,
-          có thể là hình ảnh, video, bài viết, poster hoặc sản phẩm truyền thông số.
+          Trưng bày sản phẩm nội dung số được tạo ra trong quá trình học tập.
         </p>
         <ul>
           <li>Mục tiêu: Biết cách tạo sản phẩm nội dung số</li>
-          <li>Quá trình: Lên ý tưởng, thiết kế và hoàn thiện sản phẩm</li>
-          <li>Sản phẩm: Hình ảnh, video, bài viết hoặc đường link minh họa</li>
+          <li>Quá trình: Lên ý tưởng, thiết kế và hoàn thiện</li>
+          <li>Sản phẩm: Hình ảnh, video, bài viết hoặc poster</li>
         </ul>
-        <a href="#" class="project-link">Xem chi tiết</a>
+        <button class="project-link" onclick="showDetail('bai5')">Xem chi tiết</button>
       </div>
     </div>
 
@@ -651,249 +924,897 @@
       <div class="project-body">
         <h3>Bài tập 4 - Bài 6: An toàn và liêm chính học thuật trong môi trường số</h3>
         <p>
-          Trình bày nhận thức về an toàn thông tin, bảo vệ dữ liệu cá nhân,
-          liêm chính học thuật và cách sử dụng tài nguyên số một cách có trách nhiệm.
+          Trình bày nhận thức về an toàn thông tin, bảo vệ dữ liệu cá nhân và liêm chính học thuật.
         </p>
         <ul>
           <li>Mục tiêu: Hiểu nguyên tắc an toàn và liêm chính học thuật</li>
-          <li>Quá trình: Phân tích tình huống, rút ra nguyên tắc sử dụng</li>
-          <li>Sản phẩm: Bộ nguyên tắc, bài phân tích hoặc file báo cáo</li>
+          <li>Quá trình: Phân tích tình huống và rút ra nguyên tắc</li>
+          <li>Sản phẩm: Bộ nguyên tắc hoặc báo cáo</li>
         </ul>
-        <a href="#" class="project-link">Xem chi tiết</a>
+        <button class="project-link" onclick="showDetail('bai6')">Xem chi tiết</button>
       </div>
     </div>
 
   </div>
 </section>
 
-  <!-- ===== PROJECTS ===== -->
-  <section id="projects" class="projects">
-    <div class="section-title">
-      <span>Trang dự án</span>
-      <h2>Các bài tập thành phần</h2>
+<!-- QUY TRÌNH -->
+<section id="process">
+  <div class="section-title">
+    <span>Quy trình thực hiện</span>
+    <h2>Các bước xây dựng Portfolio</h2>
+    <p>
+      Portfolio được hoàn thiện theo từng bước từ thiết lập nền tảng,
+      hệ thống hóa bài tập đến tổng kết và đánh giá bản thân.
+    </p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-number">1</div>
+      <div class="timeline-content">
+        <h3>Thiết lập nền tảng Portfolio</h3>
+        <p>
+          Lựa chọn công cụ xây dựng website hoặc blog cá nhân như Google Sites,
+          Notion, Wix, WordPress hoặc HTML/CSS.
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-number">2</div>
+      <div class="timeline-content">
+        <h3>Trình bày các bài tập thành phần</h3>
+        <p>
+          Sắp xếp 6 bài tập theo từng mục rõ ràng. Mỗi bài tập có mô tả,
+          mục tiêu, quá trình thực hiện, ảnh minh họa và sản phẩm cuối cùng.
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-number">3</div>
+      <div class="timeline-content">
+        <h3>Hoàn thiện và tổng kết</h3>
+        <p>
+          Kiểm tra bố cục, liên kết, nội dung và tính thẩm mỹ.
+          Viết phần tổng kết để chia sẻ trải nghiệm và kiến thức học được.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TỔNG KẾT -->
+<section id="summary" class="summary">
+  <div class="section-title">
+    <span>Trang tổng kết</span>
+    <h2>Nhìn lại quá trình xây dựng Portfolio</h2>
+    <p>
+      Phần tổng kết này trình bày những trải nghiệm cá nhân, kiến thức và kỹ năng đã học được,
+      đồng thời thể hiện sự trưởng thành của bản thân trong quá trình thực hiện dự án Portfolio kỹ thuật số.
+    </p>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <h3>Trải nghiệm và cảm nhận cá nhân</h3>
       <p>
-        Mỗi bài tập được trình bày với mục tiêu, quá trình thực hiện,
-        sản phẩm minh họa và đường dẫn đến kết quả hoàn chỉnh.
+        Trong quá trình thực hiện dự án Portfolio, em có cơ hội nhìn lại toàn bộ quá trình học tập
+        và hệ thống hóa các sản phẩm đã hoàn thành theo một cách rõ ràng, khoa học hơn.
+        Ban đầu, em chỉ xem Portfolio là nơi lưu trữ bài tập, nhưng sau khi thực hiện,
+        em nhận ra đây còn là công cụ giúp bản thân tự đánh giá năng lực, nhận biết điểm mạnh,
+        điểm yếu và quá trình tiến bộ của mình qua từng bài học.
+      </p>
+      <p>
+        Em cảm thấy dự án này giúp mình chủ động hơn trong học tập. Thay vì chỉ hoàn thành bài tập
+        riêng lẻ, em phải suy nghĩ cách trình bày sao cho người xem hiểu được mục tiêu,
+        quá trình thực hiện và kết quả cuối cùng của từng bài. Nhờ đó, em rèn luyện được
+        tư duy tổ chức thông tin, khả năng diễn đạt nội dung và tinh thần trách nhiệm
+        đối với sản phẩm cá nhân.
       </p>
     </div>
 
-    <div class="project-grid">
-
-      <div class="project-card">
-        <div class="project-top">01</div>
-        <div class="project-body">
-          <h3>Bài 1: Quản lý tệp và thư mục</h3>
-          <p>
-            Trình bày cấu trúc thư mục tối ưu, quy tắc đặt tên tệp
-            và ảnh chụp minh họa quá trình tổ chức dữ liệu.
-          </p>
-          <ul>
-            <li>Cấu trúc thư mục rõ ràng</li>
-            <li>Quy tắc đặt tên nhất quán</li>
-            <li>Ảnh minh họa kết quả</li>
-          </ul>
-          <a href="#" class="project-link">Xem chi tiết</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-top">02</div>
-        <div class="project-body">
-          <h3>Bài 2: Tìm kiếm và đánh giá thông tin học thuật</h3>
-          <p>
-            Thể hiện khả năng sử dụng toán tử tìm kiếm nâng cao
-            và đánh giá độ tin cậy của nguồn thông tin.
-          </p>
-          <ul>
-            <li>Sử dụng site:, filetype:, dấu ngoặc kép</li>
-            <li>Bảng đánh giá nguồn</li>
-            <li>Phân tích chiến lược tìm kiếm</li>
-          </ul>
-          <a href="#" class="project-link">Xem chi tiết</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-top">03</div>
-        <div class="project-body">
-          <h3>Bài 3: Viết Prompt hiệu quả</h3>
-          <p>
-            So sánh prompt ban đầu và prompt cải tiến,
-            phân tích cách AI tạo ra kết quả khác nhau.
-          </p>
-          <ul>
-            <li>Prompt ban đầu</li>
-            <li>Prompt cải tiến</li>
-            <li>Nhận xét kết quả đầu ra</li>
-          </ul>
-          <a href="#" class="project-link">Xem chi tiết</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-top">04</div>
-        <div class="project-body">
-          <h3>Bài 4: Hợp tác trực tuyến</h3>
-          <p>
-            Minh chứng việc sử dụng công cụ quản lý dự án,
-            phân công nhiệm vụ và theo dõi tiến độ nhóm.
-          </p>
-          <ul>
-            <li>Bảng phân công công việc</li>
-            <li>Ảnh chụp công cụ sử dụng</li>
-            <li>Mô tả cách phối hợp nhóm</li>
-          </ul>
-          <a href="#" class="project-link">Xem chi tiết</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-top">05</div>
-        <div class="project-body">
-          <h3>Bài 5: Sử dụng AI tạo sinh</h3>
-          <p>
-            Trưng bày sản phẩm nội dung số được hỗ trợ bởi AI
-            như hình ảnh, video, bài viết hoặc ý tưởng sáng tạo.
-          </p>
-          <ul>
-            <li>Sản phẩm hoàn chỉnh</li>
-            <li>Công cụ AI đã sử dụng</li>
-            <li>Mô tả quy trình tạo sản phẩm</li>
-          </ul>
-          <a href="#" class="project-link">Xem chi tiết</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-top">06</div>
-        <div class="project-body">
-          <h3>Bài 6: Sử dụng AI có trách nhiệm</h3>
-          <p>
-            Trình bày bộ nguyên tắc cá nhân về việc sử dụng AI
-            trong học tập và nghiên cứu.
-          </p>
-          <ul>
-            <li>5-7 nguyên tắc cá nhân</li>
-            <li>Phân tích vấn đề đạo đức AI</li>
-            <li>Đề xuất giải pháp</li>
-          </ul>
-          <a href="#" class="project-link">Xem chi tiết</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ===== PROCESS ===== -->
-  <section id="process">
-    <div class="section-title">
-      <span>Quy trình thực hiện</span>
-      <h2>Các bước xây dựng Portfolio</h2>
+    <div class="summary-card">
+      <h3>Kiến thức và kỹ năng quan trọng đã học được</h3>
       <p>
-        Portfolio được hoàn thiện theo từng bước từ thiết lập nền tảng,
-        hệ thống hóa bài tập đến tổng kết và đánh giá bản thân.
+        Qua dự án Portfolio, em đã học được nhiều kỹ năng số quan trọng. Trước hết là kỹ năng
+        quản lý tệp và thư mục, giúp em biết cách sắp xếp tài liệu học tập khoa học,
+        đặt tên tệp rõ ràng và lưu trữ dữ liệu hợp lý. Đây là kỹ năng nền tảng nhưng rất cần thiết
+        trong học tập và công việc sau này.
+      </p>
+      <p>
+        Bên cạnh đó, em rèn luyện được kỹ năng tìm kiếm, chọn lọc và đánh giá thông tin
+        từ nhiều nguồn khác nhau. Em hiểu rằng không phải thông tin nào trên Internet cũng đáng tin cậy,
+        vì vậy cần xem xét tác giả, nguồn xuất bản, tính cập nhật và mục đích sử dụng
+        của tài liệu trước khi đưa vào bài làm.
+      </p>
+      <p>
+        Một kỹ năng quan trọng khác là sử dụng trí tuệ nhân tạo một cách có trách nhiệm.
+        Em học được cách viết prompt rõ ràng, biết dùng AI để hỗ trợ tóm tắt, gợi ý ý tưởng
+        và cải thiện nội dung, nhưng không phụ thuộc hoàn toàn vào AI. Em hiểu rằng người học
+        vẫn cần kiểm tra, chọn lọc và chỉnh sửa kết quả để đảm bảo tính chính xác.
       </p>
     </div>
 
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-number">1</div>
-        <div class="timeline-content">
-          <h3>Thiết lập nền tảng Portfolio</h3>
-          <p>
-            Lựa chọn công cụ xây dựng website hoặc blog cá nhân như Google Sites,
-            Notion, Wix, WordPress hoặc HTML/CSS. Thiết kế trang chủ giới thiệu
-            bản thân và mục tiêu của Portfolio.
-          </p>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-number">2</div>
-        <div class="timeline-content">
-          <h3>Trình bày các bài tập thành phần</h3>
-          <p>
-            Sắp xếp 6 bài tập theo từng mục rõ ràng. Mỗi bài tập cần có phần mô tả,
-            mục tiêu, quá trình thực hiện, ảnh minh họa và liên kết đến sản phẩm cuối cùng.
-          </p>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-number">3</div>
-        <div class="timeline-content">
-          <h3>Hoàn thiện và tổng kết</h3>
-          <p>
-            Kiểm tra bố cục, liên kết, nội dung và tính thẩm mỹ.
-            Viết phần tổng kết để chia sẻ trải nghiệm, kiến thức học được
-            và định hướng áp dụng kỹ năng trong tương lai.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SUMMARY ===== -->
-  <section id="summary" class="summary">
-    <div class="section-title">
-      <span>Trang tổng kết</span>
-      <h2>Nhìn lại quá trình học tập</h2>
+    <div class="summary-card summary-wide">
+      <h3>Điểm tâm đắc và thách thức khi xây dựng Portfolio</h3>
       <p>
-        Đây là phần thể hiện cảm nhận cá nhân, những kỹ năng đã học được
-        và các thách thức trong quá trình xây dựng Portfolio.
+        Điều em cảm thấy tâm đắc nhất là Portfolio không chỉ trình bày kết quả cuối cùng
+        mà còn thể hiện được quá trình học tập và sự tiến bộ của bản thân. Mỗi bài tập trong Portfolio
+        đều có mục tiêu, quá trình thực hiện và sản phẩm minh chứng, giúp người xem hiểu rõ
+        em đã học được gì và đã áp dụng kiến thức như thế nào.
+      </p>
+      <p>
+        Tuy nhiên, trong quá trình xây dựng Portfolio, em cũng gặp một số thách thức.
+        Khó khăn đầu tiên là việc lựa chọn nội dung phù hợp để trình bày sao cho ngắn gọn
+        nhưng vẫn đầy đủ ý. Nếu viết quá ít, bài làm sẽ thiếu chiều sâu; nếu viết quá dài,
+        người xem có thể khó theo dõi. Vì vậy, em phải học cách sắp xếp nội dung theo từng phần rõ ràng
+        và ưu tiên những ý quan trọng nhất.
+      </p>
+      <p>
+        Thách thức thứ hai là đảm bảo tính thẩm mỹ và sự thống nhất của Portfolio.
+        Các bài tập cần được trình bày cùng một phong cách, có bố cục rõ ràng,
+        màu sắc phù hợp và dễ đọc. Qua quá trình chỉnh sửa, em nhận ra rằng một sản phẩm số tốt
+        không chỉ cần nội dung đúng mà còn cần cách trình bày hợp lý để tạo trải nghiệm tốt cho người xem.
+      </p>
+    </div>
+  </div>
+
+  <div class="summary-final">
+    <h2>Sự trưởng thành và định hướng áp dụng trong tương lai</h2>
+    <p>
+      Sau khi hoàn thành Portfolio, em nhận thấy bản thân đã trưởng thành hơn trong cách học tập
+      và làm việc với công nghệ. Em biết lập kế hoạch trước khi thực hiện, biết chia nhỏ công việc
+      thành từng bước, biết kiểm tra lại sản phẩm và biết trình bày kết quả một cách có hệ thống.
+      Đây là sự thay đổi quan trọng vì trước đây em thường chỉ tập trung hoàn thành từng bài riêng lẻ
+      mà chưa chú ý nhiều đến việc tổng hợp, đánh giá và cải thiện sản phẩm.
+    </p>
+    <p>
+      Trong tương lai, em sẽ tiếp tục áp dụng các kỹ năng đã học vào học tập và công việc.
+      Kỹ năng quản lý tệp sẽ giúp em lưu trữ tài liệu cá nhân khoa học hơn. Kỹ năng tìm kiếm
+      và đánh giá thông tin sẽ giúp em thực hiện các bài nghiên cứu chính xác hơn.
+      Kỹ năng sử dụng AI sẽ hỗ trợ em học tập hiệu quả, nhưng em sẽ luôn kiểm tra lại thông tin
+      và sử dụng AI một cách trung thực, có trách nhiệm.
+    </p>
+    <p>
+      Ngoài ra, kỹ năng hợp tác trực tuyến sẽ rất hữu ích khi em tham gia các dự án nhóm
+      trong học tập hoặc công việc sau này. Em có thể sử dụng các công cụ số để phân công nhiệm vụ,
+      theo dõi tiến độ, chia sẻ tài liệu và giao tiếp hiệu quả hơn. Những kinh nghiệm từ dự án Portfolio
+      sẽ là nền tảng để em tiếp tục phát triển tư duy số, khả năng tự học và năng lực thích nghi
+      với môi trường học tập, làm việc hiện đại.
+    </p>
+  </div>
+</section>
+
+<!-- LIÊN HỆ -->
+<section id="contact">
+  <div class="contact-box">
+    <div>
+      <h2>Liên hệ</h2>
+      <p>
+        Cảm ơn bạn đã xem Portfolio của tôi. Đây là nơi lưu trữ các sản phẩm học tập
+        và thể hiện quá trình phát triển kỹ năng số của bản thân.
       </p>
     </div>
 
-    <div class="summary-grid">
-      <div class="summary-card">
-        <h3>Trải nghiệm</h3>
+    <ul class="contact-info">
+      <li><strong>Họ tên:</strong> Trương Quốc Kiệt</li>
+      <li><strong>Email:</strong> ducccs19052010@gmail.com</li>
+      <li><strong>Lớp:</strong> VNU1001_E252014</li>
+      <li><strong>Portfolio:</strong> https://ducccs19052010-lang.github.io/</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 - Portfolio Kỹ thuật số | Thiết kế bởi Trương Quốc Kiệt</p>
+</footer>
+
+  </div>
+
+  <!-- CHI TIẾT BÀI 1 -->
+
+  <section id="bai1" class="detail-page">
+    <div class="detail-container">
+      <button class="back-btn" onclick="backToMain()">← Quay lại trang chính</button>
+
+  <div class="detail-card">
+    <h1>Bài 1: Máy tính và các thiết bị ngoại vi</h1>
+
+    <div class="highlight-box">
+      <h2>Mục tiêu</h2>
+      <p>
+        Ở Bài 1, em tập trung rèn luyện kỹ năng thao tác với tệp tin và thư mục trên hệ điều hành Windows.
+        Mục tiêu chính của bài là biết cách tạo, đổi tên, sao chép, di chuyển, xóa và khôi phục dữ liệu
+        một cách chính xác, an toàn và khoa học.
+      </p>
+      <p>
+        Thông qua bài tập này, em hiểu rõ hơn vai trò của việc quản lý dữ liệu cá nhân, biết sắp xếp tài liệu học tập
+        theo thư mục rõ ràng và hạn chế tình trạng thất lạc hoặc xóa nhầm tệp quan trọng.
+      </p>
+    </div>
+
+    <h2>Quá trình thực hiện</h2>
+    <div class="step-grid">
+      <div class="step-box">
+        <strong>Bước 1: Mở File Explorer và chọn vị trí thực hành</strong>
         <p>
-          Trong quá trình thực hiện Portfolio, tôi đã học được cách tổ chức thông tin,
-          trình bày sản phẩm học tập và sử dụng công cụ số hiệu quả hơn.
+          Đầu tiên, em mở File Explorer bằng tổ hợp phím Windows + E hoặc nhấp vào biểu tượng thư mục trên thanh tác vụ.
+          Sau đó, em chọn vị trí lưu trữ phù hợp như ổ D:, ổ E: hoặc thư mục Documents nếu máy chỉ có ổ C:.
         </p>
       </div>
 
-      <div class="summary-card">
-        <h3>Kỹ năng học được</h3>
+      <div class="step-box">
+        <strong>Bước 2: Tạo thư mục thực hành</strong>
         <p>
-          Tôi đã rèn luyện kỹ năng quản lý tệp, tìm kiếm thông tin học thuật,
-          viết prompt, hợp tác trực tuyến và sử dụng AI có trách nhiệm.
+          Em nhấp chuột phải vào khoảng trống, chọn New → Folder để tạo thư mục mới.
+          Thư mục được đặt tên theo mẫu ThucHanh_hotensinhvien, ví dụ ThucHanh_TruongQuocKiet,
+          nhằm giúp dễ nhận biết và quản lý bài thực hành.
         </p>
       </div>
 
-      <div class="summary-card">
-        <h3>Định hướng phát triển</h3>
+      <div class="step-box">
+        <strong>Bước 3: Tạo và đổi tên tệp văn bản</strong>
         <p>
-          Trong tương lai, tôi sẽ tiếp tục cải thiện kỹ năng thiết kế,
-          tư duy phản biện và khả năng ứng dụng công nghệ vào học tập, công việc.
+          Trong thư mục vừa tạo, em tạo một tệp văn bản mới bằng lệnh New → Text Document và đặt tên là GhiChu.txt.
+          Sau đó, em sử dụng lệnh Rename để đổi tên tệp thành GhiChuQuanTrong.txt,
+          qua đó luyện tập thao tác đặt tên tệp rõ ràng và phù hợp với nội dung.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 4: Tạo thư mục con để phân loại tài liệu</strong>
+        <p>
+          Em tạo thêm thư mục con có tên TaiLieu bên trong thư mục thực hành.
+          Việc tạo thư mục con giúp phân loại dữ liệu theo nhóm, tránh để nhiều tệp nằm lộn xộn trong cùng một vị trí.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 5: Sao chép tệp vào thư mục con</strong>
+        <p>
+          Em chọn tệp GhiChuQuanTrong.txt, sử dụng lệnh Copy hoặc tổ hợp phím Ctrl + C,
+          sau đó mở thư mục TaiLieu và dùng Paste hoặc Ctrl + V để dán tệp vào.
+          Thao tác này giúp em hiểu sự khác nhau giữa sao chép và di chuyển tệp.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 6: Di chuyển tệp sang vị trí khác</strong>
+        <p>
+          Em tạo một tệp mới tên DiChuyen.txt, sau đó sử dụng lệnh Cut hoặc Ctrl + X để di chuyển tệp
+          vào thư mục TaiLieu. Sau khi dán tệp, em kiểm tra lại vị trí cũ và vị trí mới để đảm bảo tệp đã được chuyển đúng.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 7: Xóa tệp và kiểm tra Recycle Bin</strong>
+        <p>
+          Em thực hành xóa tệp bằng phím Delete để đưa tệp vào Recycle Bin.
+          Sau đó, em mở Recycle Bin để kiểm tra tệp đã xóa và thực hành khôi phục tệp khi cần thiết.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 8: Xóa vĩnh viễn và rút kinh nghiệm</strong>
+        <p>
+          Cuối cùng, em thực hành thao tác Shift + Delete để hiểu khái niệm xóa vĩnh viễn.
+          Từ đó, em rút ra bài học rằng cần kiểm tra kỹ nội dung trước khi xóa, đặc biệt với các tệp quan trọng.
         </p>
       </div>
     </div>
+
+    <h2>Sản phẩm cuối cùng</h2>
+    <p>
+      Sản phẩm cuối cùng của Bài 1 là file PDF ghi lại quá trình thực hành quản lý tệp và thư mục trên Windows.
+      Bài làm có minh chứng các thao tác như tạo thư mục, tạo tệp, đổi tên, sao chép, di chuyển, xóa và khôi phục dữ liệu.
+      Qua bài tập này, em đã nắm được cách tổ chức tài liệu học tập một cách khoa học và an toàn hơn.
+    </p>
+    <a href="https://drive.google.com/file/d/19QrQ83cRzNV4iXPzxaSplh8GLfOtUWeu/view?usp=sharing" class="link-noi">https://drive.google.com/file/d/19QrQ83cRzNV4iXPzxaSplh8GLfOtUWeu/view?usp=sharing</a>
+
+<style>
+.link-noi {
+  color: white;
+  background-color: #007bff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: 0.2s;
+}
+
+.link-noi:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+</style>
+    <iframe class="pdf-frame" src="Bài 1.pdf"></iframe>
+  </div>
+</div>
+
   </section>
 
-  <!-- ===== CONTACT ===== -->
-  <section id="contact">
-    <div class="contact-box">
-      <div>
-        <h2>Liên hệ</h2>
+  <!-- CHI TIẾT BÀI 2 -->
+
+  <section id="bai2" class="detail-page">
+    <div class="detail-container">
+      <button class="back-btn" onclick="backToMain()">← Quay lại trang chính</button>
+
+  <div class="detail-card">
+    <h1>Bài 2: Khai thác dữ liệu và thông tin</h1>
+
+    <div class="highlight-box">
+      <h2>Mục tiêu</h2>
+      <p>
+        Ở Bài 2, em tập trung rèn luyện kỹ năng tìm kiếm, lựa chọn và đánh giá nguồn thông tin học thuật
+        đáng tin cậy về chủ đề ứng dụng AI trong hỗ trợ ra quyết định của hệ thống thông tin doanh nghiệp.
+      </p>
+      <p>
+        Mục tiêu của bài là biết cách xác định từ khóa, khai thác dữ liệu từ các nguồn uy tín,
+        so sánh chất lượng tài liệu và lựa chọn những nguồn có giá trị nhất để phục vụ nghiên cứu.
+      </p>
+    </div>
+
+    <h2>Quá trình thực hiện</h2>
+    <div class="step-grid">
+      <div class="step-box">
+        <strong>Bước 1: Xác định chủ đề và phạm vi nghiên cứu</strong>
         <p>
-          Cảm ơn bạn đã xem Portfolio của tôi. Đây là nơi lưu trữ các sản phẩm học tập
-          và thể hiện quá trình phát triển kỹ năng số của bản thân.
+          Đầu tiên, em xác định chủ đề chính của bài là ứng dụng trí tuệ nhân tạo trong việc hỗ trợ ra quyết định
+          của hệ thống thông tin doanh nghiệp. Sau đó, em giới hạn phạm vi tìm kiếm vào các tài liệu học thuật,
+          bài báo nghiên cứu và báo cáo từ tổ chức uy tín.
         </p>
       </div>
 
-      <ul class="contact-info">
-        <li><strong>Họ tên:</strong> [Tên của bạn]</li>
-        <li><strong>Email:</strong> example@gmail.com</li>
-        <li><strong>Lớp:</strong> [Tên lớp]</li>
-        <li><strong>Portfolio:</strong> [Dán liên kết tại đây]</li>
-      </ul>
+      <div class="step-box">
+        <strong>Bước 2: Xây dựng bộ từ khóa tìm kiếm</strong>
+        <p>
+          Em lựa chọn các từ khóa liên quan như artificial intelligence, decision support system,
+          business information system, AI decision-making và enterprise information system.
+          Việc sử dụng cả tiếng Anh và tiếng Việt giúp mở rộng phạm vi tìm kiếm và tiếp cận nhiều nguồn tài liệu hơn.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 3: Tìm kiếm tài liệu trên các nền tảng phù hợp</strong>
+        <p>
+          Em tiến hành tìm kiếm tài liệu trên các công cụ học thuật và nguồn thông tin đáng tin cậy.
+          Trong quá trình tìm kiếm, em ưu tiên các tài liệu có tên tác giả rõ ràng, đơn vị xuất bản uy tín,
+          nội dung liên quan trực tiếp đến chủ đề và thời gian công bố còn phù hợp.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 4: Sàng lọc và loại bỏ nguồn chưa phù hợp</strong>
+        <p>
+          Sau khi thu thập được nhiều tài liệu, em đọc tiêu đề, phần tóm tắt và nội dung chính để loại bỏ
+          các nguồn không liên quan hoặc thiếu độ tin cậy. Những tài liệu mang tính quảng cáo, không có tác giả rõ ràng
+          hoặc không nêu phương pháp nghiên cứu được đánh giá là chưa phù hợp.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 5: Đánh giá chất lượng từng nguồn</strong>
+        <p>
+          Em đánh giá từng nguồn theo các tiêu chí gồm tác giả, cơ quan xuất bản, phương pháp nghiên cứu,
+          mức độ trích dẫn, tính cập nhật và mức độ liên quan đến chủ đề.
+          Việc đánh giá này giúp em nhận biết nguồn nào có giá trị học thuật cao hơn.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 6: Lập bảng tổng hợp thông tin</strong>
+        <p>
+          Em hệ thống hóa các nguồn đã chọn vào bảng tổng hợp, trong đó ghi rõ tên tài liệu,
+          nguồn xuất bản, nội dung chính, điểm mạnh, hạn chế và lý do lựa chọn.
+          Bảng này giúp quá trình so sánh tài liệu trở nên rõ ràng và dễ theo dõi hơn.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 7: Rút ra nguồn tài liệu có giá trị nhất</strong>
+        <p>
+          Dựa trên kết quả đánh giá, em chọn ra các tài liệu có độ tin cậy cao nhất để phục vụ cho việc nghiên cứu.
+          Những nguồn này có nội dung bám sát chủ đề, phương pháp trình bày rõ ràng và có khả năng hỗ trợ lập luận tốt.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 8: Hoàn thiện báo cáo và minh chứng</strong>
+        <p>
+          Cuối cùng, em hoàn thiện bài báo cáo bằng cách trình bày mục tiêu, quá trình tìm kiếm,
+          bảng đánh giá nguồn và kết luận. Bài làm được xuất thành file PDF để lưu trữ và nộp sản phẩm cuối cùng.
+        </p>
+      </div>
     </div>
+
+    <h2>Sản phẩm cuối cùng</h2>
+    <p>
+      Sản phẩm cuối cùng của Bài 2 là file PDF trình bày quá trình khai thác, chọn lọc và đánh giá nguồn thông tin.
+      Bài làm thể hiện rõ cách em xác định chủ đề, tìm kiếm tài liệu, đánh giá độ tin cậy và lựa chọn nguồn phù hợp
+      cho nghiên cứu về ứng dụng AI trong hệ thống thông tin doanh nghiệp.
+    </p>
+    <a href="https://drive.google.com/file/d/1pkdQZLSW0JWPOtssQkP5EdcdLAs4-lQF/view?usp=sharing" class="link-noi">https://drive.google.com/file/d/1pkdQZLSW0JWPOtssQkP5EdcdLAs4-lQF/view?usp=sharing</a>
+
+<style>
+.link-noi {
+  color: white;
+  background-color: #007bff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: 0.2s;
+}
+
+.link-noi:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+</style>
+    <iframe class="pdf-frame" src="Bài 2.pdf"></iframe>
+  </div>
+</div>
+
   </section>
 
-  <footer>
-    <p>© 2026 - Portfolio Kỹ thuật số | Thiết kế bởi [Tên của bạn]</p>
-  </footer>
+  <!-- CHI TIẾT BÀI 3 -->
+
+  <section id="bai3" class="detail-page">
+    <div class="detail-container">
+      <button class="back-btn" onclick="backToMain()">← Quay lại trang chính</button>
+
+  <div class="detail-card">
+    <h1>Bài 3: Tổng quan về trí tuệ nhân tạo</h1>
+
+    <div class="highlight-box">
+      <h2>Mục tiêu</h2>
+      <p>
+        Ở Bài 3, em tập trung tìm hiểu cách sử dụng trí tuệ nhân tạo để hỗ trợ đọc hiểu và tóm tắt tài liệu học thuật.
+        Mục tiêu chính của bài là biết cách viết prompt hiệu quả để AI xác định vấn đề nghiên cứu,
+        cơ chế cốt lõi và ý nghĩa thực tiễn của tài liệu.
+      </p>
+      <p>
+        Thông qua bài tập này, em rèn luyện khả năng khai thác AI trong học tập một cách có định hướng,
+        biết cải tiến yêu cầu từng bước và kiểm tra lại nội dung để tránh phụ thuộc hoàn toàn vào công cụ.
+      </p>
+    </div>
+
+    <h2>Quá trình thực hiện</h2>
+    <div class="step-grid">
+      <div class="step-box">
+        <strong>Bước 1: Lựa chọn tài liệu học thuật cần tóm tắt</strong>
+        <p>
+          Đầu tiên, em lựa chọn bài báo “Attention Is All You Need” làm tài liệu thực hành.
+          Đây là tài liệu quan trọng trong lĩnh vực trí tuệ nhân tạo, đặc biệt liên quan đến mô hình Transformer
+          và các ứng dụng xử lý ngôn ngữ tự nhiên.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 2: Viết prompt cơ bản</strong>
+        <p>
+          Em bắt đầu bằng một prompt đơn giản yêu cầu AI tóm tắt nội dung chính của bài báo.
+          Ở bước này, mục đích là quan sát cách AI phản hồi khi yêu cầu còn ngắn và chưa có cấu trúc rõ ràng.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 3: Đánh giá kết quả phản hồi ban đầu</strong>
+        <p>
+          Sau khi nhận kết quả, em đọc lại phần tóm tắt để xem nội dung đã đầy đủ, dễ hiểu và đúng trọng tâm hay chưa.
+          Em nhận thấy prompt cơ bản có thể tạo ra câu trả lời tổng quát nhưng chưa phân chia rõ các ý quan trọng.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 4: Cải tiến prompt theo cấu trúc ba phần</strong>
+        <p>
+          Em điều chỉnh prompt bằng cách yêu cầu AI chia câu trả lời thành ba phần:
+          vấn đề nghiên cứu, cơ chế cốt lõi và ý nghĩa thực tiễn.
+          Việc bổ sung cấu trúc giúp kết quả rõ ràng hơn và dễ sử dụng cho mục đích học tập.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 5: Bổ sung vai trò và đối tượng người nghe</strong>
+        <p>
+          Tiếp theo, em nâng cấp prompt bằng cách yêu cầu AI đóng vai chuyên gia AI Engineering
+          và giải thích cho sinh viên năm nhất. Điều này giúp nội dung phản hồi được trình bày đơn giản hơn,
+          phù hợp với người mới bắt đầu tìm hiểu về trí tuệ nhân tạo.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 6: Yêu cầu giải thích từng bước và có ví dụ minh họa</strong>
+        <p>
+          Em tiếp tục bổ sung yêu cầu giải thích từng bước, đồng thời minh họa bằng ví dụ dịch tiếng Anh sang tiếng Việt.
+          Nhờ ví dụ cụ thể, các khái niệm trừu tượng như attention, encoder, decoder và Transformer trở nên dễ hiểu hơn.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 7: So sánh các phiên bản prompt</strong>
+        <p>
+          Em so sánh kết quả giữa prompt cơ bản, prompt có cấu trúc và prompt nâng cao.
+          Qua đó, em nhận ra prompt càng rõ vai trò, mục tiêu, đối tượng và định dạng đầu ra thì phản hồi của AI càng hữu ích.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 8: Hoàn thiện nội dung báo cáo</strong>
+        <p>
+          Cuối cùng, em tổng hợp quá trình thử nghiệm prompt, ghi lại kết quả nhận được và rút ra bài học.
+          Bài làm được trình bày thành file PDF nhằm minh chứng quá trình sử dụng AI để hỗ trợ học tập.
+        </p>
+      </div>
+    </div>
+
+    <h2>Sản phẩm cuối cùng</h2>
+    <p>
+      Sản phẩm cuối cùng của Bài 3 là file PDF trình bày quá trình sử dụng AI để tóm tắt và phân tích tài liệu học thuật.
+      Bài làm thể hiện sự khác nhau giữa các cấp độ prompt, từ cơ bản đến nâng cao, đồng thời cho thấy cách AI có thể hỗ trợ
+      việc đọc hiểu tài liệu nhưng vẫn cần người học kiểm tra, đánh giá và điều chỉnh nội dung.
+    </p>
+    <a href="https://drive.google.com/file/d/1BUq28A5Hed0QZ1IU52M--hoUNpOlJk1d/view?usp=sharing" class="link-noi">https://drive.google.com/file/d/1BUq28A5Hed0QZ1IU52M--hoUNpOlJk1d/view?usp=sharing</a>
+
+<style>
+.link-noi {
+  color: white;
+  background-color: #007bff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: 0.2s;
+}
+
+.link-noi:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+</style>
+    <iframe class="pdf-frame" src="Bài 3.pdf"></iframe>
+  </div>
+</div>
+
+  </section>
+
+  <!-- CHI TIẾT BÀI 4 -->
+
+  <section id="bai4" class="detail-page">
+    <div class="detail-container">
+      <button class="back-btn" onclick="backToMain()">← Quay lại trang chính</button>
+
+  <div class="detail-card">
+    <h1>Bài 4: Giao tiếp và hợp tác trong môi trường số</h1>
+      <div class="highlight-box">
+    <h2>Mục tiêu</h2>
+    <p>
+      Ở Bài 4, em tập trung rèn luyện kỹ năng sử dụng các công cụ hợp tác trực tuyến để hỗ trợ quá trình làm việc nhóm. Mục tiêu chính của bài là biết cách quản lý nhiệm vụ, soạn thảo tài liệu chung, lưu trữ dữ liệu và trao đổi thông tin trong môi trường trực tuyến.
+
+Thông qua bài tập này, em đã sử dụng các công cụ gồm Trello, Google Docs, Google Drive và Slack nhằm nâng cao hiệu quả phối hợp nhóm, theo dõi tiến độ công việc và thể hiện rõ trách nhiệm cá nhân trong quá trình thực hiện dự án.
+    </p>
+      </div>
+    <h2>Quá trình thực hiện</h2>
+    <div class="step-grid">
+      <div class="step-box">
+        <strong>Bước 1: Quản lý nhiệm vụ bằng Trello</strong>
+        <p>Đầu tiên, em sử dụng Trello để theo dõi các nhiệm vụ cá nhân trong dự án nhóm. Sau khi tham gia bảng làm việc chung, em theo dõi các danh sách công việc như Cần làm, Đang làm, Review và Hoàn thành.
+
+Trên Trello, em tạo và cập nhật thẻ nhiệm vụ, theo dõi hạn hoàn thành, đánh dấu trạng thái công việc và kiểm tra tiến độ của bản thân. Việc sử dụng Trello giúp em tránh bỏ sót nhiệm vụ và có kế hoạch làm việc rõ ràng hơn.</p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 2: Soạn thảo và chỉnh sửa nội dung bằng Google Docs</strong>
+        <p>Sau khi nhận nhiệm vụ, em sử dụng Google Docs để tham gia viết và chỉnh sửa nội dung trong tài liệu chung của nhóm. Công cụ này hỗ trợ làm việc cộng tác theo thời gian thực, giúp các thành viên có thể cùng chỉnh sửa, góp ý và hoàn thiện nội dung.
+
+Trong quá trình làm việc, em sử dụng các tính năng như chỉnh sửa văn bản, bình luận và theo dõi thay đổi. Nhờ đó, việc trao đổi nội dung trở nên thuận tiện hơn, đồng thời phần đóng góp cá nhân cũng được thể hiện rõ ràng qua lịch sử chỉnh sửa.</p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 3: Lưu trữ và chia sẻ tài liệu bằng Google Drive</strong>
+        <p>Bên cạnh việc soạn thảo nội dung, em sử dụng Google Drive để lưu trữ các tệp liên quan đến phần việc của mình. Các tài liệu được sắp xếp theo thư mục, đặt tên rõ ràng và chia sẻ cho các thành viên trong nhóm với quyền truy cập phù hợp.
+
+Việc sử dụng Google Drive giúp tài liệu không bị phân tán, dễ tìm kiếm và thuận tiện khi cần cập nhật hoặc chia sẻ lại. Đây cũng là công cụ quan trọng giúp nhóm quản lý tài nguyên chung một cách khoa học hơn.</p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 4: Trao đổi và phối hợp nhóm bằng Slack</strong>
+        <p>Trong quá trình thực hiện dự án, em sử dụng Slack để trao đổi thông tin với các thành viên trong nhóm. Em dùng Slack để cập nhật tiến độ, hỏi đáp khi gặp khó khăn, nhắc nhở deadline và gửi các đường link hoặc tệp liên quan.
+
+Nhờ có Slack, việc giao tiếp nhóm trở nên tập trung và rõ ràng hơn. Các nội dung trao đổi được lưu lại, giúp em dễ dàng tra cứu khi cần xem lại thông tin hoặc kiểm tra yêu cầu công việc.</p>
+      </div>
+      </div>
+      </div>
+
+    <h2>Sản phẩm cuối cùng</h2>
+    <p>
+      Sản phẩm cuối cùng của Bài 4 là một báo cáo cá nhân trình bày quá trình sử dụng các công cụ hợp tác trực tuyến trong dự án nhóm. Báo cáo thể hiện rõ các nội dung chính sau:
+
+Các công cụ đã sử dụng trong quá trình làm việc nhóm.
+Cách thiết lập và sử dụng từng công cụ.
+Vai trò cá nhân trong quá trình thực hiện nhiệm vụ.
+Hiệu quả của từng công cụ đối với công việc.
+Những khó khăn gặp phải và cách giải quyết.
+Bài học kinh nghiệm sau khi hoàn thành bài tập.
+
+Bài làm cũng có kèm hình ảnh minh chứng quá trình sử dụng các công cụ như giao diện Trello, Google Docs, Google Drive và phần chia sẻ tài liệu cho thành viên khác.
+    </p>
+    <a href="https://drive.google.com/file/d/1xlwuMpAqPt-7MSLFXFTVKArqcpODibjE/view?usp=sharing" class="link-noi">https://drive.google.com/file/d/1xlwuMpAqPt-7MSLFXFTVKArqcpODibjE/view?usp=sharing</a>
+
+<style>
+.link-noi {
+  color: white;
+  background-color: #007bff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  transition: 0.2s;
+}
+
+.link-noi:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+</style>
+    <iframe class="pdf-frame" src="Bài 4.pdf"></iframe>
+  </div>
+</div>
+
+  </section>
+
+  <!-- CHI TIẾT BÀI 5 -->
+
+  <section id="bai5" class="detail-page">
+    <div class="detail-container">
+      <button class="back-btn" onclick="backToMain()">← Quay lại trang chính</button>
+
+  <div class="detail-card">
+    <h1>Bài 5: Sáng tạo nội dung số</h1>
+
+    <div class="highlight-box">
+      <h2>Mục tiêu</h2>
+      <p>
+        Ở Bài 5, em tập trung rèn luyện kỹ năng sáng tạo nội dung số thông qua việc lên ý tưởng,
+        thiết kế, chỉnh sửa và hoàn thiện một sản phẩm truyền thông hoặc học tập.
+      </p>
+      <p>
+        Mục tiêu của bài là biết cách biến một ý tưởng ban đầu thành sản phẩm số hoàn chỉnh,
+        có bố cục rõ ràng, nội dung phù hợp, hình ảnh hài hòa và truyền tải được thông điệp đến người xem.
+      </p>
+    </div>
+
+    <h2>Quá trình thực hiện</h2>
+    <div class="step-grid">
+      <div class="step-box">
+        <strong>Bước 1: Xác định chủ đề sản phẩm</strong>
+        <p>
+          Đầu tiên, em xác định chủ đề cho sản phẩm nội dung số dựa trên yêu cầu bài học và mục đích truyền tải.
+          Chủ đề cần rõ ràng, phù hợp với người xem và có khả năng trình bày bằng hình ảnh, chữ viết hoặc video.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 2: Xác định đối tượng người xem</strong>
+        <p>
+          Sau khi chọn chủ đề, em xác định sản phẩm sẽ hướng đến ai, ví dụ học sinh, sinh viên hoặc người quan tâm đến kỹ năng số.
+          Việc xác định đối tượng giúp em lựa chọn ngôn ngữ, màu sắc, hình ảnh và cách trình bày phù hợp hơn.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 3: Lên ý tưởng và xây dựng bố cục</strong>
+        <p>
+          Em phác thảo bố cục sản phẩm gồm tiêu đề, nội dung chính, hình ảnh minh họa và phần kết luận.
+          Ở bước này, em chú ý sắp xếp thông tin theo thứ tự dễ hiểu để người xem có thể nắm bắt thông điệp nhanh chóng.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 4: Lựa chọn công cụ thiết kế</strong>
+        <p>
+          Em lựa chọn công cụ phù hợp để tạo sản phẩm, có thể là Canva, PowerPoint, CapCut hoặc một công cụ thiết kế trực tuyến khác.
+          Công cụ được chọn cần dễ sử dụng, hỗ trợ chèn hình ảnh, chỉnh sửa văn bản và xuất sản phẩm ở định dạng phù hợp.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 5: Thiết kế bản nháp đầu tiên</strong>
+        <p>
+          Em bắt đầu thiết kế sản phẩm dựa trên bố cục đã chuẩn bị.
+          Trong quá trình này, em thêm tiêu đề, nội dung, hình ảnh, biểu tượng và các thành phần trang trí cần thiết
+          để sản phẩm có tính trực quan và hấp dẫn hơn.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 6: Chỉnh sửa màu sắc, font chữ và hình ảnh</strong>
+        <p>
+          Sau khi hoàn thành bản nháp, em điều chỉnh màu sắc, font chữ, kích thước chữ và vị trí hình ảnh.
+          Em chú ý giữ sự thống nhất về phong cách thiết kế, tránh sử dụng quá nhiều màu hoặc quá nhiều kiểu chữ gây rối mắt.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 7: Kiểm tra nội dung và hoàn thiện sản phẩm</strong>
+        <p>
+          Em đọc lại toàn bộ nội dung để kiểm tra lỗi chính tả, độ rõ ràng của thông điệp và tính hợp lý của bố cục.
+          Nếu cần, em chỉnh sửa lại các phần chưa phù hợp để sản phẩm trở nên hoàn chỉnh hơn.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 8: Xuất file và lưu trữ sản phẩm</strong>
+        <p>
+          Cuối cùng, em xuất sản phẩm ở định dạng phù hợp như PDF, PNG, JPG hoặc video.
+          Sản phẩm được lưu vào thư mục bài tập và có thể chia sẻ bằng đường link hoặc chèn trực tiếp vào Portfolio.
+        </p>
+      </div>
+    </div>
+
+    <h2>Sản phẩm cuối cùng</h2>
+    <p>
+      Sản phẩm cuối cùng của Bài 5 là một sản phẩm nội dung số hoàn chỉnh, có thể là poster, hình ảnh,
+      bài viết, video ngắn hoặc ấn phẩm truyền thông. Bài làm thể hiện quá trình từ hình thành ý tưởng,
+      thiết kế bản nháp, chỉnh sửa đến hoàn thiện sản phẩm.
+    </p>
+    <p>
+      Thông qua bài tập này, em học được cách trình bày thông tin bằng hình ảnh, lựa chọn bố cục hợp lý,
+      sử dụng công cụ thiết kế và đánh giá chất lượng sản phẩm trước khi chia sẻ.
+    </p>
+
+    <iframe class="pdf-frame" src="Bài 5.pdf"></iframe>
+  </div>
+</div>
+
+  </section>
+
+  <!-- CHI TIẾT BÀI 6 -->
+
+  <section id="bai6" class="detail-page">
+    <div class="detail-container">
+      <button class="back-btn" onclick="backToMain()">← Quay lại trang chính</button>
+
+  <div class="detail-card">
+    <h1>Bài 6: An toàn và liêm chính học thuật trong môi trường số</h1>
+
+    <div class="highlight-box">
+      <h2>Mục tiêu</h2>
+      <p>
+        Ở Bài 6, em tập trung tìm hiểu về an toàn thông tin, bảo vệ dữ liệu cá nhân
+        và liêm chính học thuật khi học tập, làm việc trong môi trường số.
+      </p>
+      <p>
+        Mục tiêu của bài là nhận biết các nguy cơ thường gặp trên môi trường trực tuyến,
+        biết cách sử dụng tài khoản và dữ liệu cá nhân an toàn, đồng thời hiểu trách nhiệm của người học
+        khi sử dụng tài liệu, Internet và công cụ AI.
+      </p>
+    </div>
+
+    <h2>Quá trình thực hiện</h2>
+    <div class="step-grid">
+      <div class="step-box">
+        <strong>Bước 1: Tìm hiểu khái niệm an toàn thông tin</strong>
+        <p>
+          Đầu tiên, em tìm hiểu an toàn thông tin là gì và vì sao việc bảo vệ dữ liệu cá nhân lại quan trọng.
+          Em nhận thấy thông tin như mật khẩu, email, số điện thoại, hình ảnh cá nhân và tài liệu học tập
+          đều cần được bảo vệ khi sử dụng Internet.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 2: Nhận diện các nguy cơ trên môi trường số</strong>
+        <p>
+          Em tìm hiểu các nguy cơ phổ biến như lộ mật khẩu, truy cập đường link lạ, tải tệp không rõ nguồn gốc,
+          chia sẻ quá nhiều thông tin cá nhân và bị lừa đảo trực tuyến.
+          Việc nhận diện nguy cơ giúp em cẩn thận hơn khi học tập và giao tiếp trên mạng.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 3: Tìm hiểu cách bảo vệ tài khoản cá nhân</strong>
+        <p>
+          Em rút ra một số biện pháp bảo vệ tài khoản như đặt mật khẩu mạnh, không dùng chung một mật khẩu cho nhiều dịch vụ,
+          bật xác thực hai bước và đăng xuất tài khoản khi sử dụng máy tính công cộng.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 4: Phân tích việc bảo vệ dữ liệu cá nhân</strong>
+        <p>
+          Em phân tích các tình huống có thể làm lộ dữ liệu cá nhân, ví dụ chia sẻ ảnh chụp màn hình có thông tin riêng tư
+          hoặc gửi tài liệu cho sai người. Từ đó, em học cách kiểm tra kỹ nội dung trước khi đăng tải hoặc chia sẻ.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 5: Tìm hiểu khái niệm liêm chính học thuật</strong>
+        <p>
+          Em tìm hiểu liêm chính học thuật là việc học tập trung thực, không đạo văn, không gian lận
+          và biết ghi nhận nguồn tài liệu khi sử dụng ý tưởng của người khác.
+          Đây là nguyên tắc quan trọng để xây dựng thái độ học tập nghiêm túc.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 6: Phân tích việc sử dụng AI có trách nhiệm</strong>
+        <p>
+          Em tìm hiểu cách sử dụng AI như một công cụ hỗ trợ thay vì thay thế hoàn toàn quá trình học tập.
+          Khi dùng AI, người học cần kiểm tra lại thông tin, chỉnh sửa bằng hiểu biết của bản thân
+          và không sao chép nguyên văn nếu chưa đánh giá nội dung.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 7: Xây dựng bộ nguyên tắc cá nhân</strong>
+        <p>
+          Từ các nội dung đã tìm hiểu, em xây dựng bộ nguyên tắc sử dụng tài nguyên số và AI có trách nhiệm.
+          Bộ nguyên tắc bao gồm bảo vệ tài khoản, tôn trọng bản quyền, trích dẫn nguồn, kiểm tra thông tin
+          và trung thực trong học tập.
+        </p>
+      </div>
+
+      <div class="step-box">
+        <strong>Bước 8: Hoàn thiện báo cáo và rút ra bài học</strong>
+        <p>
+          Cuối cùng, em tổng hợp nội dung thành bài báo cáo, trình bày các nguy cơ, biện pháp bảo vệ,
+          nguyên tắc liêm chính học thuật và bài học kinh nghiệm.
+          Qua bài tập này, em hiểu rằng kỹ năng số không chỉ là biết sử dụng công cụ mà còn là sử dụng công cụ đúng cách.
+        </p>
+      </div>
+    </div>
+
+    <h2>Sản phẩm cuối cùng</h2>
+    <p>
+      Sản phẩm cuối cùng của Bài 6 là bài báo cáo hoặc bộ nguyên tắc về an toàn và liêm chính học thuật
+      trong môi trường số. Nội dung sản phẩm thể hiện các biện pháp bảo vệ dữ liệu cá nhân,
+      cách sử dụng tài nguyên số đúng quy định và cách dùng AI một cách trung thực, có trách nhiệm.
+    </p>
+    <p>
+      Bài tập giúp em nâng cao ý thức tự bảo vệ bản thân trên Internet, đồng thời hình thành thói quen học tập trung thực
+      khi sử dụng công nghệ và các nguồn thông tin trực tuyến.
+    </p>
+
+    <iframe class="pdf-frame" src="Bài 6.pdf"></iframe>
+  </div>
+</div>
+
+  </section>
+
+  <script>
+    function showDetail(id) {
+      document.getElementById("mainContent").classList.add("hidden");
+
+      const detailPages = document.querySelectorAll(".detail-page");
+      detailPages.forEach(function(page) {
+        page.classList.remove("active");
+      });
+
+      document.getElementById(id).classList.add("active");
+      window.scrollTo(0, 0);
+    }
+
+    function backToMain() {
+      const detailPages = document.querySelectorAll(".detail-page");
+      detailPages.forEach(function(page) {
+        page.classList.remove("active");
+      });
+
+      document.getElementById("mainContent").classList.remove("hidden");
+      window.scrollTo(0, 0);
+    }
+  </script>
 
 </body>
 </html>
