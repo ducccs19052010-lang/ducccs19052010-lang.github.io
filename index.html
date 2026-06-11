@@ -33,6 +33,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 96px;
     }
 
     body {
@@ -84,11 +85,23 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 100;
+      left: 0;
+      right: 0;
+      z-index: 1000;
       background: rgba(6, 52, 82, 0.94);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 10px 28px rgba(0, 35, 70, 0.18);
+      transition: padding 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    nav.scrolled {
+      padding-top: 16px;
+      padding-bottom: 16px;
+      background: rgba(6, 52, 82, 0.98);
+      box-shadow: 0 12px 32px rgba(0, 35, 70, 0.24);
     }
 
     .logo {
@@ -108,14 +121,34 @@
     }
 
     .nav-links a {
+      position: relative;
+      padding: 8px 0;
       font-weight: 600;
       opacity: 0.95;
       transition: 0.3s;
       cursor: pointer;
     }
 
-    .nav-links a:hover {
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 3px;
+      border-radius: 999px;
+      background: #90e0ef;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
       color: #90e0ef;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
     }
 
     .hero {
@@ -538,6 +571,9 @@
 
     .back-btn {
       display: inline-block;
+      position: sticky;
+      top: 18px;
+      z-index: 90;
       margin-bottom: 28px;
       background: var(--blue);
       color: var(--white);
@@ -547,6 +583,7 @@
       border: none;
       cursor: pointer;
       font-size: 16px;
+      box-shadow: var(--shadow);
     }
 
     .back-btn:hover {
@@ -660,6 +697,322 @@
       font: inherit;
     }
 
+
+
+    /* ===== OUTLINE + QUY TRÌNH DẠNG TIMELINE CHO CÁC BÀI ===== */
+    .lesson-layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 26px;
+      align-items: start;
+      margin-top: 22px;
+    }
+
+    .lesson-outline {
+      position: sticky;
+      top: 86px;
+      align-self: start;
+      z-index: 10;
+    }
+
+    .outline-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .outline-header {
+      padding: 18px 18px 14px;
+      background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+      color: var(--white);
+    }
+
+    .outline-header span {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 4px;
+    }
+
+    .outline-header h3 {
+      margin: 0;
+      color: var(--white);
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    .outline-card ol {
+      list-style: none;
+      padding: 12px;
+      margin: 0;
+      max-height: calc(100vh - 190px);
+      overflow-y: auto;
+    }
+
+    .outline-card li {
+      margin: 0;
+    }
+
+    .outline-card a {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 11px;
+      border-radius: 13px;
+      color: var(--text);
+      transition: 0.2s ease;
+      line-height: 1.35;
+      font-weight: 650;
+      font-size: 14px;
+    }
+
+    .outline-card a span {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-size: 12px;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .outline-card a:hover,
+    .outline-card a.active {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      transform: translateX(3px);
+    }
+
+    .outline-card a:hover span,
+    .outline-card a.active span {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .process-overview {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 12px 0 24px;
+    }
+
+    .overview-pill {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 8px 20px rgba(0, 64, 128, 0.06);
+    }
+
+    .overview-pill b {
+      display: block;
+      color: var(--blue-dark);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .overview-pill span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .lesson-timeline {
+      position: relative;
+      display: grid;
+      gap: 18px;
+    }
+
+    .lesson-timeline::before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: 20px;
+      bottom: 20px;
+      width: 3px;
+      border-radius: 999px;
+      background: linear-gradient(var(--blue), var(--blue-soft));
+    }
+
+    .lesson-step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr);
+      gap: 18px;
+      scroll-margin-top: 105px;
+    }
+
+    .step-index {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      color: var(--white);
+      font-weight: 800;
+      box-shadow: var(--shadow);
+      z-index: 1;
+    }
+
+    .step-content {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 8px 22px rgba(0, 64, 128, 0.08);
+      transition: 0.25s ease;
+    }
+
+    .lesson-step:hover .step-content {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .step-content h3 {
+      color: var(--blue-dark);
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .step-content p {
+      color: var(--text);
+      margin-bottom: 12px;
+      text-align: justify;
+    }
+
+    .step-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .action-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      border: 1px solid var(--blue-soft);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .result-note {
+      background: #f8fdff;
+      border-left: 5px solid var(--blue);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+
+
+    .step-list {
+      padding-left: 20px;
+      margin: 10px 0 0;
+      color: var(--text);
+    }
+
+    .step-list li {
+      margin-bottom: 8px;
+    }
+
+    .prompt-box {
+      background: #f8fdff;
+      border: 1px dashed var(--blue-soft);
+      border-radius: 14px;
+      padding: 13px 14px;
+      margin: 12px 0;
+      color: var(--blue-dark);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .process-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .flow-step {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: var(--blue-dark);
+      font-weight: 750;
+      box-shadow: 0 5px 14px rgba(0, 64, 128, 0.06);
+    }
+
+    .flow-arrow {
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    .source-mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .source-mini-table th,
+    .source-mini-table td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .source-mini-table th {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-weight: 800;
+    }
+
+    .lesson-note {
+      margin-top: 22px;
+      padding: 22px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--blue-light), #ffffff);
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 20px rgba(0, 64, 128, 0.06);
+    }
+
+    .lesson-note h3 {
+      color: var(--blue-dark);
+      margin-top: 0;
+    }
+
+    .lesson-note ul {
+      margin-bottom: 0;
+    }
+
     @media (max-width: 1000px) {
       .project-grid,
       .step-grid {
@@ -681,9 +1034,16 @@
     }
 
     @media (max-width: 760px) {
+      html {
+        scroll-padding-top: 150px;
+      }
+
       nav {
         flex-direction: column;
         gap: 16px;
+        padding: 18px 6%;
+        max-height: 38vh;
+        overflow-y: auto;
       }
 
       .nav-links {
@@ -734,6 +1094,31 @@
       .rubric-table {
         font-size: 13px;
       }
+
+      .outline-card ol {
+        grid-template-columns: 1fr;
+      }
+
+      .lesson-step {
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .lesson-timeline::before {
+        left: 21px;
+      }
+
+      .step-index {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        font-size: 14px;
+      }
+
+      .step-content {
+        padding: 18px;
+      }
+
     }
   </style>
 
@@ -1136,72 +1521,255 @@
     </div>
 
     <h2>Quá trình thực hiện</h2>
-    <div class="step-grid">
-      <div class="step-box">
-        <strong>Bước 1: Mở File Explorer và chọn vị trí thực hành</strong>
-        <p>
-          Đầu tiên, em mở File Explorer bằng tổ hợp phím Windows + E hoặc nhấp vào biểu tượng thư mục trên thanh tác vụ.
-          Sau đó, em chọn vị trí lưu trữ phù hợp như ổ D:, ổ E: hoặc thư mục Documents nếu máy chỉ có ổ C:.
-        </p>
-      </div>
+    <p>
+      Phần này được trình bày lại theo dạng timeline có outline bên trái để người xem dễ theo dõi toàn bộ quá trình thao tác.
+      Nội dung gồm 12 bước chính: từ mở File Explorer, tạo thư mục, tạo tệp, sao chép, di chuyển, xóa đến khôi phục dữ liệu.
+    </p>
 
-      <div class="step-box">
-        <strong>Bước 2: Tạo thư mục thực hành</strong>
-        <p>
-          Em nhấp chuột phải vào khoảng trống, chọn New → Folder để tạo thư mục mới.
-          Thư mục được đặt tên theo mẫu ThucHanh_hotensinhvien, ví dụ ThucHanh_TruongQuocKiet,
-          nhằm giúp dễ nhận biết và quản lý bài thực hành.
-        </p>
-      </div>
+    <div class="lesson-layout">
+      <aside class="lesson-outline" aria-label="Outline quá trình thực hiện Bài 1">
+        <div class="outline-card">
+          <div class="outline-header">
+            <span>Outline Bài 1</span>
+            <h3>12 bước thao tác tệp và thư mục</h3>
+          </div>
+          <ol>
+            <li><a href="#b1-step-01" class="active"><span>01</span>Mở File Explorer</a></li>
+            <li><a href="#b1-step-02"><span>02</span>Chọn ổ đĩa/thư mục</a></li>
+            <li><a href="#b1-step-03"><span>03</span>Tạo thư mục mới</a></li>
+            <li><a href="#b1-step-04"><span>04</span>Vào thư mục vừa tạo</a></li>
+            <li><a href="#b1-step-05"><span>05</span>Tạo tệp GhiChu.txt</a></li>
+            <li><a href="#b1-step-06"><span>06</span>Đổi tên tệp tin</a></li>
+            <li><a href="#b1-step-07"><span>07</span>Tạo thư mục TaiLieu</a></li>
+            <li><a href="#b1-step-08"><span>08</span>Sao chép tệp tin</a></li>
+            <li><a href="#b1-step-09"><span>09</span>Di chuyển tệp tin</a></li>
+            <li><a href="#b1-step-10"><span>10</span>Xóa tệp tin</a></li>
+            <li><a href="#b1-step-11"><span>11</span>Xóa vĩnh viễn</a></li>
+            <li><a href="#b1-step-12"><span>12</span>Khôi phục từ Thùng rác</a></li>
+          </ol>
+        </div>
+      </aside>
 
-      <div class="step-box">
-        <strong>Bước 3: Tạo và đổi tên tệp văn bản</strong>
-        <p>
-          Trong thư mục vừa tạo, em tạo một tệp văn bản mới bằng lệnh New → Text Document và đặt tên là GhiChu.txt.
-          Sau đó, em sử dụng lệnh Rename để đổi tên tệp thành GhiChuQuanTrong.txt,
-          qua đó luyện tập thao tác đặt tên tệp rõ ràng và phù hợp với nội dung.
-        </p>
-      </div>
+      <div class="lesson-main">
+        <div class="process-overview">
+          <div class="overview-pill">
+            <b>Công cụ sử dụng</b>
+            <span>File Explorer trên Windows</span>
+          </div>
+          <div class="overview-pill">
+            <b>Kỹ năng luyện tập</b>
+            <span>Tạo, đổi tên, copy, cut, paste, delete, restore</span>
+          </div>
+          <div class="overview-pill">
+            <b>Sản phẩm minh chứng</b>
+            <span>Thư mục thực hành, các tệp văn bản và ảnh/PDF minh họa</span>
+          </div>
+        </div>
 
-      <div class="step-box">
-        <strong>Bước 4: Tạo thư mục con để phân loại tài liệu</strong>
-        <p>
-          Em tạo thêm thư mục con có tên TaiLieu bên trong thư mục thực hành.
-          Việc tạo thư mục con giúp phân loại dữ liệu theo nhóm, tránh để nhiều tệp nằm lộn xộn trong cùng một vị trí.
-        </p>
-      </div>
+        <div class="lesson-timeline">
+          <article class="lesson-step" id="b1-step-01">
+            <div class="step-index">01</div>
+            <div class="step-content">
+              <h3>Mở File Explorer</h3>
+              <p>
+                Em bắt đầu bằng cách mở File Explorer để truy cập và quản lý các tệp, thư mục trên máy tính.
+                Có thể nhấn tổ hợp phím <strong>Windows + E</strong> hoặc nhấp vào biểu tượng thư mục màu vàng trên thanh tác vụ.
+              </p>
+              <div class="step-actions">
+                <span class="action-chip">⌨ Windows + E</span>
+                <span class="action-chip">📁 Biểu tượng thư mục</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 5: Sao chép tệp vào thư mục con</strong>
-        <p>
-          Em chọn tệp GhiChuQuanTrong.txt, sử dụng lệnh Copy hoặc tổ hợp phím Ctrl + C,
-          sau đó mở thư mục TaiLieu và dùng Paste hoặc Ctrl + V để dán tệp vào.
-          Thao tác này giúp em hiểu sự khác nhau giữa sao chép và di chuyển tệp.
-        </p>
-      </div>
+          <article class="lesson-step" id="b1-step-02">
+            <div class="step-index">02</div>
+            <div class="step-content">
+              <h3>Truy cập ổ đĩa hoặc thư mục thực hành</h3>
+              <p>
+                Ở cột bên trái, em chọn <strong>This PC</strong>, sau đó nhấp đúp vào ổ đĩa không phải ổ hệ thống,
+                ví dụ ổ <strong>D:</strong> hoặc <strong>E:</strong>. Nếu máy chỉ có ổ <strong>C:</strong>, em có thể thực hành trong thư mục <strong>Documents</strong>.
+              </p>
+              <div class="step-actions">
+                <span class="action-chip">This PC</span>
+                <span class="action-chip">Ổ D:/E:</span>
+                <span class="action-chip">Documents</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 6: Di chuyển tệp sang vị trí khác</strong>
-        <p>
-          Em tạo một tệp mới tên DiChuyen.txt, sau đó sử dụng lệnh Cut hoặc Ctrl + X để di chuyển tệp
-          vào thư mục TaiLieu. Sau khi dán tệp, em kiểm tra lại vị trí cũ và vị trí mới để đảm bảo tệp đã được chuyển đúng.
-        </p>
-      </div>
+          <article class="lesson-step" id="b1-step-03">
+            <div class="step-index">03</div>
+            <div class="step-content">
+              <h3>Tạo thư mục mới</h3>
+              <p>
+                Em nhấp chuột phải vào một khoảng trống, chọn <strong>New → Folder</strong>, sau đó đặt tên thư mục theo mẫu
+                <strong>ThucHanh_hotensinhvien</strong>, ví dụ <strong>ThucHanh_TruongQuocKiet</strong>, rồi nhấn <strong>Enter</strong> để hoàn tất.
+              </p>
+              <div class="step-actions">
+                <span class="action-chip">Right click</span>
+                <span class="action-chip">New → Folder</span>
+                <span class="action-chip">Enter</span>
+              </div>
+              <div class="result-note"><strong>Kết quả:</strong> Có một thư mục thực hành riêng, đặt tên rõ ràng để dễ nhận biết và quản lý.</div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 7: Xóa tệp và kiểm tra Recycle Bin</strong>
-        <p>
-          Em thực hành xóa tệp bằng phím Delete để đưa tệp vào Recycle Bin.
-          Sau đó, em mở Recycle Bin để kiểm tra tệp đã xóa và thực hành khôi phục tệp khi cần thiết.
-        </p>
-      </div>
+          <article class="lesson-step" id="b1-step-04">
+            <div class="step-index">04</div>
+            <div class="step-content">
+              <h3>Vào thư mục vừa tạo</h3>
+              <p>
+                Em nhấp đúp vào thư mục vừa tạo để mở không gian làm việc chính. Tất cả các tệp và thư mục con trong bài thực hành
+                sẽ được tạo và quản lý bên trong thư mục này.
+              </p>
+              <div class="step-actions">
+                <span class="action-chip">Double click</span>
+                <span class="action-chip">ThucHanh_TruongQuocKiet</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 8: Xóa vĩnh viễn và rút kinh nghiệm</strong>
-        <p>
-          Cuối cùng, em thực hành thao tác Shift + Delete để hiểu khái niệm xóa vĩnh viễn.
-          Từ đó, em rút ra bài học rằng cần kiểm tra kỹ nội dung trước khi xóa, đặc biệt với các tệp quan trọng.
-        </p>
+          <article class="lesson-step" id="b1-step-05">
+            <div class="step-index">05</div>
+            <div class="step-content">
+              <h3>Tạo tệp tin văn bản GhiChu.txt</h3>
+              <p>
+                Trong thư mục thực hành, em nhấp chuột phải vào khoảng trống, chọn <strong>New → Text Document</strong>,
+                đặt tên tệp là <strong>GhiChu.txt</strong> và nhấn <strong>Enter</strong>.
+              </p>
+              <div class="step-actions">
+                <span class="action-chip">New → Text Document</span>
+                <span class="action-chip">GhiChu.txt</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b1-step-06">
+            <div class="step-index">06</div>
+            <div class="step-content">
+              <h3>Đổi tên tệp tin</h3>
+              <p>
+                Em nhấp chuột phải vào tệp <strong>GhiChu.txt</strong>, chọn <strong>Rename</strong>, đổi tên thành
+                <strong>GhiChuQuanTrong.txt</strong>, sau đó nhấn <strong>Enter</strong>. Việc đổi tên giúp nội dung tệp rõ nghĩa hơn.
+              </p>
+              <div class="step-actions">
+                <span class="action-chip">Rename</span>
+                <span class="action-chip">GhiChuQuanTrong.txt</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b1-step-07">
+            <div class="step-index">07</div>
+            <div class="step-content">
+              <h3>Tạo thư mục con TaiLieu</h3>
+              <p>
+                Trong thư mục thực hành, em tiếp tục nhấp chuột phải, chọn <strong>New → Folder</strong> và đặt tên thư mục con là
+                <strong>TaiLieu</strong>. Thư mục con này dùng để phân loại và lưu trữ các tệp văn bản.
+              </p>
+              <div class="step-actions">
+                <span class="action-chip">New → Folder</span>
+                <span class="action-chip">TaiLieu</span>
+              </div>
+              <div class="result-note"><strong>Kết quả:</strong> Cấu trúc lưu trữ gọn hơn vì tệp được gom vào thư mục phù hợp.</div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b1-step-08">
+            <div class="step-index">08</div>
+            <div class="step-content">
+              <h3>Sao chép tệp tin bằng Copy &amp; Paste</h3>
+              <p>
+                Em nhấp chuột phải vào tệp <strong>GhiChuQuanTrong.txt</strong> và chọn <strong>Copy</strong>
+                hoặc chọn tệp rồi nhấn <strong>Ctrl + C</strong>. Sau đó, em mở thư mục <strong>TaiLieu</strong>, nhấp chuột phải vào khoảng trống và chọn
+                <strong>Paste</strong> hoặc nhấn <strong>Ctrl + V</strong>.
+              </p>
+              <div class="step-actions">
+                <span class="action-chip">Copy</span>
+                <span class="action-chip">Ctrl + C</span>
+                <span class="action-chip">Paste</span>
+                <span class="action-chip">Ctrl + V</span>
+              </div>
+              <div class="result-note"><strong>Kết quả:</strong> Tệp gốc vẫn còn ở vị trí cũ và có thêm một bản sao trong thư mục <strong>TaiLieu</strong>.</div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b1-step-09">
+            <div class="step-index">09</div>
+            <div class="step-content">
+              <h3>Di chuyển tệp tin bằng Cut &amp; Paste</h3>
+              <p>
+                Em quay lại thư mục thực hành, tạo một tệp mới tên <strong>DiChuyen.txt</strong>. Sau đó, em nhấp chuột phải vào tệp này,
+                chọn <strong>Cut</strong> hoặc nhấn <strong>Ctrl + X</strong>. Tiếp theo, em mở thư mục <strong>TaiLieu</strong> và chọn <strong>Paste</strong>
+                hoặc nhấn <strong>Ctrl + V</strong>.
+              </p>
+              <div class="step-actions">
+                <span class="action-chip">DiChuyen.txt</span>
+                <span class="action-chip">Cut</span>
+                <span class="action-chip">Ctrl + X</span>
+                <span class="action-chip">Paste</span>
+              </div>
+              <div class="result-note"><strong>Kết quả:</strong> Tệp <strong>DiChuyen.txt</strong> biến mất khỏi vị trí cũ và chỉ còn ở vị trí mới.</div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b1-step-10">
+            <div class="step-index">10</div>
+            <div class="step-content">
+              <h3>Xóa tệp tin vào Recycle Bin</h3>
+              <p>
+                Trong thư mục <strong>TaiLieu</strong>, em nhấp chuột phải vào tệp <strong>GhiChuQuanTrong.txt</strong> và chọn <strong>Delete</strong>.
+                Tệp sẽ được chuyển vào <strong>Recycle Bin</strong>, vì vậy vẫn có thể khôi phục nếu cần.
+              </p>
+              <div class="step-actions">
+                <span class="action-chip">Delete</span>
+                <span class="action-chip">Recycle Bin</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b1-step-11">
+            <div class="step-index">11</div>
+            <div class="step-content">
+              <h3>Xóa vĩnh viễn tệp tin</h3>
+              <p>
+                Em chọn tệp <strong>DiChuyen.txt</strong>, nhấn giữ phím <strong>Shift</strong> rồi nhấn <strong>Delete</strong>.
+                Khi hộp thoại cảnh báo xuất hiện, nếu xác nhận đồng ý thì tệp sẽ bị xóa vĩnh viễn và không đi qua Thùng rác.
+              </p>
+              <div class="step-actions">
+                <span class="action-chip">Shift + Delete</span>
+                <span class="action-chip">Xác nhận cảnh báo</span>
+              </div>
+              <div class="result-note"><strong>Lưu ý:</strong> Cần kiểm tra kỹ trước khi dùng Shift + Delete vì thao tác này khó khôi phục hơn xóa thông thường.</div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b1-step-12">
+            <div class="step-index">12</div>
+            <div class="step-content">
+              <h3>Khôi phục tệp từ Thùng rác</h3>
+              <p>
+                Em mở biểu tượng <strong>Recycle Bin</strong> trên màn hình nền, tìm tệp <strong>GhiChuQuanTrong.txt</strong> đã xóa,
+                nhấp chuột phải vào tệp và chọn <strong>Restore</strong>. Tệp sẽ quay lại vị trí ban đầu trước khi bị xóa.
+              </p>
+              <div class="step-actions">
+                <span class="action-chip">Recycle Bin</span>
+                <span class="action-chip">Restore</span>
+              </div>
+              <div class="result-note"><strong>Kết quả:</strong> Em hiểu sự khác nhau giữa xóa tạm thời, xóa vĩnh viễn và khôi phục dữ liệu.</div>
+            </div>
+          </article>
+        </div>
+
+        <div class="lesson-note">
+          <h3>Bài học rút ra</h3>
+          <ul>
+            <li>Đặt tên thư mục và tệp rõ ràng giúp quản lý tài liệu học tập khoa học hơn.</li>
+            <li><strong>Copy</strong> tạo thêm bản sao, còn <strong>Cut</strong> là di chuyển tệp sang vị trí mới.</li>
+            <li>Khi xóa dữ liệu quan trọng, cần phân biệt <strong>Delete</strong> và <strong>Shift + Delete</strong> để tránh mất tệp ngoài ý muốn.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -1231,7 +1799,7 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 </style>
-    <iframe class="pdf-frame" src="Bài 1.pdf"></iframe>
+    <iframe class="pdf-frame" src="Bài 1(1).pdf" title="PDF minh chứng Bài 1" loading="lazy"></iframe>
   </div>
 </div>
 
@@ -1243,124 +1811,210 @@
     <div class="detail-container">
       <button class="back-btn" onclick="backToMain()">← Quay lại trang chính</button>
 
-  <div class="detail-card">
-    <h1>Bài 2: Khai thác dữ liệu và thông tin</h1>
+      <div class="detail-card">
+        <h1>Bài 2: Khai thác dữ liệu và thông tin</h1>
 
-    <div class="highlight-box">
-      <h2>Mục tiêu</h2>
+        <div class="highlight-box">
+          <h2>Mục tiêu</h2>
       <p>
-        Ở Bài 2, em tập trung rèn luyện kỹ năng tìm kiếm, lựa chọn và đánh giá nguồn thông tin học thuật
-        đáng tin cậy về chủ đề ứng dụng AI trong hỗ trợ ra quyết định của hệ thống thông tin doanh nghiệp.
+        Ở Bài 2, em tập trung rèn luyện kỹ năng tìm kiếm, lựa chọn và đánh giá nguồn thông tin học thuật đáng tin cậy về chủ đề ứng dụng AI trong hỗ trợ ra quyết định của hệ thống thông tin doanh nghiệp.
       </p>
       <p>
-        Mục tiêu của bài là biết cách xác định từ khóa, khai thác dữ liệu từ các nguồn uy tín,
-        so sánh chất lượng tài liệu và lựa chọn những nguồn có giá trị nhất để phục vụ nghiên cứu.
+        Mục tiêu của bài là biết cách xác định từ khóa, khai thác dữ liệu từ các nguồn uy tín, so sánh chất lượng tài liệu và lựa chọn những nguồn có giá trị nhất để phục vụ nghiên cứu.
       </p>
-    </div>
+        </div>
 
     <h2>Quá trình thực hiện</h2>
-    <div class="step-grid">
-      <div class="step-box">
-        <strong>Bước 1: Xác định chủ đề và phạm vi nghiên cứu</strong>
-        <p>
-          Đầu tiên, em xác định chủ đề chính của bài là ứng dụng trí tuệ nhân tạo trong việc hỗ trợ ra quyết định
-          của hệ thống thông tin doanh nghiệp. Sau đó, em giới hạn phạm vi tìm kiếm vào các tài liệu học thuật,
-          bài báo nghiên cứu và báo cáo từ tổ chức uy tín.
-        </p>
-      </div>
+    <p>
+      Phần này được trình bày lại theo dạng timeline có outline bên trái, bám sát nội dung PDF về quá trình tìm kiếm, sàng lọc và đánh giá nguồn học thuật.
+    </p>
 
-      <div class="step-box">
-        <strong>Bước 2: Xây dựng bộ từ khóa tìm kiếm</strong>
-        <p>
-          Em lựa chọn các từ khóa liên quan như artificial intelligence, decision support system,
-          business information system, AI decision-making và enterprise information system.
-          Việc sử dụng cả tiếng Anh và tiếng Việt giúp mở rộng phạm vi tìm kiếm và tiếp cận nhiều nguồn tài liệu hơn.
-        </p>
-      </div>
+    <div class="lesson-layout">
+      <aside class="lesson-outline" aria-label="Outline quá trình thực hiện Bài 2">
+        <div class="outline-card">
+          <div class="outline-header">
+            <span>Outline Bài 2</span>
+            <h3>8 bước tìm kiếm, đánh giá và chọn nguồn</h3>
+          </div>
+          <ol>
+            <li><a href="#b2-step-01" class="active"><span>01</span>Xác định chủ đề</a></li>
+            <li><a href="#b2-step-02"><span>02</span>Đặt mục tiêu báo cáo</a></li>
+            <li><a href="#b2-step-03"><span>03</span>Xác định phạm vi</a></li>
+            <li><a href="#b2-step-04"><span>04</span>Chọn nguồn tài liệu</a></li>
+            <li><a href="#b2-step-05"><span>05</span>Sàng lọc tài liệu</a></li>
+            <li><a href="#b2-step-06"><span>06</span>Tổng quan kết quả</a></li>
+            <li><a href="#b2-step-07"><span>07</span>Đánh giá 12 nguồn</a></li>
+            <li><a href="#b2-step-08"><span>08</span>Rút ra kết luận</a></li>
+          </ol>
+        </div>
+      </aside>
 
-      <div class="step-box">
-        <strong>Bước 3: Tìm kiếm tài liệu trên các nền tảng phù hợp</strong>
-        <p>
-          Em tiến hành tìm kiếm tài liệu trên các công cụ học thuật và nguồn thông tin đáng tin cậy.
-          Trong quá trình tìm kiếm, em ưu tiên các tài liệu có tên tác giả rõ ràng, đơn vị xuất bản uy tín,
-          nội dung liên quan trực tiếp đến chủ đề và thời gian công bố còn phù hợp.
-        </p>
-      </div>
+      <div class="lesson-main">
+        <div class="process-overview">
+          <div class="overview-pill">
+            <b>Chủ đề</b>
+            <span>AI hỗ trợ ra quyết định trong hệ thống thông tin doanh nghiệp</span>
+          </div>
+          <div class="overview-pill">
+            <b>Phạm vi</b>
+            <span>Tài liệu học thuật, sách chuyên khảo và báo cáo uy tín</span>
+          </div>
+          <div class="overview-pill">
+            <b>Sản phẩm</b>
+            <span>Báo cáo đánh giá 12 nguồn kèm bảng xếp hạng</span>
+          </div>
+        </div>
 
-      <div class="step-box">
-        <strong>Bước 4: Sàng lọc và loại bỏ nguồn chưa phù hợp</strong>
-        <p>
-          Sau khi thu thập được nhiều tài liệu, em đọc tiêu đề, phần tóm tắt và nội dung chính để loại bỏ
-          các nguồn không liên quan hoặc thiếu độ tin cậy. Những tài liệu mang tính quảng cáo, không có tác giả rõ ràng
-          hoặc không nêu phương pháp nghiên cứu được đánh giá là chưa phù hợp.
-        </p>
-      </div>
+        <div class="lesson-timeline">
+          <article class="lesson-step" id="b2-step-01">
+            <div class="step-index">01</div>
+            <div class="step-content">
+              <h3>Xác định chủ đề nghiên cứu</h3>
+              <p>Em bắt đầu từ bối cảnh chuyển đổi số, trong đó hệ thống thông tin doanh nghiệp không chỉ lưu trữ dữ liệu mà còn hỗ trợ phân tích, dự báo và ra quyết định. Chủ đề được chọn là <strong>ứng dụng AI trong hỗ trợ ra quyết định của hệ thống thông tin doanh nghiệp</strong>.</p>
+              <div class="step-actions">
+                <span class="action-chip">EIS/ERP</span>
+                <span class="action-chip">AI</span>
+                <span class="action-chip">Decision Support</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 5: Đánh giá chất lượng từng nguồn</strong>
-        <p>
-          Em đánh giá từng nguồn theo các tiêu chí gồm tác giả, cơ quan xuất bản, phương pháp nghiên cứu,
-          mức độ trích dẫn, tính cập nhật và mức độ liên quan đến chủ đề.
-          Việc đánh giá này giúp em nhận biết nguồn nào có giá trị học thuật cao hơn.
-        </p>
-      </div>
+          <article class="lesson-step" id="b2-step-02">
+            <div class="step-index">02</div>
+            <div class="step-content">
+              <h3>Đặt mục tiêu và câu hỏi cần làm rõ</h3>
+              <p>Bài báo cáo hướng tới ba mục tiêu: tìm kiếm nguồn tài liệu đáng tin cậy, đánh giá độ tin cậy của từng nguồn và xác định những tài liệu có giá trị học thuật cao nhất để phục vụ nghiên cứu.</p>
+              <ul class="step-list">
+                <li>Tìm kiếm và lựa chọn tài liệu liên quan trực tiếp đến chủ đề.</li>
+                <li>Đánh giá theo tác giả, nhà xuất bản, phương pháp, trích dẫn và tính cập nhật.</li>
+                <li>Rút ra nhóm nguồn nên dùng làm cơ sở cho bài nghiên cứu.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">Mục tiêu rõ ràng</span>
+                <span class="action-chip">Tiêu chí đánh giá</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 6: Lập bảng tổng hợp thông tin</strong>
-        <p>
-          Em hệ thống hóa các nguồn đã chọn vào bảng tổng hợp, trong đó ghi rõ tên tài liệu,
-          nguồn xuất bản, nội dung chính, điểm mạnh, hạn chế và lý do lựa chọn.
-          Bảng này giúp quá trình so sánh tài liệu trở nên rõ ràng và dễ theo dõi hơn.
-        </p>
-      </div>
+          <article class="lesson-step" id="b2-step-03">
+            <div class="step-index">03</div>
+            <div class="step-content">
+              <h3>Xác định phạm vi và bộ từ khóa tìm kiếm</h3>
+              <p>Em giới hạn phạm vi vào các tài liệu về AI trong doanh nghiệp, hệ thống hỗ trợ ra quyết định, explainable AI, business value of AI và human-AI collaboration. Các tài liệu được ưu tiên trong giai đoạn 2017–2025, đồng thời giữ lại một số nguồn nền tảng có giá trị lý thuyết cao.</p>
+              <div class="prompt-box"><strong>Từ khóa chính:</strong> “artificial intelligence decision support systems”, “AI in enterprise information systems”, “explainable AI in information systems”, “business value of AI”, “human-artificial intelligence systems”, “cognitive decision support”.</div>
+              <div class="step-actions">
+                <span class="action-chip">2017–2025</span>
+                <span class="action-chip">Từ khóa học thuật</span>
+                <span class="action-chip">Human-AI</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 7: Rút ra nguồn tài liệu có giá trị nhất</strong>
-        <p>
-          Dựa trên kết quả đánh giá, em chọn ra các tài liệu có độ tin cậy cao nhất để phục vụ cho việc nghiên cứu.
-          Những nguồn này có nội dung bám sát chủ đề, phương pháp trình bày rõ ràng và có khả năng hỗ trợ lập luận tốt.
-        </p>
-      </div>
+          <article class="lesson-step" id="b2-step-04">
+            <div class="step-index">04</div>
+            <div class="step-content">
+              <h3>Lựa chọn nhóm nguồn tài liệu phù hợp</h3>
+              <p>Em tìm và phân loại tài liệu theo bốn nhóm chính để bảo đảm bài làm có cả chiều sâu học thuật lẫn bối cảnh thực tiễn.</p>
+              <ul class="step-list">
+                <li>Bài báo/kỷ yếu học thuật trên AISeL, ScienceDirect, SpringerLink.</li>
+                <li>Sách chuyên khảo của Springer.</li>
+                <li>Báo cáo nguồn mở từ OECD và McKinsey.</li>
+                <li>Các công trình liên hệ trực tiếp tới hệ thống thông tin và bài toán ra quyết định doanh nghiệp.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">AISeL</span>
+                <span class="action-chip">ScienceDirect</span>
+                <span class="action-chip">SpringerLink</span>
+                <span class="action-chip">OECD</span>
+                <span class="action-chip">McKinsey</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 8: Hoàn thiện báo cáo và minh chứng</strong>
-        <p>
-          Cuối cùng, em hoàn thiện bài báo cáo bằng cách trình bày mục tiêu, quá trình tìm kiếm,
-          bảng đánh giá nguồn và kết luận. Bài làm được xuất thành file PDF để lưu trữ và nộp sản phẩm cuối cùng.
-        </p>
+          <article class="lesson-step" id="b2-step-05">
+            <div class="step-index">05</div>
+            <div class="step-content">
+              <h3>Sàng lọc tài liệu theo tiêu chí tin cậy</h3>
+              <p>Sau khi thu thập tài liệu, em loại bỏ các nguồn chưa liên quan hoặc thiếu thông tin về tác giả, đơn vị xuất bản và phương pháp. Những nguồn được giữ lại cần có chủ đề sát với AI, DSS, EIS/ERP, XAI hoặc human-AI systems.</p>
+              <div class="step-actions">
+                <span class="action-chip">Liên quan</span>
+                <span class="action-chip">Có tác giả</span>
+                <span class="action-chip">Có phương pháp</span>
+                <span class="action-chip">Cập nhật</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b2-step-06">
+            <div class="step-index">06</div>
+            <div class="step-content">
+              <h3>Tổng quan kết quả tìm kiếm</h3>
+              <p>Kết quả cho thấy chủ đề có nền tảng học thuật khá mạnh. Nhóm tài liệu nền tảng giúp giải thích DSS và cognitive DSS, còn nhóm tài liệu mới hơn tập trung vào giá trị kinh doanh của AI, Explainable AI và thiết kế hệ thống người–AI.</p>
+              <ul class="step-list">
+                <li>Watson (2017), Liu et al. (2010), Gupta et al. (2006): cơ sở lý thuyết DSS/cognitive DSS.</li>
+                <li>Enholm et al. (2022), Brasse et al. (2023), Storey et al. (2024): giá trị kinh doanh, XAI và human-AI systems.</li>
+                <li>OECD và McKinsey: bối cảnh doanh nghiệp, rào cản ứng dụng, xu hướng triển khai AI.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">DSS</span>
+                <span class="action-chip">Cognitive DSS</span>
+                <span class="action-chip">XAI</span>
+                <span class="action-chip">Business value</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b2-step-07">
+            <div class="step-index">07</div>
+            <div class="step-content">
+              <h3>Lập bảng đánh giá 12 nguồn thông tin</h3>
+              <p>Em xây dựng bảng tổng hợp để chấm điểm từng nguồn theo thang 1–5 ở năm tiêu chí: tác giả, cơ quan xuất bản, phương pháp, trích dẫn và tính cập nhật. Cách trình bày bằng bảng giúp việc so sánh nguồn trở nên trực quan hơn.</p>
+              <table class="source-mini-table"><thead><tr><th>Nhóm nguồn</th><th>Nguồn tiêu biểu</th><th>Vai trò trong bài</th></tr></thead><tbody><tr><td>Rất cao</td><td>Enholm 2022, Brasse 2023, Storey 2024</td><td>Làm trục chính cho khung lý thuyết và phân tích</td></tr><tr><td>Cao</td><td>Liu 2010, Watson 2017, Sadeghi 2024, Sunyaev 2023</td><td>Bổ sung nền tảng DSS, XAI và EIS/ERP</td></tr><tr><td>Khá cao</td><td>Singla/McKinsey 2025</td><td>Bổ sung bối cảnh thực tiễn, không dùng làm lý thuyết cốt lõi</td></tr></tbody></table>
+              <div class="step-actions">
+                <span class="action-chip">Thang 1–5</span>
+                <span class="action-chip">12 nguồn</span>
+                <span class="action-chip">Xếp hạng</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b2-step-08">
+            <div class="step-index">08</div>
+            <div class="step-content">
+              <h3>Rút ra nguồn có giá trị và hoàn thiện báo cáo</h3>
+              <p>Ở bước cuối, em kết luận rằng các bài báo khoa học bình duyệt nên là nguồn chính, sách chuyên khảo dùng cho nền tảng lý thuyết, còn OECD/McKinsey dùng để bổ sung số liệu và xu hướng thực tiễn. Báo cáo được hoàn thiện kèm danh mục tài liệu tham khảo theo Harvard.</p>
+              <div class="step-actions">
+                <span class="action-chip">Bài báo bình duyệt</span>
+                <span class="action-chip">Sách nền tảng</span>
+                <span class="action-chip">Báo cáo thực tiễn</span>
+                <span class="action-chip">Harvard</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="lesson-note">
+          <h3>Bài học rút ra</h3>
+          <ul>
+            <li>Khi nghiên cứu học thuật, không chỉ cần tìm nhiều nguồn mà còn cần đánh giá độ tin cậy của từng nguồn.</li>
+            <li>Bài báo bình duyệt phù hợp làm nền tảng lập luận; báo cáo doanh nghiệp nên dùng để bổ sung bối cảnh thực tiễn.</li>
+            <li>Bảng tiêu chí giúp quá trình chọn nguồn minh bạch, dễ kiểm tra và dễ trình bày trong Portfolio.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <h2>Sản phẩm cuối cùng</h2>
     <p>
-      Sản phẩm cuối cùng của Bài 2 là file PDF trình bày quá trình khai thác, chọn lọc và đánh giá nguồn thông tin.
-      Bài làm thể hiện rõ cách em xác định chủ đề, tìm kiếm tài liệu, đánh giá độ tin cậy và lựa chọn nguồn phù hợp
-      cho nghiên cứu về ứng dụng AI trong hệ thống thông tin doanh nghiệp.
+      Sản phẩm cuối cùng của Bài 2 là file PDF trình bày quá trình khai thác, chọn lọc và đánh giá nguồn thông tin học thuật.
+    </p>
+    <p>
+      Bài làm thể hiện rõ cách xác định chủ đề, xây dựng từ khóa, đánh giá độ tin cậy và lựa chọn nguồn phù hợp cho nghiên cứu về ứng dụng AI trong hệ thống thông tin doanh nghiệp.
     </p>
     <a href="https://drive.google.com/file/d/1pkdQZLSW0JWPOtssQkP5EdcdLAs4-lQF/view?usp=sharing" class="link-noi">https://drive.google.com/file/d/1pkdQZLSW0JWPOtssQkP5EdcdLAs4-lQF/view?usp=sharing</a>
-
-<style>
-.link-noi {
-  color: white;
-  background-color: #007bff;
-  padding: 10px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  display: inline-block;
-  transition: 0.2s;
-}
-
-.link-noi:hover {
-  background-color: #0056b3;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-}
-</style>
-    <iframe class="pdf-frame" src="Bài 2.pdf"></iframe>
-  </div>
-</div>
-
+    <iframe class="pdf-frame" src="Bài 2.pdf" title="PDF minh chứng Bài 2" loading="lazy"></iframe>
+      </div>
+    </div>
   </section>
 
   <!-- CHI TIẾT BÀI 3 -->
@@ -1369,122 +2023,222 @@
     <div class="detail-container">
       <button class="back-btn" onclick="backToMain()">← Quay lại trang chính</button>
 
-  <div class="detail-card">
-    <h1>Bài 3: Tổng quan về trí tuệ nhân tạo</h1>
+      <div class="detail-card">
+        <h1>Bài 3: Tổng quan về trí tuệ nhân tạo</h1>
 
-    <div class="highlight-box">
-      <h2>Mục tiêu</h2>
+        <div class="highlight-box">
+          <h2>Mục tiêu</h2>
       <p>
-        Ở Bài 3, em tập trung tìm hiểu cách sử dụng trí tuệ nhân tạo để hỗ trợ đọc hiểu và tóm tắt tài liệu học thuật.
-        Mục tiêu chính của bài là biết cách viết prompt hiệu quả để AI xác định vấn đề nghiên cứu,
-        cơ chế cốt lõi và ý nghĩa thực tiễn của tài liệu.
+        Ở Bài 3, em tập trung tìm hiểu cách sử dụng trí tuệ nhân tạo để hỗ trợ học tập thông qua việc xây dựng, thử nghiệm và so sánh nhiều cấp độ prompt.
       </p>
       <p>
-        Thông qua bài tập này, em rèn luyện khả năng khai thác AI trong học tập một cách có định hướng,
-        biết cải tiến yêu cầu từng bước và kiểm tra lại nội dung để tránh phụ thuộc hoàn toàn vào công cụ.
+        Mục tiêu chính là hiểu vì sao prompt càng rõ bối cảnh, vai trò, ví dụ và định dạng thì phản hồi của AI càng hữu ích, đồng thời rút ra nguyên tắc viết prompt hiệu quả.
       </p>
-    </div>
+        </div>
 
     <h2>Quá trình thực hiện</h2>
-    <div class="step-grid">
-      <div class="step-box">
-        <strong>Bước 1: Lựa chọn tài liệu học thuật cần tóm tắt</strong>
-        <p>
-          Đầu tiên, em lựa chọn bài báo “Attention Is All You Need” làm tài liệu thực hành.
-          Đây là tài liệu quan trọng trong lĩnh vực trí tuệ nhân tạo, đặc biệt liên quan đến mô hình Transformer
-          và các ứng dụng xử lý ngôn ngữ tự nhiên.
-        </p>
-      </div>
+    <p>
+      Phần này được chuyển thành timeline có outline đầy đủ, trình bày toàn bộ quy trình từ chọn tác vụ, viết prompt, thử nghiệm, so sánh đến tổng hợp khung C.R.E.A.T.E.
+    </p>
 
-      <div class="step-box">
-        <strong>Bước 2: Viết prompt cơ bản</strong>
-        <p>
-          Em bắt đầu bằng một prompt đơn giản yêu cầu AI tóm tắt nội dung chính của bài báo.
-          Ở bước này, mục đích là quan sát cách AI phản hồi khi yêu cầu còn ngắn và chưa có cấu trúc rõ ràng.
-        </p>
-      </div>
+    <div class="lesson-layout">
+      <aside class="lesson-outline" aria-label="Outline quá trình thực hiện Bài 3">
+        <div class="outline-card">
+          <div class="outline-header">
+            <span>Outline Bài 3</span>
+            <h3>8 bước thử nghiệm và cải tiến prompt</h3>
+          </div>
+          <ol>
+            <li><a href="#b3-step-01" class="active"><span>01</span>Chọn 3 tác vụ</a></li>
+            <li><a href="#b3-step-02"><span>02</span>Tác vụ 1</a></li>
+            <li><a href="#b3-step-03"><span>03</span>Tác vụ 2</a></li>
+            <li><a href="#b3-step-04"><span>04</span>Tác vụ 3</a></li>
+            <li><a href="#b3-step-05"><span>05</span>Thử nghiệm prompt</a></li>
+            <li><a href="#b3-step-06"><span>06</span>So sánh kết quả</a></li>
+            <li><a href="#b3-step-07"><span>07</span>Phân tích kỹ thuật</a></li>
+            <li><a href="#b3-step-08"><span>08</span>Khung C.R.E.A.T.E</a></li>
+          </ol>
+        </div>
+      </aside>
 
-      <div class="step-box">
-        <strong>Bước 3: Đánh giá kết quả phản hồi ban đầu</strong>
-        <p>
-          Sau khi nhận kết quả, em đọc lại phần tóm tắt để xem nội dung đã đầy đủ, dễ hiểu và đúng trọng tâm hay chưa.
-          Em nhận thấy prompt cơ bản có thể tạo ra câu trả lời tổng quát nhưng chưa phân chia rõ các ý quan trọng.
-        </p>
-      </div>
+      <div class="lesson-main">
+        <div class="process-overview">
+          <div class="overview-pill">
+            <b>Số tác vụ</b>
+            <span>3 tác vụ học tập phổ biến</span>
+          </div>
+          <div class="overview-pill">
+            <b>Số prompt</b>
+            <span>9 prompt: cơ bản, cải tiến, nâng cao</span>
+          </div>
+          <div class="overview-pill">
+            <b>Kết quả</b>
+            <span>Bảng so sánh và khung C.R.E.A.T.E</span>
+          </div>
+        </div>
 
-      <div class="step-box">
-        <strong>Bước 4: Cải tiến prompt theo cấu trúc ba phần</strong>
-        <p>
-          Em điều chỉnh prompt bằng cách yêu cầu AI chia câu trả lời thành ba phần:
-          vấn đề nghiên cứu, cơ chế cốt lõi và ý nghĩa thực tiễn.
-          Việc bổ sung cấu trúc giúp kết quả rõ ràng hơn và dễ sử dụng cho mục đích học tập.
-        </p>
-      </div>
+        <div class="lesson-timeline">
+          <article class="lesson-step" id="b3-step-01">
+            <div class="step-index">01</div>
+            <div class="step-content">
+              <h3>Lựa chọn 3 tác vụ học tập để thử nghiệm prompt</h3>
+              <p>Em chọn ba tác vụ thường gặp trong học tập: tóm tắt tài liệu học thuật, giải thích khái niệm phức tạp và tạo bộ câu hỏi ôn tập. Cách chọn này giúp kiểm tra AI ở nhiều dạng nhiệm vụ khác nhau: đọc hiểu, giảng giải và kiểm tra kiến thức.</p>
+              <div class="step-actions">
+                <span class="action-chip">Tóm tắt</span>
+                <span class="action-chip">Giải thích</span>
+                <span class="action-chip">Ôn tập</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 5: Bổ sung vai trò và đối tượng người nghe</strong>
-        <p>
-          Tiếp theo, em nâng cấp prompt bằng cách yêu cầu AI đóng vai chuyên gia AI Engineering
-          và giải thích cho sinh viên năm nhất. Điều này giúp nội dung phản hồi được trình bày đơn giản hơn,
-          phù hợp với người mới bắt đầu tìm hiểu về trí tuệ nhân tạo.
-        </p>
-      </div>
+          <article class="lesson-step" id="b3-step-02">
+            <div class="step-index">02</div>
+            <div class="step-content">
+              <h3>Tác vụ 1: Tóm tắt bài báo học thuật</h3>
+              <p>Tác vụ đầu tiên là tóm tắt bài báo <strong>“Attention Is All You Need”</strong> về kiến trúc Transformer. Em xây dựng ba phiên bản prompt từ đơn giản đến nâng cao để so sánh mức độ chi tiết của kết quả.</p>
+              <ul class="step-list">
+                <li>Prompt cơ bản: yêu cầu tóm tắt bài báo.</li>
+                <li>Prompt cải tiến: chia nội dung thành vấn đề nghiên cứu, Self-Attention và tầm ảnh hưởng.</li>
+                <li>Prompt nâng cao: yêu cầu đóng vai chuyên gia AI Engineering, giải thích cho sinh viên năm nhất, có lập luận từng bước và ví dụ dịch Anh–Việt.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">Transformer</span>
+                <span class="action-chip">Self-Attention</span>
+                <span class="action-chip">Role prompting</span>
+                <span class="action-chip">Chain of Thought</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 6: Yêu cầu giải thích từng bước và có ví dụ minh họa</strong>
-        <p>
-          Em tiếp tục bổ sung yêu cầu giải thích từng bước, đồng thời minh họa bằng ví dụ dịch tiếng Anh sang tiếng Việt.
-          Nhờ ví dụ cụ thể, các khái niệm trừu tượng như attention, encoder, decoder và Transformer trở nên dễ hiểu hơn.
-        </p>
-      </div>
+          <article class="lesson-step" id="b3-step-03">
+            <div class="step-index">03</div>
+            <div class="step-content">
+              <h3>Tác vụ 2: Giải thích khái niệm trị riêng và vector riêng</h3>
+              <p>Tác vụ thứ hai tập trung vào một khái niệm trừu tượng trong Đại số tuyến tính. Em yêu cầu AI giải thích từ dễ đến khó, bắt đầu bằng ví dụ đời sống, sau đó mới đi vào phương trình và ứng dụng thực tế.</p>
+              <div class="prompt-box"><strong>Điểm nâng cao:</strong> AI được yêu cầu đóng vai giảng viên đại học cho sinh viên CNTT, giải thích phương trình <strong>Ax = λx</strong> và liên hệ tới PageRank hoặc PCA trong ngành Hệ thống thông tin.</div>
+              <div class="step-actions">
+                <span class="action-chip">Eigenvalues</span>
+                <span class="action-chip">Eigenvectors</span>
+                <span class="action-chip">Ax = λx</span>
+                <span class="action-chip">PCA</span>
+                <span class="action-chip">PageRank</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 7: So sánh các phiên bản prompt</strong>
-        <p>
-          Em so sánh kết quả giữa prompt cơ bản, prompt có cấu trúc và prompt nâng cao.
-          Qua đó, em nhận ra prompt càng rõ vai trò, mục tiêu, đối tượng và định dạng đầu ra thì phản hồi của AI càng hữu ích.
-        </p>
-      </div>
+          <article class="lesson-step" id="b3-step-04">
+            <div class="step-index">04</div>
+            <div class="step-content">
+              <h3>Tác vụ 3: Tạo bộ câu hỏi ôn tập IELTS</h3>
+              <p>Tác vụ thứ ba dùng AI để tạo bài quiz từ vựng IELTS mức Band 7.0+. Em dùng few-shot prompting bằng cách đưa mẫu câu hỏi và yêu cầu AI giữ đúng định dạng đầu ra.</p>
+              <ul class="step-list">
+                <li>Có 5 câu hỏi trắc nghiệm với 4 đáp án A, B, C, D.</li>
+                <li>Không in đáp án ngay dưới câu hỏi để người học tự làm trước.</li>
+                <li>Cuối bài có bảng giải thích vì sao đáp án đúng đúng và vì sao các đáp án khác sai.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">Few-shot</span>
+                <span class="action-chip">Format output</span>
+                <span class="action-chip">IELTS 7.0+</span>
+                <span class="action-chip">Active Recall</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 8: Hoàn thiện nội dung báo cáo</strong>
-        <p>
-          Cuối cùng, em tổng hợp quá trình thử nghiệm prompt, ghi lại kết quả nhận được và rút ra bài học.
-          Bài làm được trình bày thành file PDF nhằm minh chứng quá trình sử dụng AI để hỗ trợ học tập.
-        </p>
+          <article class="lesson-step" id="b3-step-05">
+            <div class="step-index">05</div>
+            <div class="step-content">
+              <h3>Thử nghiệm 9 prompt trên công cụ AI</h3>
+              <p>Sau khi xây dựng 3 phiên bản prompt cho mỗi tác vụ, em đưa tổng cộng 9 prompt vào công cụ AI như Gemini hoặc ChatGPT để quan sát kết quả. Việc thử nghiệm giúp thấy rõ khác biệt giữa yêu cầu chung chung và yêu cầu có bối cảnh, vai trò, ví dụ, định dạng.</p>
+              <div class="step-actions">
+                <span class="action-chip">9 prompt</span>
+                <span class="action-chip">Gemini/ChatGPT</span>
+                <span class="action-chip">Chụp minh chứng</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b3-step-06">
+            <div class="step-index">06</div>
+            <div class="step-content">
+              <h3>So sánh prompt cơ bản, cải tiến và nâng cao</h3>
+              <p>Em so sánh các kết quả theo ba tiêu chí: độ dài và mức độ chi tiết, tính chính xác và bối cảnh, định dạng trình bày. Prompt nâng cao thường tạo đầu ra mạch lạc hơn vì đã có vai trò, bối cảnh và định dạng rõ ràng.</p>
+              <table class="source-mini-table"><thead><tr><th>Tiêu chí</th><th>Prompt cơ bản</th><th>Prompt nâng cao</th></tr></thead><tbody><tr><td>Độ chi tiết</td><td>Ngắn, chung chung</td><td>Phân tích sâu, bám sát yêu cầu</td></tr><tr><td>Bối cảnh</td><td>Dễ lạc đề hoặc quá hàn lâm</td><td>Khớp người học và mục tiêu</td></tr><tr><td>Định dạng</td><td>Text liền mạch</td><td>Có bảng, bullet, cấu trúc rõ</td></tr></tbody></table>
+              <div class="step-actions">
+                <span class="action-chip">Độ chi tiết</span>
+                <span class="action-chip">Bối cảnh</span>
+                <span class="action-chip">Định dạng</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b3-step-07">
+            <div class="step-index">07</div>
+            <div class="step-content">
+              <h3>Phân tích vì sao prompt nâng cao hiệu quả hơn</h3>
+              <p>Từ kết quả so sánh, em rút ra rằng prompt hiệu quả thường có vai trò rõ, yêu cầu suy luận từng bước, ví dụ mẫu và ràng buộc bối cảnh. Những yếu tố này giúp AI hiểu đúng yêu cầu và giảm khả năng trả lời lan man.</p>
+              <ul class="step-list">
+                <li>Role prompting định hình văn phong và độ chuyên sâu.</li>
+                <li>Chain of Thought giúp câu trả lời có trình tự lập luận.</li>
+                <li>Few-shot prompting giúp AI bám sát định dạng mong muốn.</li>
+                <li>Contextual Constraints giúp kết quả phù hợp với người học cụ thể.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">Role</span>
+                <span class="action-chip">CoT</span>
+                <span class="action-chip">Few-shot</span>
+                <span class="action-chip">Context</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b3-step-08">
+            <div class="step-index">08</div>
+            <div class="step-content">
+              <h3>Tổng hợp khung nguyên tắc C.R.E.A.T.E</h3>
+              <p>Cuối cùng, em hệ thống hóa mẹo viết prompt bằng khung C.R.E.A.T.E: Context, Role, Example, Action, Tone, Evaluate & Iterate. Đây là bộ nguyên tắc giúp sử dụng LLMs hiệu quả hơn trong học tập.</p>
+              <ul class="step-list">
+                <li>Context: nêu bối cảnh và mục đích học tập.</li>
+                <li>Role: giao vai trò để định hình cách phản hồi.</li>
+                <li>Example: đưa mẫu đầu ra khi cần định dạng chuẩn.</li>
+                <li>Action: dùng động từ rõ ràng như tóm tắt, phân tích, so sánh.</li>
+                <li>Tone: quy định văn phong mong muốn.</li>
+                <li>Evaluate & Iterate: đánh giá và tiếp tục tinh chỉnh prompt.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">Context</span>
+                <span class="action-chip">Role</span>
+                <span class="action-chip">Example</span>
+                <span class="action-chip">Action</span>
+                <span class="action-chip">Tone</span>
+                <span class="action-chip">Iterate</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="lesson-note">
+          <h3>Bài học rút ra</h3>
+          <ul>
+            <li>Prompt tốt cần có bối cảnh, vai trò, yêu cầu hành động, ví dụ và tiêu chí định dạng rõ ràng.</li>
+            <li>AI có thể hỗ trợ học tập hiệu quả hơn khi người dùng biết thử nghiệm, so sánh và tinh chỉnh yêu cầu.</li>
+            <li>Người học vẫn cần đọc, kiểm tra và đánh giá kết quả thay vì phụ thuộc hoàn toàn vào phản hồi của AI.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <h2>Sản phẩm cuối cùng</h2>
     <p>
-      Sản phẩm cuối cùng của Bài 3 là file PDF trình bày quá trình sử dụng AI để tóm tắt và phân tích tài liệu học thuật.
-      Bài làm thể hiện sự khác nhau giữa các cấp độ prompt, từ cơ bản đến nâng cao, đồng thời cho thấy cách AI có thể hỗ trợ
-      việc đọc hiểu tài liệu nhưng vẫn cần người học kiểm tra, đánh giá và điều chỉnh nội dung.
+      Sản phẩm cuối cùng của Bài 3 là file PDF trình bày quá trình xây dựng 9 prompt cho 3 tác vụ học tập, đồng thời so sánh hiệu quả của prompt cơ bản, prompt cải tiến và prompt nâng cao.
+    </p>
+    <p>
+      Bài làm giúp làm rõ các kỹ thuật như Role Prompting, Chain of Thought, Few-shot Prompting và Contextual Constraints trong việc khai thác AI phục vụ học tập.
     </p>
     <a href="https://drive.google.com/file/d/1BUq28A5Hed0QZ1IU52M--hoUNpOlJk1d/view?usp=sharing" class="link-noi">https://drive.google.com/file/d/1BUq28A5Hed0QZ1IU52M--hoUNpOlJk1d/view?usp=sharing</a>
-
-<style>
-.link-noi {
-  color: white;
-  background-color: #007bff;
-  padding: 10px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  display: inline-block;
-  transition: 0.2s;
-}
-
-.link-noi:hover {
-  background-color: #0056b3;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-}
-</style>
-    <iframe class="pdf-frame" src="Bài 3.pdf"></iframe>
-  </div>
-</div>
-
+    <iframe class="pdf-frame" src="Bài 3(1).pdf" title="PDF minh chứng Bài 3" loading="lazy"></iframe>
+      </div>
+    </div>
   </section>
 
   <!-- CHI TIẾT BÀI 4 -->
@@ -1493,85 +2247,232 @@
     <div class="detail-container">
       <button class="back-btn" onclick="backToMain()">← Quay lại trang chính</button>
 
-  <div class="detail-card">
-    <h1>Bài 4: Giao tiếp và hợp tác trong môi trường số</h1>
-      <div class="highlight-box">
-    <h2>Mục tiêu</h2>
-    <p>
-      Ở Bài 4, em tập trung rèn luyện kỹ năng sử dụng các công cụ hợp tác trực tuyến để hỗ trợ quá trình làm việc nhóm. Mục tiêu chính của bài là biết cách quản lý nhiệm vụ, soạn thảo tài liệu chung, lưu trữ dữ liệu và trao đổi thông tin trong môi trường trực tuyến.
+      <div class="detail-card">
+        <h1>Bài 4: Giao tiếp và hợp tác trong môi trường số</h1>
 
-Thông qua bài tập này, em đã sử dụng các công cụ gồm Trello, Google Docs, Google Drive và Slack nhằm nâng cao hiệu quả phối hợp nhóm, theo dõi tiến độ công việc và thể hiện rõ trách nhiệm cá nhân trong quá trình thực hiện dự án.
-    </p>
-      </div>
+        <div class="highlight-box">
+          <h2>Mục tiêu</h2>
+      <p>
+        Ở Bài 4, em tập trung rèn luyện kỹ năng sử dụng các công cụ hợp tác trực tuyến để hỗ trợ quá trình làm việc nhóm.
+      </p>
+      <p>
+        Thông qua bài tập này, em sử dụng Trello, Google Docs, Google Drive và Slack nhằm quản lý nhiệm vụ, soạn thảo tài liệu chung, lưu trữ dữ liệu và trao đổi thông tin hiệu quả trong môi trường trực tuyến.
+      </p>
+        </div>
+
     <h2>Quá trình thực hiện</h2>
-    <div class="step-grid">
-      <div class="step-box">
-        <strong>Bước 1: Quản lý nhiệm vụ bằng Trello</strong>
-        <p>Đầu tiên, em sử dụng Trello để theo dõi các nhiệm vụ cá nhân trong dự án nhóm. Sau khi tham gia bảng làm việc chung, em theo dõi các danh sách công việc như Cần làm, Đang làm, Review và Hoàn thành.
+    <p>
+      Phần này được trình bày lại theo dạng timeline có outline bên trái, nhấn mạnh vai trò của từng công cụ, quy trình phối hợp và kinh nghiệm xử lý khó khăn khi làm việc nhóm.
+    </p>
 
-Trên Trello, em tạo và cập nhật thẻ nhiệm vụ, theo dõi hạn hoàn thành, đánh dấu trạng thái công việc và kiểm tra tiến độ của bản thân. Việc sử dụng Trello giúp em tránh bỏ sót nhiệm vụ và có kế hoạch làm việc rõ ràng hơn.</p>
+    <div class="lesson-layout">
+      <aside class="lesson-outline" aria-label="Outline quá trình thực hiện Bài 4">
+        <div class="outline-card">
+          <div class="outline-header">
+            <span>Outline Bài 4</span>
+            <h3>9 bước hợp tác trực tuyến</h3>
+          </div>
+          <ol>
+            <li><a href="#b4-step-01" class="active"><span>01</span>Xác định nhu cầu</a></li>
+            <li><a href="#b4-step-02"><span>02</span>Thiết lập Trello</a></li>
+            <li><a href="#b4-step-03"><span>03</span>Google Docs</a></li>
+            <li><a href="#b4-step-04"><span>04</span>Google Drive</a></li>
+            <li><a href="#b4-step-05"><span>05</span>Slack</a></li>
+            <li><a href="#b4-step-06"><span>06</span>Nhiệm vụ cá nhân</a></li>
+            <li><a href="#b4-step-07"><span>07</span>Quy trình phối hợp</a></li>
+            <li><a href="#b4-step-08"><span>08</span>Khó khăn &amp; giải pháp</a></li>
+            <li><a href="#b4-step-09"><span>09</span>Đánh giá vai trò</a></li>
+          </ol>
+        </div>
+      </aside>
+
+      <div class="lesson-main">
+        <div class="process-overview">
+          <div class="overview-pill">
+            <b>Công cụ</b>
+            <span>Trello, Google Docs, Google Drive, Slack</span>
+          </div>
+          <div class="overview-pill">
+            <b>Trọng tâm</b>
+            <span>Quản lý nhiệm vụ, cộng tác nội dung, lưu trữ, giao tiếp</span>
+          </div>
+          <div class="overview-pill">
+            <b>Minh chứng</b>
+            <span>Ảnh chụp giao diện công cụ và báo cáo cá nhân</span>
+          </div>
+        </div>
+
+        <div class="lesson-timeline">
+          <article class="lesson-step" id="b4-step-01">
+            <div class="step-index">01</div>
+            <div class="step-content">
+              <h3>Xác định nhu cầu hợp tác trực tuyến</h3>
+              <p>Dự án nhóm yêu cầu các thành viên phối hợp liên tục, cập nhật tiến độ, trao đổi thông tin và chia sẻ tài nguyên. Vì vậy, em lựa chọn kết hợp nhiều công cụ trực tuyến để quản lý công việc theo một quy trình thống nhất.</p>
+              <div class="step-actions">
+                <span class="action-chip">Làm việc nhóm</span>
+                <span class="action-chip">Cập nhật tiến độ</span>
+                <span class="action-chip">Chia sẻ tài nguyên</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b4-step-02">
+            <div class="step-index">02</div>
+            <div class="step-content">
+              <h3>Thiết lập và sử dụng Trello để quản lý nhiệm vụ</h3>
+              <p>Sau khi nhóm thống nhất sử dụng Trello, em tạo tài khoản, cập nhật thông tin cá nhân, tham gia bảng làm việc chung và theo dõi các danh sách công việc như To do, Doing, Review, Done.</p>
+              <ul class="step-list">
+                <li>Nhận thẻ nhiệm vụ có mô tả, hạn hoàn thành và mức độ ưu tiên.</li>
+                <li>Cập nhật trạng thái khi bắt đầu làm, khi cần hỗ trợ và khi đã hoàn thành.</li>
+                <li>Theo dõi tiến độ cá nhân và phối hợp với các thành viên khác.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">Trello</span>
+                <span class="action-chip">To do</span>
+                <span class="action-chip">Doing</span>
+                <span class="action-chip">Review</span>
+                <span class="action-chip">Done</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b4-step-03">
+            <div class="step-index">03</div>
+            <div class="step-content">
+              <h3>Soạn thảo và chỉnh sửa nội dung bằng Google Docs</h3>
+              <p>Em sử dụng Google Docs như công cụ soạn thảo chính của nhóm. Sau khi được cấp quyền truy cập, em trực tiếp viết nội dung, chỉnh sửa câu chữ, bổ sung ý kiến và để lại bình luận tại những phần cần thống nhất.</p>
+              <ul class="step-list">
+                <li>Làm việc cộng tác theo thời gian thực.</li>
+                <li>Dùng comment và suggesting mode để trao đổi mà không làm mất nội dung gốc.</li>
+                <li>Lịch sử chỉnh sửa giúp thể hiện rõ phần đóng góp cá nhân.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">Google Docs</span>
+                <span class="action-chip">Comment</span>
+                <span class="action-chip">Suggesting mode</span>
+                <span class="action-chip">Lịch sử chỉnh sửa</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b4-step-04">
+            <div class="step-index">04</div>
+            <div class="step-content">
+              <h3>Lưu trữ và chia sẻ tệp bằng Google Drive</h3>
+              <p>Song song với việc soạn thảo, em dùng Google Drive để lưu trữ tài liệu liên quan đến phần việc cá nhân và nhóm. Tệp được phân loại theo thư mục rõ ràng như tài liệu tham khảo, hình ảnh, bản nháp và bản hoàn chỉnh.</p>
+              <ul class="step-list">
+                <li>Thiết lập quyền truy cập phù hợp: viewer, commenter hoặc editor.</li>
+                <li>Đặt tên tệp theo quy tắc thống nhất để tránh nhầm phiên bản.</li>
+                <li>Tập trung tài nguyên vào một không gian chung, dễ tìm và dễ cập nhật.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">Google Drive</span>
+                <span class="action-chip">Viewer</span>
+                <span class="action-chip">Commenter</span>
+                <span class="action-chip">Editor</span>
+                <span class="action-chip">Quy tắc đặt tên</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b4-step-05">
+            <div class="step-index">05</div>
+            <div class="step-content">
+              <h3>Trao đổi và phối hợp nhóm bằng Slack</h3>
+              <p>Để giao tiếp nhanh, em tham gia kênh Slack của nhóm, đọc tin nhắn thường xuyên, phản hồi yêu cầu liên quan đến nhiệm vụ và chủ động đặt câu hỏi khi gặp vấn đề.</p>
+              <ul class="step-list">
+                <li>Trao đổi tiến độ công việc hằng ngày.</li>
+                <li>Xác nhận nội dung cần chỉnh sửa và nhắc deadline.</li>
+                <li>Gửi tệp, đường link liên quan và phản hồi thắc mắc của thành viên khác.</li>
+                <li>Tag đúng người cần xử lý để tiết kiệm thời gian trao đổi.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">Slack</span>
+                <span class="action-chip">Deadline</span>
+                <span class="action-chip">Tag thành viên</span>
+                <span class="action-chip">Tra cứu tin nhắn</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b4-step-06">
+            <div class="step-index">06</div>
+            <div class="step-content">
+              <h3>Hoàn thành các nhiệm vụ cá nhân trong dự án</h3>
+              <p>Trong vòng một tuần, em thực hiện đầy đủ các hoạt động cá nhân: quản lý nhiệm vụ, chỉnh sửa nội dung, tương tác với thành viên khác và tổ chức tài nguyên. Mỗi hoạt động đều để lại minh chứng qua thẻ nhiệm vụ, lịch sử chỉnh sửa, tin nhắn và tệp đã lưu.</p>
+              <div class="step-actions">
+                <span class="action-chip">1 tuần</span>
+                <span class="action-chip">Minh chứng rõ</span>
+                <span class="action-chip">Trách nhiệm cá nhân</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b4-step-07">
+            <div class="step-index">07</div>
+            <div class="step-content">
+              <h3>Xây dựng quy trình phối hợp thống nhất</h3>
+              <p>Khi kết hợp bốn công cụ, em hình thành một quy trình làm việc mạch lạc thay vì thao tác rời rạc. Quy trình này giúp giảm chồng chéo và tăng khả năng theo dõi tiến độ.</p>
+              <div class="process-flow"><span class="flow-step">Nhận nhiệm vụ trên Trello</span><span class="flow-arrow">→</span><span class="flow-step">Thực hiện nội dung trên Google Docs</span><span class="flow-arrow">→</span><span class="flow-step">Lưu trữ ở Google Drive</span><span class="flow-arrow">→</span><span class="flow-step">Trao đổi, phản hồi trên Slack</span></div>
+              <div class="step-actions">
+                <span class="action-chip">Quy trình thống nhất</span>
+                <span class="action-chip">Ít bỏ sót</span>
+                <span class="action-chip">Dễ theo dõi</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b4-step-08">
+            <div class="step-index">08</div>
+            <div class="step-content">
+              <h3>Ghi nhận khó khăn và cách giải quyết</h3>
+              <p>Trong quá trình làm việc, em gặp khó khăn khi phải kiểm tra nhiều công cụ, nội dung Google Docs bị chỉnh sửa chồng chéo, tệp dễ trùng phiên bản và đôi khi thành viên phản hồi chậm. Em khắc phục bằng cách kiểm tra theo thứ tự cố định, dùng bình luận trước khi sửa, thống nhất quy tắc đặt tên và tag đúng người trên Slack.</p>
+              <div class="step-actions">
+                <span class="action-chip">Thông báo</span>
+                <span class="action-chip">Chỉnh sửa chồng chéo</span>
+                <span class="action-chip">Phiên bản tệp</span>
+                <span class="action-chip">Phản hồi chậm</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b4-step-09">
+            <div class="step-index">09</div>
+            <div class="step-content">
+              <h3>Đánh giá vai trò cá nhân và rút kinh nghiệm</h3>
+              <p>Qua bài tập, em nhận thấy bản thân không chỉ hoàn thành phần việc được giao mà còn chủ động trong phối hợp. Kỹ năng sử dụng công cụ trực tuyến gắn liền với tinh thần trách nhiệm, giao tiếp rõ ràng và khả năng tổ chức tài nguyên trong môi trường số.</p>
+              <div class="step-actions">
+                <span class="action-chip">Chủ động</span>
+                <span class="action-chip">Trách nhiệm</span>
+                <span class="action-chip">Phối hợp</span>
+                <span class="action-chip">Tổ chức tài nguyên</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="lesson-note">
+          <h3>Bài học rút ra</h3>
+          <ul>
+            <li>Công cụ trực tuyến chỉ hiệu quả khi được sử dụng theo quy trình thống nhất, không rời rạc.</li>
+            <li>Làm việc nhóm cần vừa biết thao tác kỹ thuật vừa có trách nhiệm cập nhật tiến độ và phản hồi kịp thời.</li>
+            <li>Lịch sử chỉnh sửa, thẻ nhiệm vụ, tin nhắn và hệ thống tệp là minh chứng rõ cho đóng góp cá nhân.</li>
+          </ul>
+        </div>
       </div>
-
-      <div class="step-box">
-        <strong>Bước 2: Soạn thảo và chỉnh sửa nội dung bằng Google Docs</strong>
-        <p>Sau khi nhận nhiệm vụ, em sử dụng Google Docs để tham gia viết và chỉnh sửa nội dung trong tài liệu chung của nhóm. Công cụ này hỗ trợ làm việc cộng tác theo thời gian thực, giúp các thành viên có thể cùng chỉnh sửa, góp ý và hoàn thiện nội dung.
-
-Trong quá trình làm việc, em sử dụng các tính năng như chỉnh sửa văn bản, bình luận và theo dõi thay đổi. Nhờ đó, việc trao đổi nội dung trở nên thuận tiện hơn, đồng thời phần đóng góp cá nhân cũng được thể hiện rõ ràng qua lịch sử chỉnh sửa.</p>
-      </div>
-
-      <div class="step-box">
-        <strong>Bước 3: Lưu trữ và chia sẻ tài liệu bằng Google Drive</strong>
-        <p>Bên cạnh việc soạn thảo nội dung, em sử dụng Google Drive để lưu trữ các tệp liên quan đến phần việc của mình. Các tài liệu được sắp xếp theo thư mục, đặt tên rõ ràng và chia sẻ cho các thành viên trong nhóm với quyền truy cập phù hợp.
-
-Việc sử dụng Google Drive giúp tài liệu không bị phân tán, dễ tìm kiếm và thuận tiện khi cần cập nhật hoặc chia sẻ lại. Đây cũng là công cụ quan trọng giúp nhóm quản lý tài nguyên chung một cách khoa học hơn.</p>
-      </div>
-
-      <div class="step-box">
-        <strong>Bước 4: Trao đổi và phối hợp nhóm bằng Slack</strong>
-        <p>Trong quá trình thực hiện dự án, em sử dụng Slack để trao đổi thông tin với các thành viên trong nhóm. Em dùng Slack để cập nhật tiến độ, hỏi đáp khi gặp khó khăn, nhắc nhở deadline và gửi các đường link hoặc tệp liên quan.
-
-Nhờ có Slack, việc giao tiếp nhóm trở nên tập trung và rõ ràng hơn. Các nội dung trao đổi được lưu lại, giúp em dễ dàng tra cứu khi cần xem lại thông tin hoặc kiểm tra yêu cầu công việc.</p>
-      </div>
-      </div>
-      </div>
+    </div>
 
     <h2>Sản phẩm cuối cùng</h2>
     <p>
-      Sản phẩm cuối cùng của Bài 4 là một báo cáo cá nhân trình bày quá trình sử dụng các công cụ hợp tác trực tuyến trong dự án nhóm. Báo cáo thể hiện rõ các nội dung chính sau:
-
-Các công cụ đã sử dụng trong quá trình làm việc nhóm.
-Cách thiết lập và sử dụng từng công cụ.
-Vai trò cá nhân trong quá trình thực hiện nhiệm vụ.
-Hiệu quả của từng công cụ đối với công việc.
-Những khó khăn gặp phải và cách giải quyết.
-Bài học kinh nghiệm sau khi hoàn thành bài tập.
-
-Bài làm cũng có kèm hình ảnh minh chứng quá trình sử dụng các công cụ như giao diện Trello, Google Docs, Google Drive và phần chia sẻ tài liệu cho thành viên khác.
+      Sản phẩm cuối cùng của Bài 4 là báo cáo cá nhân trình bày quá trình sử dụng các công cụ hợp tác trực tuyến trong dự án nhóm.
+    </p>
+    <p>
+      Báo cáo thể hiện cách thiết lập công cụ, vai trò cá nhân, hiệu quả từng công cụ, khó khăn gặp phải và bài học kinh nghiệm sau khi hoàn thành nhiệm vụ.
     </p>
     <a href="https://drive.google.com/file/d/1xlwuMpAqPt-7MSLFXFTVKArqcpODibjE/view?usp=sharing" class="link-noi">https://drive.google.com/file/d/1xlwuMpAqPt-7MSLFXFTVKArqcpODibjE/view?usp=sharing</a>
-
-<style>
-.link-noi {
-  color: white;
-  background-color: #007bff;
-  padding: 10px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  display: inline-block;
-  transition: 0.2s;
-}
-
-.link-noi:hover {
-  background-color: #0056b3;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-}
-</style>
-    <iframe class="pdf-frame" src="Bài 4.pdf"></iframe>
-  </div>
-</div>
-
+    <iframe class="pdf-frame" src="Bài 4.pdf" title="PDF minh chứng Bài 4" loading="lazy"></iframe>
+      </div>
+    </div>
   </section>
 
   <!-- CHI TIẾT BÀI 5 -->
@@ -1580,123 +2481,202 @@ Bài làm cũng có kèm hình ảnh minh chứng quá trình sử dụng các c
     <div class="detail-container">
       <button class="back-btn" onclick="backToMain()">← Quay lại trang chính</button>
 
-  <div class="detail-card">
-    <h1>Bài 5: Sáng tạo nội dung số</h1>
+      <div class="detail-card">
+        <h1>Bài 5: Sáng tạo nội dung số</h1>
 
-    <div class="highlight-box">
-      <h2>Mục tiêu</h2>
+        <div class="highlight-box">
+          <h2>Mục tiêu</h2>
       <p>
-        Ở Bài 5, em tập trung rèn luyện kỹ năng sáng tạo nội dung số thông qua việc lên ý tưởng,
-        thiết kế, chỉnh sửa và hoàn thiện một sản phẩm truyền thông hoặc học tập.
+        Ở Bài 5, em tập trung rèn luyện kỹ năng sáng tạo nội dung số thông qua việc sử dụng AI tạo sinh để lên ý tưởng, tạo nội dung, tạo hình ảnh, thiết kế bố cục và hoàn thiện sản phẩm.
       </p>
       <p>
-        Mục tiêu của bài là biết cách biến một ý tưởng ban đầu thành sản phẩm số hoàn chỉnh,
-        có bố cục rõ ràng, nội dung phù hợp, hình ảnh hài hòa và truyền tải được thông điệp đến người xem.
+        Mục tiêu của bài là biết cách biến ý tưởng ban đầu thành một bài thuyết trình số/infographic có cấu trúc logic, hình ảnh trực quan và dấu ấn sáng tạo cá nhân.
       </p>
-    </div>
+        </div>
 
     <h2>Quá trình thực hiện</h2>
-    <div class="step-grid">
-      <div class="step-box">
-        <strong>Bước 1: Xác định chủ đề sản phẩm</strong>
-        <p>
-          Đầu tiên, em xác định chủ đề cho sản phẩm nội dung số dựa trên yêu cầu bài học và mục đích truyền tải.
-          Chủ đề cần rõ ràng, phù hợp với người xem và có khả năng trình bày bằng hình ảnh, chữ viết hoặc video.
-        </p>
-      </div>
+    <p>
+      Phần này được trình bày lại thành timeline có outline đầy đủ, thể hiện rõ sự kết hợp giữa AI tạo sinh và đóng góp cá nhân trong quá trình tạo slide thuyết trình/infographic.
+    </p>
 
-      <div class="step-box">
-        <strong>Bước 2: Xác định đối tượng người xem</strong>
-        <p>
-          Sau khi chọn chủ đề, em xác định sản phẩm sẽ hướng đến ai, ví dụ học sinh, sinh viên hoặc người quan tâm đến kỹ năng số.
-          Việc xác định đối tượng giúp em lựa chọn ngôn ngữ, màu sắc, hình ảnh và cách trình bày phù hợp hơn.
-        </p>
-      </div>
+    <div class="lesson-layout">
+      <aside class="lesson-outline" aria-label="Outline quá trình thực hiện Bài 5">
+        <div class="outline-card">
+          <div class="outline-header">
+            <span>Outline Bài 5</span>
+            <h3>8 bước sáng tạo nội dung số với AI</h3>
+          </div>
+          <ol>
+            <li><a href="#b5-step-01" class="active"><span>01</span>Xác định dự án</a></li>
+            <li><a href="#b5-step-02"><span>02</span>Chọn công cụ AI</a></li>
+            <li><a href="#b5-step-03"><span>03</span>Xây dựng nội dung</a></li>
+            <li><a href="#b5-step-04"><span>04</span>Biên tập nội dung</a></li>
+            <li><a href="#b5-step-05"><span>05</span>Tạo hình ảnh</a></li>
+            <li><a href="#b5-step-06"><span>06</span>Chỉnh sửa hình ảnh</a></li>
+            <li><a href="#b5-step-07"><span>07</span>Dàn trang Canva</a></li>
+            <li><a href="#b5-step-08"><span>08</span>Hoàn thiện &amp; phản biện</a></li>
+          </ol>
+        </div>
+      </aside>
 
-      <div class="step-box">
-        <strong>Bước 3: Lên ý tưởng và xây dựng bố cục</strong>
-        <p>
-          Em phác thảo bố cục sản phẩm gồm tiêu đề, nội dung chính, hình ảnh minh họa và phần kết luận.
-          Ở bước này, em chú ý sắp xếp thông tin theo thứ tự dễ hiểu để người xem có thể nắm bắt thông điệp nhanh chóng.
-        </p>
-      </div>
+      <div class="lesson-main">
+        <div class="process-overview">
+          <div class="overview-pill">
+            <b>Dự án</b>
+            <span>Slide &amp; Infographic về lộ trình Data Engineering</span>
+          </div>
+          <div class="overview-pill">
+            <b>Công cụ</b>
+            <span>Gemini/ChatGPT, DALL-E 3, Canva AI</span>
+          </div>
+          <div class="overview-pill">
+            <b>Tỷ lệ đóng góp</b>
+            <span>AI 40% – cá nhân 60%</span>
+          </div>
+        </div>
 
-      <div class="step-box">
-        <strong>Bước 4: Lựa chọn công cụ thiết kế</strong>
-        <p>
-          Em lựa chọn công cụ phù hợp để tạo sản phẩm, có thể là Canva, PowerPoint, CapCut hoặc một công cụ thiết kế trực tuyến khác.
-          Công cụ được chọn cần dễ sử dụng, hỗ trợ chèn hình ảnh, chỉnh sửa văn bản và xuất sản phẩm ở định dạng phù hợp.
-        </p>
-      </div>
+        <div class="lesson-timeline">
+          <article class="lesson-step" id="b5-step-01">
+            <div class="step-index">01</div>
+            <div class="step-content">
+              <h3>Xác định dự án nội dung số</h3>
+              <p>Em chọn dự án <strong>Slide thuyết trình & Infographic: “Lộ trình chinh phục Data Engineering cho sinh viên Hệ thống thông tin”</strong>. Sản phẩm hướng tới việc trình bày lộ trình học từ nền tảng lập trình, cơ sở dữ liệu đến kiến trúc hệ thống dữ liệu lớn.</p>
+              <div class="step-actions">
+                <span class="action-chip">Data Engineering</span>
+                <span class="action-chip">Slide</span>
+                <span class="action-chip">Infographic</span>
+                <span class="action-chip">Sinh viên HTTT</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 5: Thiết kế bản nháp đầu tiên</strong>
-        <p>
-          Em bắt đầu thiết kế sản phẩm dựa trên bố cục đã chuẩn bị.
-          Trong quá trình này, em thêm tiêu đề, nội dung, hình ảnh, biểu tượng và các thành phần trang trí cần thiết
-          để sản phẩm có tính trực quan và hấp dẫn hơn.
-        </p>
-      </div>
+          <article class="lesson-step" id="b5-step-02">
+            <div class="step-index">02</div>
+            <div class="step-content">
+              <h3>Lựa chọn bộ công cụ AI tạo sinh</h3>
+              <p>Em kết hợp ba nhóm công cụ AI để tạo sản phẩm: Google Gemini/ChatGPT cho nội dung, Midjourney/DALL-E 3 cho hình ảnh minh họa và Canva AI để dàn trang, thiết kế bố cục.</p>
+              <div class="result-note"><strong>Tỷ lệ đóng góp:</strong> AI hỗ trợ khoảng 40%, phần sáng tạo cá nhân chiếm khoảng 60% thông qua việc chọn lọc, chỉnh sửa, sắp xếp và hoàn thiện sản phẩm.</div>
+              <div class="step-actions">
+                <span class="action-chip">Gemini/ChatGPT</span>
+                <span class="action-chip">DALL-E 3</span>
+                <span class="action-chip">Canva AI</span>
+                <span class="action-chip">40% AI - 60% cá nhân</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 6: Chỉnh sửa màu sắc, font chữ và hình ảnh</strong>
-        <p>
-          Sau khi hoàn thành bản nháp, em điều chỉnh màu sắc, font chữ, kích thước chữ và vị trí hình ảnh.
-          Em chú ý giữ sự thống nhất về phong cách thiết kế, tránh sử dụng quá nhiều màu hoặc quá nhiều kiểu chữ gây rối mắt.
-        </p>
-      </div>
+          <article class="lesson-step" id="b5-step-03">
+            <div class="step-index">03</div>
+            <div class="step-content">
+              <h3>Ứng dụng Gemini/ChatGPT để xây dựng nội dung</h3>
+              <p>Ở bước đầu, em yêu cầu AI đóng vai Senior Data Engineer để lập dàn ý slide gồm 10 trang về lộ trình học Data Engineer. Prompt yêu cầu cấu trúc đi từ nền tảng Java OOP, Design Patterns, SQL đến các khái niệm nâng cao hơn.</p>
+              <div class="prompt-box"><strong>Prompt cốt lõi:</strong> “Đóng vai một Senior Data Engineer. Hãy lập cho tôi một dàn ý slide thuyết trình gồm 10 trang về lộ trình học Data Engineer...”</div>
+              <div class="step-actions">
+                <span class="action-chip">Senior Data Engineer</span>
+                <span class="action-chip">10 slide</span>
+                <span class="action-chip">Java OOP</span>
+                <span class="action-chip">SQL</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 7: Kiểm tra nội dung và hoàn thiện sản phẩm</strong>
-        <p>
-          Em đọc lại toàn bộ nội dung để kiểm tra lỗi chính tả, độ rõ ràng của thông điệp và tính hợp lý của bố cục.
-          Nếu cần, em chỉnh sửa lại các phần chưa phù hợp để sản phẩm trở nên hoàn chỉnh hơn.
-        </p>
-      </div>
+          <article class="lesson-step" id="b5-step-04">
+            <div class="step-index">04</div>
+            <div class="step-content">
+              <h3>Đánh giá, lược bỏ và viết lại nội dung AI</h3>
+              <p>AI trả về cấu trúc rõ ràng nhưng còn dàn trải và chưa có điểm nhấn thực tế cho người mới bắt đầu. Em chủ động lược bỏ một số công cụ đám mây quá sức với sinh viên năm nhất, bổ sung ví dụ về Design Pattern như Singleton, Factory và viết lại nội dung để văn phong tự nhiên hơn.</p>
+              <div class="step-actions">
+                <span class="action-chip">Lược bỏ nội dung thừa</span>
+                <span class="action-chip">Design Pattern</span>
+                <span class="action-chip">Singleton</span>
+                <span class="action-chip">Factory</span>
+                <span class="action-chip">Viết lại 60%</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 8: Xuất file và lưu trữ sản phẩm</strong>
-        <p>
-          Cuối cùng, em xuất sản phẩm ở định dạng phù hợp như PDF, PNG, JPG hoặc video.
-          Sản phẩm được lưu vào thư mục bài tập và có thể chia sẻ bằng đường link hoặc chèn trực tiếp vào Portfolio.
-        </p>
+          <article class="lesson-step" id="b5-step-05">
+            <div class="step-index">05</div>
+            <div class="step-content">
+              <h3>Ứng dụng DALL-E 3 để tạo hình ảnh minh họa</h3>
+              <p>Sau khi có nội dung chính, em dùng DALL-E 3 để tạo hình ảnh minh họa data pipeline theo phong cách công nghệ. AI tạo ra bốn lựa chọn hình ảnh có màu sắc cyber sắc nét và thể hiện đúng luồng dữ liệu.</p>
+              <div class="prompt-box"><strong>Prompt hình ảnh:</strong> “A high-quality 3D isometric illustration of a modern data pipeline... Dark blue and neon purple color palette, cyber technology style, 16:9 aspect ratio.”</div>
+              <div class="step-actions">
+                <span class="action-chip">Data Pipeline</span>
+                <span class="action-chip">3D isometric</span>
+                <span class="action-chip">Cyber style</span>
+                <span class="action-chip">16:9</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b5-step-06">
+            <div class="step-index">06</div>
+            <div class="step-content">
+              <h3>Tinh chỉnh hình ảnh để đồng bộ nhận diện slide</h3>
+              <p>Ảnh AI tạo ra có một số chi tiết thừa và chữ vô nghĩa. Em tải ảnh về, dùng công cụ chỉnh sửa như Clone Stamp để xóa lỗi, sau đó áp dụng thêm bộ lọc màu để tông xanh đen đồng bộ với toàn bộ bộ slide.</p>
+              <div class="step-actions">
+                <span class="action-chip">Clone Stamp</span>
+                <span class="action-chip">Xóa chữ lỗi</span>
+                <span class="action-chip">Filter màu</span>
+                <span class="action-chip">Đồng bộ thiết kế</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b5-step-07">
+            <div class="step-index">07</div>
+            <div class="step-content">
+              <h3>Ứng dụng Canva AI để thiết kế và dàn trang</h3>
+              <p>Em dùng Canva AI/Magic Design để tạo bộ template thuyết trình theo dark mode, điểm nhấn xanh dương và typography tối giản hiện đại. Canva tạo nhanh các trang tiêu đề, thân bài và kết luận.</p>
+              <div class="prompt-box"><strong>Prompt Canva:</strong> “A professional technology presentation about Data Engineering roadmap, using dark mode theme, blue accents, modern minimalist typography.”</div>
+              <div class="step-actions">
+                <span class="action-chip">Canva AI</span>
+                <span class="action-chip">Magic Design</span>
+                <span class="action-chip">Dark mode</span>
+                <span class="action-chip">Blue accents</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b5-step-08">
+            <div class="step-index">08</div>
+            <div class="step-content">
+              <h3>Hoàn thiện sản phẩm và phân tích vai trò của AI</h3>
+              <p>Ở bước cuối, em tự sắp xếp lại layout, kéo thả nội dung đã lọc từ Gemini, chèn hình ảnh từ DALL-E 3 làm nền cho slide mở đầu và bổ sung hiệu ứng chuyển động. Em cũng phân tích ưu/nhược điểm của từng công cụ và các vấn đề đạo đức như minh bạch, sở hữu trí tuệ và nguy cơ ảo giác AI.</p>
+              <div class="step-actions">
+                <span class="action-chip">Layout</span>
+                <span class="action-chip">Animation</span>
+                <span class="action-chip">Transparency</span>
+                <span class="action-chip">Sở hữu trí tuệ</span>
+                <span class="action-chip">Hallucination</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="lesson-note">
+          <h3>Bài học rút ra</h3>
+          <ul>
+            <li>AI giúp tăng tốc khâu lên ý tưởng, hình ảnh và dàn trang nhưng không thay thế tư duy thiết kế của con người.</li>
+            <li>Sản phẩm tốt cần được người học kiểm chứng nội dung, chỉnh sửa hình ảnh, căn chỉnh bố cục và bổ sung phong cách riêng.</li>
+            <li>Khi dùng AI tạo sinh, cần minh bạch về mức độ sử dụng và cẩn trọng với bản quyền, chữ lỗi và ảo giác AI.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <h2>Sản phẩm cuối cùng</h2>
     <p>
-      Sản phẩm cuối cùng của Bài 5 là một sản phẩm nội dung số hoàn chỉnh, có thể là poster, hình ảnh,
-      bài viết, video ngắn hoặc ấn phẩm truyền thông. Bài làm thể hiện quá trình từ hình thành ý tưởng,
-      thiết kế bản nháp, chỉnh sửa đến hoàn thiện sản phẩm.
+      Sản phẩm cuối cùng của Bài 5 là một bài thuyết trình số/infographic về lộ trình chinh phục Data Engineering cho sinh viên Hệ thống thông tin.
     </p>
     <p>
-      Thông qua bài tập này, em học được cách trình bày thông tin bằng hình ảnh, lựa chọn bố cục hợp lý,
-      sử dụng công cụ thiết kế và đánh giá chất lượng sản phẩm trước khi chia sẻ.
+      Bài làm thể hiện quy trình kết hợp AI và đóng góp cá nhân: từ xây dựng nội dung, tạo hình minh họa, dàn trang đến đánh giá hiệu quả và vấn đề đạo đức khi sử dụng AI tạo sinh.
     </p>
-      <a href="https://drive.google.com/file/d/1M3YzLvjLAItALqwHBgYEp0xw4Dwhmvh-/view?usp=sharing" class="link-noi">https://drive.google.com/file/d/1M3YzLvjLAItALqwHBgYEp0xw4Dwhmvh-/view?usp=sharing</a>
-
-<style>
-.link-noi {
-  color: white;
-  background-color: #007bff;
-  padding: 10px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  display: inline-block;
-  transition: 0.2s;
-}
-
-.link-noi:hover {
-  background-color: #0056b3;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-}
-</style>
-    <iframe class="pdf-frame" src="Bài 5.pdf"></iframe>
-  </div>
-</div>
-
+    <a href="https://drive.google.com/file/d/1M3YzLvjLAItALqwHBgYEp0xw4Dwhmvh-/view?usp=sharing" class="link-noi">https://drive.google.com/file/d/1M3YzLvjLAItALqwHBgYEp0xw4Dwhmvh-/view?usp=sharing</a>
+    <iframe class="pdf-frame" src="Bài 5.pdf" title="PDF minh chứng Bài 5" loading="lazy"></iframe>
+      </div>
+    </div>
   </section>
 
   <!-- CHI TIẾT BÀI 6 -->
@@ -1705,132 +2685,301 @@ Bài làm cũng có kèm hình ảnh minh chứng quá trình sử dụng các c
     <div class="detail-container">
       <button class="back-btn" onclick="backToMain()">← Quay lại trang chính</button>
 
-  <div class="detail-card">
-    <h1>Bài 6: An toàn và liêm chính học thuật trong môi trường số</h1>
+      <div class="detail-card">
+        <h1>Bài 6: An toàn và liêm chính học thuật trong môi trường số</h1>
 
-    <div class="highlight-box">
-      <h2>Mục tiêu</h2>
+        <div class="highlight-box">
+          <h2>Mục tiêu</h2>
       <p>
-        Ở Bài 6, em tập trung tìm hiểu về an toàn thông tin, bảo vệ dữ liệu cá nhân
-        và liêm chính học thuật khi học tập, làm việc trong môi trường số.
+        Ở Bài 6, em tập trung tìm hiểu việc sử dụng AI có trách nhiệm và đạo đức trong học thuật, đặc biệt là ranh giới giữa hỗ trợ hợp lý và gian lận học thuật.
       </p>
       <p>
-        Mục tiêu của bài là nhận biết các nguy cơ thường gặp trên môi trường trực tuyến,
-        biết cách sử dụng tài khoản và dữ liệu cá nhân an toàn, đồng thời hiểu trách nhiệm của người học
-        khi sử dụng tài liệu, Internet và công cụ AI.
+        Mục tiêu của bài là biết cách sử dụng AI minh bạch, kiểm chứng thông tin, bảo vệ dữ liệu cá nhân và xây dựng bộ nguyên tắc cá nhân để học tập trung thực trong môi trường số.
       </p>
-    </div>
+        </div>
 
     <h2>Quá trình thực hiện</h2>
-    <div class="step-grid">
-      <div class="step-box">
-        <strong>Bước 1: Tìm hiểu khái niệm an toàn thông tin</strong>
-        <p>
-          Đầu tiên, em tìm hiểu an toàn thông tin là gì và vì sao việc bảo vệ dữ liệu cá nhân lại quan trọng.
-          Em nhận thấy thông tin như mật khẩu, email, số điện thoại, hình ảnh cá nhân và tài liệu học tập
-          đều cần được bảo vệ khi sử dụng Internet.
-        </p>
-      </div>
+    <p>
+      Phần này được trình bày lại dưới dạng timeline có outline đầy đủ, tóm lược toàn bộ quá trình nghiên cứu chính sách, thử nghiệm AI, trích dẫn minh bạch, phân tích đạo đức và thiết kế infographic.
+    </p>
 
-      <div class="step-box">
-        <strong>Bước 2: Nhận diện các nguy cơ trên môi trường số</strong>
-        <p>
-          Em tìm hiểu các nguy cơ phổ biến như lộ mật khẩu, truy cập đường link lạ, tải tệp không rõ nguồn gốc,
-          chia sẻ quá nhiều thông tin cá nhân và bị lừa đảo trực tuyến.
-          Việc nhận diện nguy cơ giúp em cẩn thận hơn khi học tập và giao tiếp trên mạng.
-        </p>
-      </div>
+    <div class="lesson-layout">
+      <aside class="lesson-outline" aria-label="Outline quá trình thực hiện Bài 6">
+        <div class="outline-card">
+          <div class="outline-header">
+            <span>Outline Bài 6</span>
+            <h3>10 bước sử dụng AI có trách nhiệm</h3>
+          </div>
+          <ol>
+            <li><a href="#b6-step-01" class="active"><span>01</span>Nghiên cứu chính sách</a></li>
+            <li><a href="#b6-step-02"><span>02</span>So sánh quốc tế</a></li>
+            <li><a href="#b6-step-03"><span>03</span>Chọn nhiệm vụ AI</a></li>
+            <li><a href="#b6-step-04"><span>04</span>Prompt định hình</a></li>
+            <li><a href="#b6-step-05"><span>05</span>Prompt đào sâu</a></li>
+            <li><a href="#b6-step-06"><span>06</span>Đánh giá &amp; tích hợp</a></li>
+            <li><a href="#b6-step-07"><span>07</span>Trích dẫn AI</a></li>
+            <li><a href="#b6-step-08"><span>08</span>Phân tích đạo đức</a></li>
+            <li><a href="#b6-step-09"><span>09</span>Bộ nguyên tắc</a></li>
+            <li><a href="#b6-step-10"><span>10</span>Thiết kế infographic</a></li>
+          </ol>
+        </div>
+      </aside>
 
-      <div class="step-box">
-        <strong>Bước 3: Tìm hiểu cách bảo vệ tài khoản cá nhân</strong>
-        <p>
-          Em rút ra một số biện pháp bảo vệ tài khoản như đặt mật khẩu mạnh, không dùng chung một mật khẩu cho nhiều dịch vụ,
-          bật xác thực hai bước và đăng xuất tài khoản khi sử dụng máy tính công cộng.
-        </p>
-      </div>
+      <div class="lesson-main">
+        <div class="process-overview">
+          <div class="overview-pill">
+            <b>Chủ đề</b>
+            <span>Sử dụng AI có trách nhiệm và đạo đức học thuật</span>
+          </div>
+          <div class="overview-pill">
+            <b>Nhiệm vụ AI</b>
+            <span>Lập đề cương về Data Pipeline trong doanh nghiệp</span>
+          </div>
+          <div class="overview-pill">
+            <b>Sản phẩm</b>
+            <span>Bộ nguyên tắc cá nhân và ý tưởng infographic</span>
+          </div>
+        </div>
 
-      <div class="step-box">
-        <strong>Bước 4: Phân tích việc bảo vệ dữ liệu cá nhân</strong>
-        <p>
-          Em phân tích các tình huống có thể làm lộ dữ liệu cá nhân, ví dụ chia sẻ ảnh chụp màn hình có thông tin riêng tư
-          hoặc gửi tài liệu cho sai người. Từ đó, em học cách kiểm tra kỹ nội dung trước khi đăng tải hoặc chia sẻ.
-        </p>
-      </div>
+        <div class="lesson-timeline">
+          <article class="lesson-step" id="b6-step-01">
+            <div class="step-index">01</div>
+            <div class="step-content">
+              <h3>Nghiên cứu chính sách sử dụng AI tại VNU/UET</h3>
+              <p>Em bắt đầu bằng việc tìm hiểu cách nhà trường khuyến khích sinh viên tiếp cận công nghệ mới nhưng vẫn đặt ranh giới nghiêm ngặt dựa trên quy chế học vụ và đạo đức học thuật.</p>
+              <ul class="step-list">
+                <li>Được phép dùng AI để gợi ý ý tưởng, cấu trúc bài viết, sửa lỗi ngôn ngữ hoặc tối ưu mã nguồn.</li>
+                <li>Không được sao chép nguyên văn văn bản/mã nguồn do AI tạo ra rồi nộp như sản phẩm cá nhân.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">VNU/UET</span>
+                <span class="action-chip">Hỗ trợ hợp lý</span>
+                <span class="action-chip">Không gian lận</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 5: Tìm hiểu khái niệm liêm chính học thuật</strong>
-        <p>
-          Em tìm hiểu liêm chính học thuật là việc học tập trung thực, không đạo văn, không gian lận
-          và biết ghi nhận nguồn tài liệu khi sử dụng ý tưởng của người khác.
-          Đây là nguyên tắc quan trọng để xây dựng thái độ học tập nghiêm túc.
-        </p>
-      </div>
+          <article class="lesson-step" id="b6-step-02">
+            <div class="step-index">02</div>
+            <div class="step-content">
+              <h3>So sánh với xu hướng quốc tế</h3>
+              <p>Em so sánh định hướng của VNU/UET với xu hướng tại các trường như Stanford và MIT, nơi nhấn mạnh tinh thần “Minh bạch và Làm chủ”. AI được xem như cộng sự hỗ trợ, không phải người làm thay.</p>
+              <div class="step-actions">
+                <span class="action-chip">Stanford/MIT</span>
+                <span class="action-chip">AI Citation</span>
+                <span class="action-chip">Prompt log</span>
+                <span class="action-chip">Co-pilot</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 6: Phân tích việc sử dụng AI có trách nhiệm</strong>
-        <p>
-          Em tìm hiểu cách sử dụng AI như một công cụ hỗ trợ thay vì thay thế hoàn toàn quá trình học tập.
-          Khi dùng AI, người học cần kiểm tra lại thông tin, chỉnh sửa bằng hiểu biết của bản thân
-          và không sao chép nguyên văn nếu chưa đánh giá nội dung.
-        </p>
-      </div>
+          <article class="lesson-step" id="b6-step-03">
+            <div class="step-index">03</div>
+            <div class="step-content">
+              <h3>Chọn nhiệm vụ học tập có sử dụng AI</h3>
+              <p>Nhiệm vụ được chọn là tổng hợp tài liệu và lập đề cương bài thuyết trình về chủ đề <strong>“Vai trò của Data Pipeline trong Hệ thống thông tin doanh nghiệp hiện đại”</strong>. Đây là nhiệm vụ phù hợp để dùng AI hỗ trợ lên cấu trúc và hệ thống hóa nội dung.</p>
+              <div class="step-actions">
+                <span class="action-chip">Data Pipeline</span>
+                <span class="action-chip">Đề cương thuyết trình</span>
+                <span class="action-chip">Hệ thống thông tin</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 7: Xây dựng bộ nguyên tắc cá nhân</strong>
-        <p>
-          Từ các nội dung đã tìm hiểu, em xây dựng bộ nguyên tắc sử dụng tài nguyên số và AI có trách nhiệm.
-          Bộ nguyên tắc bao gồm bảo vệ tài khoản, tôn trọng bản quyền, trích dẫn nguồn, kiểm tra thông tin
-          và trung thực trong học tập.
-        </p>
-      </div>
+          <article class="lesson-step" id="b6-step-04">
+            <div class="step-index">04</div>
+            <div class="step-content">
+              <h3>Tương tác Prompt 1 để định hình nội dung</h3>
+              <p>Ở prompt đầu tiên, em nói rõ mình là sinh viên năm nhất ngành Hệ thống thông tin và cần bài thuyết trình 10 phút. AI phản hồi bằng cấu trúc 4 phần gồm mở đầu, kiến trúc Data Pipeline, vai trò/lợi ích và kết luận; đồng thời gợi ý Apache Kafka, Apache Spark và MySQL/PostgreSQL.</p>
+              <div class="step-actions">
+                <span class="action-chip">10 phút</span>
+                <span class="action-chip">Kafka</span>
+                <span class="action-chip">Spark</span>
+                <span class="action-chip">MySQL/PostgreSQL</span>
+              </div>
+            </div>
+          </article>
 
-      <div class="step-box">
-        <strong>Bước 8: Hoàn thiện báo cáo và rút ra bài học</strong>
-        <p>
-          Cuối cùng, em tổng hợp nội dung thành bài báo cáo, trình bày các nguy cơ, biện pháp bảo vệ,
-          nguyên tắc liêm chính học thuật và bài học kinh nghiệm.
-          Qua bài tập này, em hiểu rằng kỹ năng số không chỉ là biết sử dụng công cụ mà còn là sử dụng công cụ đúng cách.
-        </p>
+          <article class="lesson-step" id="b6-step-05">
+            <div class="step-index">05</div>
+            <div class="step-content">
+              <h3>Tương tác Prompt 2 để đào sâu và sửa lỗi</h3>
+              <p>Khi phần kiến trúc còn chung chung, em yêu cầu AI giải thích rõ sự khác biệt giữa Batch Processing và Stream Processing bằng bảng so sánh ngắn gọn, tập trung vào độ trễ và khối lượng dữ liệu.</p>
+              <table class="source-mini-table"><thead><tr><th>Nội dung</th><th>Batch Processing</th><th>Stream Processing</th></tr></thead><tbody><tr><td>Đặc điểm</td><td>Xử lý khối lượng lớn theo lô</td><td>Xử lý dữ liệu liên tục</td></tr><tr><td>Độ trễ</td><td>Cao, thường theo giờ/ngày</td><td>Rất thấp, có thể theo mili-giây</td></tr></tbody></table>
+              <div class="step-actions">
+                <span class="action-chip">Batch</span>
+                <span class="action-chip">Stream</span>
+                <span class="action-chip">Latency</span>
+                <span class="action-chip">Data volume</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b6-step-06">
+            <div class="step-index">06</div>
+            <div class="step-content">
+              <h3>Đánh giá, chỉnh sửa và tích hợp đầu ra của AI</h3>
+              <p>Em đánh giá AI cung cấp khung kiến thức chuẩn và tiết kiệm thời gian, nhưng nội dung ban đầu còn thiếu tính thực tế tại doanh nghiệp Việt Nam. Vì vậy, em giữ lại cấu trúc khung, bổ sung ví dụ ngân hàng/ví điện tử xử lý luồng giao dịch và dùng bảng Batch/Stream trong slide.</p>
+              <div class="result-note"><strong>Tỷ lệ tích hợp:</strong> khoảng 70% nội dung đến từ tự nghiên cứu và biên tập lại; 30% dùng AI để tối ưu câu từ và cấu trúc dữ liệu.</div>
+              <div class="step-actions">
+                <span class="action-chip">Case study Việt Nam</span>
+                <span class="action-chip">70% tự làm</span>
+                <span class="action-chip">30% AI hỗ trợ</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b6-step-07">
+            <div class="step-index">07</div>
+            <div class="step-content">
+              <h3>Trích dẫn minh bạch việc sử dụng AI</h3>
+              <p>Để bảo đảm liêm chính học thuật, em ghi nhận rõ việc sử dụng ChatGPT/GPT-4o để hỗ trợ lên ý tưởng cấu trúc bài thuyết trình và cung cấp dữ liệu so sánh các mô hình xử lý dữ liệu theo chuẩn trích dẫn IEEE.</p>
+              <div class="step-actions">
+                <span class="action-chip">Minh bạch</span>
+                <span class="action-chip">IEEE</span>
+                <span class="action-chip">AI Citation</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b6-step-08">
+            <div class="step-index">08</div>
+            <div class="step-content">
+              <h3>Phân tích ranh giới đạo đức khi dùng AI</h3>
+              <p>Em phân tích sự khác nhau giữa hỗ trợ hợp lý và gian lận học thuật. AI có thể giúp giải thích khái niệm, debug, sửa lỗi ngôn ngữ, nhưng việc nộp nguyên văn bài/mã do AI tạo ra mà không hiểu và không trích dẫn là gian lận.</p>
+              <ul class="step-list">
+                <li>Quyền sở hữu trí tuệ: cần cẩn trọng vì AI học từ dữ liệu có sẵn trên Internet.</li>
+                <li>Tác động tích cực: AI như gia sư 1-1 hỗ trợ học nhanh hơn.</li>
+                <li>Tác động tiêu cực: dễ tạo thói quen lười tư duy phản biện nếu phụ thuộc quá mức.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">Hỗ trợ hợp lý</span>
+                <span class="action-chip">Gian lận</span>
+                <span class="action-chip">IP</span>
+                <span class="action-chip">Tư duy phản biện</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b6-step-09">
+            <div class="step-index">09</div>
+            <div class="step-content">
+              <h3>Xây dựng bộ nguyên tắc cá nhân dùng AI có trách nhiệm</h3>
+              <p>Từ quá trình phân tích, em xây dựng sáu nguyên tắc cá nhân để sử dụng AI an toàn và trung thực trong học thuật.</p>
+              <ul class="step-list">
+                <li>Làm chủ: AI là trợ lý, con người chịu trách nhiệm cuối cùng.</li>
+                <li>Minh bạch: công khai và trích dẫn sự tham gia của AI.</li>
+                <li>Xác minh: kiểm tra lại mọi thông tin, số liệu, mã nguồn.</li>
+                <li>Thấu hiểu: chỉ dùng nội dung khi đã hiểu cơ chế hoạt động.</li>
+                <li>Bảo mật: không tải dữ liệu cá nhân, đề thi hoặc tài liệu nội bộ lên AI công cộng.</li>
+                <li>Phát triển bền vững: dùng AI để học sâu hơn, không cắt giảm tư duy tối thiểu.</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">Human-in-the-loop</span>
+                <span class="action-chip">Transparency</span>
+                <span class="action-chip">Fact-checking</span>
+                <span class="action-chip">Data Privacy</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="lesson-step" id="b6-step-10">
+            <div class="step-index">10</div>
+            <div class="step-content">
+              <h3>Lên ý tưởng infographic tổng kết</h3>
+              <p>Cuối cùng, em đề xuất bố cục infographic “Sử dụng AI có trách nhiệm trong học thuật” với tông xanh dương công nghệ, trắng và các khối nội dung dễ nhớ như Đèn xanh, Đèn đỏ, công thức 3K và slogan truyền cảm hứng.</p>
+              <ul class="step-list">
+                <li>Đèn xanh: gợi ý cấu trúc, giải thích mã nguồn, tra cứu khái niệm.</li>
+                <li>Đèn đỏ: copy-paste 100%, dùng AI làm bài kiểm tra, giấu việc sử dụng AI.</li>
+                <li>Công thức 3K: Không lười biếng, Kiểm chứng, Khai báo.</li>
+                <li>Slogan: “AI không thay thế được người giỏi, AI chỉ thay thế người lười. Hãy làm chủ công nghệ!”</li>
+              </ul>
+              <div class="step-actions">
+                <span class="action-chip">Infographic</span>
+                <span class="action-chip">Đèn xanh/Đèn đỏ</span>
+                <span class="action-chip">3K</span>
+                <span class="action-chip">Slogan</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="lesson-note">
+          <h3>Bài học rút ra</h3>
+          <ul>
+            <li>AI nên được xem là công cụ hỗ trợ, không phải người làm thay.</li>
+            <li>Minh bạch, kiểm chứng và bảo mật dữ liệu là ba yêu cầu quan trọng khi sử dụng AI trong học thuật.</li>
+            <li>Người học cần làm chủ sản phẩm cuối cùng và chịu trách nhiệm về mọi nội dung mình nộp.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <h2>Sản phẩm cuối cùng</h2>
     <p>
-      Sản phẩm cuối cùng của Bài 6 là bài báo cáo hoặc bộ nguyên tắc về an toàn và liêm chính học thuật
-      trong môi trường số. Nội dung sản phẩm thể hiện các biện pháp bảo vệ dữ liệu cá nhân,
-      cách sử dụng tài nguyên số đúng quy định và cách dùng AI một cách trung thực, có trách nhiệm.
+      Sản phẩm cuối cùng của Bài 6 là báo cáo về sử dụng AI có trách nhiệm và đạo đức trong học thuật, có kèm nhật ký prompt, trích dẫn AI, phân tích ranh giới đạo đức và bộ nguyên tắc cá nhân.
     </p>
     <p>
-      Bài tập giúp em nâng cao ý thức tự bảo vệ bản thân trên Internet, đồng thời hình thành thói quen học tập trung thực
-      khi sử dụng công nghệ và các nguồn thông tin trực tuyến.
+      Bài tập giúp em nâng cao ý thức tự bảo vệ dữ liệu, tôn trọng liêm chính học thuật và sử dụng AI theo hướng hỗ trợ phát triển năng lực thay vì thay thế tư duy cá nhân.
     </p>
-      <a href="https://drive.google.com/file/d/1tK69tXiekgW87sQQ3N9sRL1frmdV8i1-/view?usp=sharing" class="link-noi">https://drive.google.com/file/d/1tK69tXiekgW87sQQ3N9sRL1frmdV8i1-/view?usp=sharing</a>
-
-<style>
-.link-noi {
-  color: white;
-  background-color: #007bff;
-  padding: 10px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  display: inline-block;
-  transition: 0.2s;
-}
-
-.link-noi:hover {
-  background-color: #0056b3;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-}
-</style>
-    <iframe class="pdf-frame" src="Bài 6.pdf"></iframe>
-  </div>
-</div>
-
+    <a href="https://drive.google.com/file/d/1tK69tXiekgW87sQQ3N9sRL1frmdV8i1-/view?usp=sharing" class="link-noi">https://drive.google.com/file/d/1tK69tXiekgW87sQQ3N9sRL1frmdV8i1-/view?usp=sharing</a>
+    <iframe class="pdf-frame" src="Bài 6.pdf" title="PDF minh chứng Bài 6" loading="lazy"></iframe>
+      </div>
+    </div>
   </section>
 
   <script>
+    const siteNav = document.querySelector("nav");
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const mainSections = document.querySelectorAll("#about, #projects, #process, #summary, #contact");
+
+    function updateFloatingNav() {
+      if (!siteNav) return;
+
+      siteNav.classList.toggle("scrolled", window.scrollY > 30);
+
+      let currentSection = "";
+      mainSections.forEach(function(section) {
+        const sectionTop = section.offsetTop - 140;
+        if (window.scrollY >= sectionTop) {
+          currentSection = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(function(link) {
+        link.classList.toggle("active", link.getAttribute("href") === "#" + currentSection);
+      });
+    }
+
+    window.addEventListener("scroll", updateFloatingNav);
+    window.addEventListener("load", updateFloatingNav);
+
+
+
+    function updateLessonOutline() {
+      const activePage = document.querySelector(".detail-page.active");
+      if (!activePage) return;
+
+      const steps = activePage.querySelectorAll(".lesson-step");
+      const outlineLinks = activePage.querySelectorAll(".lesson-outline a");
+      if (!steps.length || !outlineLinks.length) return;
+
+      let currentStep = steps[0].id;
+      steps.forEach(function(step) {
+        const rect = step.getBoundingClientRect();
+        if (rect.top <= 180) {
+          currentStep = step.id;
+        }
+      });
+
+      outlineLinks.forEach(function(link) {
+        link.classList.toggle("active", link.getAttribute("href") === "#" + currentStep);
+      });
+    }
+
+    window.addEventListener("scroll", updateLessonOutline);
+    window.addEventListener("load", updateLessonOutline);
+
     function showDetail(id) {
       document.getElementById("mainContent").classList.add("hidden");
 
@@ -1841,6 +2990,7 @@ Bài làm cũng có kèm hình ảnh minh chứng quá trình sử dụng các c
 
       document.getElementById(id).classList.add("active");
       window.scrollTo(0, 0);
+      updateLessonOutline();
     }
 
     function backToMain() {
@@ -1851,6 +3001,7 @@ Bài làm cũng có kèm hình ảnh minh chứng quá trình sử dụng các c
 
       document.getElementById("mainContent").classList.remove("hidden");
       window.scrollTo(0, 0);
+      updateFloatingNav();
     }
   </script>
 
